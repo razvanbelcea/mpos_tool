@@ -196,7 +196,7 @@ Public Class Form8
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
     End Sub
-    ' Print all barcodes from \temp folder!
+    ' Print all barcodes from \temp folder - one printout for each.
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         For Each filePath In IO.Directory.GetFiles("temp")
             Try
