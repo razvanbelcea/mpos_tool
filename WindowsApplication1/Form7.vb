@@ -1,9 +1,7 @@
-﻿Option Explicit On
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Windows.Forms
-Imports System.Windows.Forms.Control
 Imports System.Xml
 Imports System.Net
 Imports System.Management
@@ -15,8 +13,8 @@ Imports System.Threading.Thread
 Imports System.IO.Packaging
 Imports System.IO.Compression
 Imports MPOS.My.Resources
-
 Public Class Form7
+    Public quote As String = Chr(34)
     Public posx1 As Integer = Screen.PrimaryScreen.WorkingArea.Width - 30
     Public posy1 As Integer = Screen.PrimaryScreen.WorkingArea.Height - 160
     Private Sub Form7_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -27,7 +25,7 @@ Public Class Form7
         ascundere()
     End Sub
     Private Sub afisare()
-        Do Until posx1 = Screen.PrimaryScreen.WorkingArea.Width - 335
+        Do Until posx1 <= Screen.PrimaryScreen.WorkingArea.Width - 335
             posx1 = posx1 - 1
             Me.Width = Me.Width + 1
             Me.Location = New Point(posx1, posy1)
@@ -37,7 +35,7 @@ Public Class Form7
     End Sub
     Private Sub ascundere()
         Panel2.Hide()
-        Do Until posx1 = Screen.PrimaryScreen.WorkingArea.Width - 30
+        Do Until posx1 >= Screen.PrimaryScreen.WorkingArea.Width - 30
             posx1 = posx1 + 1
             Me.Width = Me.Width - 1
             Me.Location = New Point(posx1, posy1)
@@ -45,35 +43,35 @@ Public Class Form7
         Me.Refresh()
     End Sub
     Private Sub Panel1_MouseClick(sender As Object, e As MouseEventArgs) Handles Panel1.MouseClick
-        If Me.Width = 30 Then
+        If Me.Width <= 30 Then
             afisare()
         Else
             ascundere()
         End If
     End Sub
     Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
-        If Me.Width = 30 Then
+        If Me.Width <= 30 Then
             afisare()
         Else
             ascundere()
         End If
     End Sub
     Private Sub Panel2_MouseClick(sender As Object, e As MouseEventArgs) Handles Panel2.MouseClick
-        If Me.Width = 30 Then
+        If Me.Width <= 30 Then
             afisare()
         Else
             ascundere()
         End If
     End Sub
     Private Sub Label2_Click(sender As Object, e As EventArgs)
-        If Me.Width = 30 Then
+        If Me.Width <= 30 Then
             afisare()
         Else
             ascundere()
         End If
     End Sub
     Private Sub Panel3_MouseClick(sender As Object, e As MouseEventArgs) Handles Panel3.MouseClick
-        If Me.Width = 30 Then
+        If Me.Width <= 30 Then
             afisare()
         Else
             ascundere()
@@ -108,7 +106,6 @@ Public Class Form7
             MsgBox(ek.Message)
         End Try
     End Sub
-
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Try
             If Label3.Text = "ON" Then
@@ -341,7 +338,7 @@ Public Class Form7
                     If My.Computer.FileSystem.DirectoryExists(loc) Then
                         'Process.Start("C:\Program Files\7-Zip\7z.exe", "a " & fname & " " & loc)
                         'My.Computer.FileSystem.MoveFile(fname, FolderBrowserDialog1.SelectedPath & tstamp)
-                        Process.Start("C:\Program Files\7-Zip\7z.exe", "a " & FolderBrowserDialog1.SelectedPath & fname & " " & loc)
+                        Process.Start("C:\Program Files\7-Zip\7z.exe", "a " & quote & FolderBrowserDialog1.SelectedPath & fname & quote & " " & loc)
                         balon("Retrieving server logs ... " & i1())
                     Else
                         balon("Location not available ... " & i1())
@@ -359,16 +356,13 @@ Public Class Form7
     Private Sub movetilllog()
         Dim str = ComboBox2.Text.Replace(" ", "_").Replace("-", "_").Replace(".", "_")
         Dim tstamp = Format(Now, "yyyyMMdd_hhmmss")
-        'Dim fname = "\\" & ComboBox2.Tag & "\e$\TpDotnet\Tilllog" & tstamp
         Dim fname = "\TILL_" & tstamp & "_" & str
         Dim loc = "\\" & ComboBox2.Tag & "\e$\TpDotnet\Log"
         Try
             If FolderBrowserDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
                 If Label3.Text = "ON" Then
                     If My.Computer.FileSystem.DirectoryExists(loc) Then
-                        'Process.Start("C:\Program Files\7-Zip\7z.exe", "a " & fname & " " & loc)
-                        'My.Computer.FileSystem.MoveFile(fname, FolderBrowserDialog1.SelectedPath & tstamp)
-                        Process.Start("C:\Program Files\7-Zip\7z.exe", "a " & FolderBrowserDialog1.SelectedPath & fname & " " & loc)
+                        Process.Start("C:\Program Files\7-Zip\7z.exe", "a " & quote & FolderBrowserDialog1.SelectedPath & fname & quote & " " & loc)
                         balon("Retrieving till logs ... " & i2())
                     Else
                         balon("Location not available ... " & i2())
@@ -411,7 +405,7 @@ Public Class Form7
 
     Private Sub PictureBox2_MouseClick(sender As Object, e As MouseEventArgs) Handles PictureBox2.MouseClick
         If e.Button = Windows.Forms.MouseButtons.Left Then
-            If Me.Width = 30 Then
+            If Me.Width <= 30 Then
                 afisare()
             Else
                 ascundere()

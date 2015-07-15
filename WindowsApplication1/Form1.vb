@@ -159,28 +159,6 @@ Class Form1
             Form7.balon(e.Message)
         End Try
     End Sub
-    Public Function readHF(ip)
-        Dim path As String = "\\" & ip & hff
-        Dim hotf As String = "-"
-        Dim rhf As XmlTextReader = New XmlTextReader(path)
-        Try
-            Do While (rhf.Read())
-                Select Case rhf.NodeType
-                    Case XmlNodeType.Element
-                        Select Case rhf.Name
-                            Case "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-                                rhf.Read()
-                                hotf = rhf.Value
-                        End Select
-                End Select
-            Loop
-            rhf.Dispose()
-        Catch e As Exception
-            Form7.balon(e.Message)
-        End Try
-
-        Return hotf
-    End Function
     '-----------------------------------------------------------------------------------------------------------------------------------------END read xml files
     '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN server selection
     Private Sub serverlist_SelectedIndexChanged(sender As Object, e As EventArgs) Handles serverlist.SelectedIndexChanged
@@ -212,7 +190,6 @@ Class Form1
         End Try
     End Sub
     Private Sub viewserver()
-        Button2.Visible = False
         metro.Visible = False
         title.Visible = False
         status.Visible = True
@@ -224,9 +201,6 @@ Class Form1
                 Label9.Text = item.SubItems(2).Text
                 Label8.Text = item.SubItems(1).Text
                 Label10.Text = item.SubItems(0).Text
-                If Label10.Text = "CHN" Then
-                    Button2.Visible = True
-                End If
                 Try
                     Dim MyReg As RegistryKey
                     Dim MyVal As Object
@@ -853,9 +827,12 @@ Class Form1
     Private Sub Button1_MouseHover(sender As Object, e As EventArgs) Handles Button1.MouseHover
         ToolTip1.Show(cnt, Button1)
     End Sub
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Form8.ShowDialog()
+        If Label11.Text = "ONLINE" Then
+            Form8.ShowDialog()
+        Else
+            Form7.balon("Server is Offline ...")
+        End If
     End Sub
     Private Sub ContextMenuStrip6_Opening(sender As Object, e As CancelEventArgs) Handles ContextMenuStrip6.Opening
         Dim ff As String
@@ -884,6 +861,7 @@ Class Form1
     Private Sub label9_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles label9.LinkClicked
         My.Computer.Clipboard.SetText(label9.Text)
     End Sub
+
 End Class
 
 

@@ -97,8 +97,6 @@ Partial Class Form1
         Me.ip = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.statuss = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.vers = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.HF = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.USI = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.storeno = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ContextMenuStrip4 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.OpenInSCCMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -121,7 +119,6 @@ Partial Class Form1
         Me.metro = New System.Windows.Forms.PictureBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.sss = New System.Windows.Forms.Label()
@@ -702,7 +699,7 @@ Partial Class Form1
         Me.serverlist.AutoArrange = False
         Me.serverlist.BackColor = System.Drawing.Color.White
         Me.serverlist.BackgroundImageTiled = True
-        Me.serverlist.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.country, Me.servername, Me.ip, Me.statuss, Me.vers, Me.HF, Me.USI, Me.storeno})
+        Me.serverlist.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.country, Me.servername, Me.ip, Me.statuss, Me.vers, Me.storeno})
         Me.serverlist.ContextMenuStrip = Me.ContextMenuStrip4
         Me.serverlist.Cursor = System.Windows.Forms.Cursors.Hand
         Me.serverlist.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -749,20 +746,12 @@ Partial Class Form1
         'vers
         '
         Me.vers.Text = "Version"
-        '
-        'HF
-        '
-        Me.HF.Text = "HF"
-        Me.HF.Width = 27
-        '
-        'USI
-        '
-        Me.USI.Text = "USI"
+        Me.vers.Width = 100
         '
         'storeno
         '
         Me.storeno.Text = "Store"
-        Me.storeno.Width = 23
+        Me.storeno.Width = 50
         '
         'ContextMenuStrip4
         '
@@ -903,9 +892,9 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(493, 540)
+        Me.Button1.Location = New System.Drawing.Point(322, 537)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(118, 26)
+        Me.Button1.Size = New System.Drawing.Size(165, 29)
         Me.Button1.TabIndex = 18
         Me.Button1.Text = "DB Queries"
         Me.Button1.UseVisualStyleBackColor = True
@@ -918,17 +907,6 @@ Partial Class Form1
         Me.ToolTip1.ReshowDelay = 100
         Me.ToolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTip1.ToolTipTitle = "Bootstrap Info"
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(616, 540)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(2)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(118, 26)
-        Me.Button2.TabIndex = 25
-        Me.Button2.Text = "CHN barcode"
-        Me.Button2.UseVisualStyleBackColor = True
-        Me.Button2.Visible = False
         '
         'Button3
         '
@@ -972,7 +950,6 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1113, 569)
         Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.sss)
         Me.Controls.Add(Me.Button4)
@@ -1104,7 +1081,6 @@ Partial Class Form1
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents OpenInSCCMToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents OpenInSCCMToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents nr As System.Windows.Forms.ColumnHeader
     Friend WithEvents tlb As System.Windows.Forms.Label
     Friend WithEvents tpb As System.Windows.Forms.ProgressBar
@@ -1112,8 +1088,6 @@ Partial Class Form1
     Friend WithEvents Button4 As System.Windows.Forms.Button
     Friend WithEvents sss As System.Windows.Forms.Label
     Friend WithEvents LinkLabel1 As System.Windows.Forms.LinkLabel
-    Friend WithEvents HF As System.Windows.Forms.ColumnHeader
-    Friend WithEvents USI As System.Windows.Forms.ColumnHeader
     Friend WithEvents ToolTip2 As System.Windows.Forms.ToolTip
     Friend WithEvents label8 As System.Windows.Forms.LinkLabel
     Friend WithEvents label9 As System.Windows.Forms.LinkLabel
