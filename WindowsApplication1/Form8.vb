@@ -21,6 +21,7 @@ Public Class Form8
     Private con As SqlConnection
     Private cmd As SqlCommand
     Private dat As SqlDataReader
+    Private dat1 As SqlDataReader
     Private con1 As SqlConnection
     Private Sub Form8_Leave(sender As Object, e As EventArgs) Handles Me.Leave
         Me.Dispose()
@@ -740,21 +741,24 @@ Public Class Form8
         Dim x As FileInfo
         'Create PDF doc
         Dim pdfdoc As New Document()
-        Dim pdfwrite As PdfWriter = PdfWriter.GetInstance(pdfdoc, New FileStream("test.pdf", FileMode.Create))
+        Dim pdfwrite As PdfWriter = PdfWriter.GetInstance(pdfdoc, New FileStream(Path.Combine(jdc, barcodetype.ToString & ".pdf"), FileMode.Create))
         'Open PDF doc
         pdfdoc.Open()
-        pdfdoc.Add(New Paragraph("Barcode Generator v1.0"))
+        Dim p As Paragraph = New Paragraph("-=" + barcodetype.ToString + " - Country: " + Form1.Label10.Text + " - Store: " + Form1.Label7.Text + " =-")
+        p.Alignment = Element.ALIGN_CENTER
+        p.Font.Size = 16
+        pdfdoc.Add(p)
+        pdfdoc.Add(Chunk.NEWLINE)
 
         Dim image As iTextSharp.text.Image = Nothing
         For Each x In images
             image = iTextSharp.text.Image.GetInstance(x.FullName)
-            image.ScalePercent(100)
-            image.Alignment = iTextSharp.text.Image.ALIGN_CENTER
-            pdfdoc.Add(image)
+            image.ScalePercent(80)
+            pdfdoc.Add(New Chunk(image, 0, 15, True))
 
         Next
         pdfdoc.Close()
-        System.Diagnostics.Process.Start("test.pdf")
+        System.Diagnostics.Process.Start(Path.Combine(jdc, barcodetype.ToString & ".pdf"))
     End Sub
 
     Function FilterForImages(images() As FileInfo) As FileInfo()
@@ -772,6 +776,71 @@ Public Class Form8
 
         Return CType(newImages.ToArray(GetType(FileInfo)), FileInfo())
     End Function
+
+    Function checkFile() As System.IO.File
+        If My.Computer.FileSystem.FileExists("test.pdf") Then
+
+        End If
+        My.Computer.FileSystem.DeleteFile("test.pdf")
+        End
+    End Function
+    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
+        ssels = 0
+        srowsa = 0
+        Button2.Enabled = False
+        DataGridView6.Rows.Clear()
+        Dim row As String() = New String() {"-", "-", "-", "-", "-", "-", "-", "-", "-"}
+        If Form1.Label11.Text = "ONLINE" Then
+            Try
+                con = New SqlConnection("Data Source=" & Form1.label9.Text & ";Database=TPCentralDB;" & Form1.cred & ";")
+                cmd = con.CreateCommand
+                con.Open()
+                ssels = ssels + 1
+                cmd.CommandText = "select szDiscountID,szName,lTier,bActivated,szRuleIdentifierID,lPriority,'aha' from discountaffiliation"
+                dat = cmd.ExecuteReader()
+                If dat.HasRows Then
+                    While dat.Read()
+                        row(0) = dat(0)
+                        row(1) = dat(1)
+                        row(2) = dat(2)
+                        row(3) = dat(3)
+                        row(4) = dat(4)
+                        row(5) = dat(5)
+                        row(6) = dat(6)
+                        row(7) = dat(7)
+                        DataGridView6.Rows.Add(row)
+                    End While
+                    dat.Close()
+                End If
+        cmd.Dispose()
+        con.Dispose()
+            Catch af As Exception
+            Form7.balon(af.Message)
+        End Try
+        Else
+            Form7.balon("Server is offline ...")
+        End If
+        If ssels = 0 Then
+            Form7.balon("No selection has been made ...")
+        End If
+    End Sub
+    '   Function DiscountType()
+    'Dim ssqll As String
+    'Dim dat3 As New DataSet()
+
+    '    Try
+    '       ssqll = "select ISNULL(szlinetypecodeid,'') + ISNULL(szmxmtypecodeid,'') + ISNULL(szqtytypecodeid,'') from DiscountAffiliation where szDiscountID = '" & DataGridView6.Item(1, 1).Value & "'"
+    'Dim runsql As New SqlDataAdapter(ssqll, con)
+    '       runsql.Fill(dat3)
+
+    '        dat3.Dispose()
+    '       con1.Close()
+    '  Catch ev As Exception
+    '     Form7.balon(ev.Message)
+    '    dat1.Dispose()
+    '   con1.Close()
+    'End Try
+    'End Function
 End Class
 
 

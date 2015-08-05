@@ -150,6 +150,18 @@ Partial Class Form8
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Button13 = New System.Windows.Forms.Button()
+        Me.Button12 = New System.Windows.Forms.Button()
+        Me.DataGridView6 = New System.Windows.Forms.DataGridView()
+        Me.DiscID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DiscDesc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DiscType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DiscRule = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DiscArticle = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DiscExpiration = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DiscCustQualifier = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DiscKeystroke = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
@@ -173,6 +185,8 @@ Partial Class Form8
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        CType(Me.DataGridView6, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DataGridView1
@@ -657,12 +671,14 @@ Partial Class Form8
         '
         'tab
         '
+        Me.tab.AccessibleName = "asd"
         Me.tab.Controls.Add(Me.CUS)
         Me.tab.Controls.Add(Me.ART)
         Me.tab.Controls.Add(Me.COD)
         Me.tab.Controls.Add(Me.TX)
         Me.tab.Controls.Add(Me.CHN)
         Me.tab.Controls.Add(Me.Other)
+        Me.tab.Controls.Add(Me.TabPage1)
         Me.tab.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tab.ItemSize = New System.Drawing.Size(42, 18)
         Me.tab.Location = New System.Drawing.Point(12, 12)
@@ -1374,6 +1390,89 @@ Partial Class Form8
         Me.TextBox3.Size = New System.Drawing.Size(89, 22)
         Me.TextBox3.TabIndex = 5
         '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.Button13)
+        Me.TabPage1.Controls.Add(Me.Button12)
+        Me.TabPage1.Controls.Add(Me.DataGridView6)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(984, 363)
+        Me.TabPage1.TabIndex = 6
+        Me.TabPage1.Text = "Discounts"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'Button13
+        '
+        Me.Button13.Location = New System.Drawing.Point(220, 16)
+        Me.Button13.Name = "Button13"
+        Me.Button13.Size = New System.Drawing.Size(164, 23)
+        Me.Button13.TabIndex = 2
+        Me.Button13.Text = "Print Articles"
+        Me.Button13.UseVisualStyleBackColor = True
+        '
+        'Button12
+        '
+        Me.Button12.Location = New System.Drawing.Point(37, 16)
+        Me.Button12.Name = "Button12"
+        Me.Button12.Size = New System.Drawing.Size(153, 23)
+        Me.Button12.TabIndex = 1
+        Me.Button12.Text = "List Discounts"
+        Me.Button12.UseVisualStyleBackColor = True
+        '
+        'DataGridView6
+        '
+        Me.DataGridView6.AllowUserToAddRows = False
+        Me.DataGridView6.AllowUserToDeleteRows = False
+        Me.DataGridView6.AllowUserToResizeRows = False
+        Me.DataGridView6.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView6.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DiscID, Me.DiscDesc, Me.DiscType, Me.DiscRule, Me.DiscArticle, Me.DiscExpiration, Me.DiscCustQualifier, Me.DiscKeystroke})
+        Me.DataGridView6.Location = New System.Drawing.Point(3, 55)
+        Me.DataGridView6.Name = "DataGridView6"
+        Me.DataGridView6.Size = New System.Drawing.Size(981, 305)
+        Me.DataGridView6.TabIndex = 0
+        '
+        'DiscID
+        '
+        Me.DiscID.HeaderText = "DiscID"
+        Me.DiscID.Name = "DiscID"
+        '
+        'DiscDesc
+        '
+        Me.DiscDesc.HeaderText = "DiscDesc"
+        Me.DiscDesc.Name = "DiscDesc"
+        '
+        'DiscType
+        '
+        Me.DiscType.HeaderText = "DiscType"
+        Me.DiscType.Name = "DiscType"
+        '
+        'DiscRule
+        '
+        Me.DiscRule.HeaderText = "DiscRule"
+        Me.DiscRule.Name = "DiscRule"
+        '
+        'DiscArticle
+        '
+        Me.DiscArticle.HeaderText = "DiscArticle"
+        Me.DiscArticle.Name = "DiscArticle"
+        '
+        'DiscExpiration
+        '
+        Me.DiscExpiration.HeaderText = "DiscExpiration"
+        Me.DiscExpiration.Name = "DiscExpiration"
+        '
+        'DiscCustQualifier
+        '
+        Me.DiscCustQualifier.HeaderText = "DiscCustQualifier"
+        Me.DiscCustQualifier.Name = "DiscCustQualifier"
+        '
+        'DiscKeystroke
+        '
+        Me.DiscKeystroke.HeaderText = "DiscKeystroke"
+        Me.DiscKeystroke.Name = "DiscKeystroke"
+        '
         'Form8
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1419,6 +1518,8 @@ Partial Class Form8
         Me.GroupBox3.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.TabPage1.ResumeLayout(False)
+        CType(Me.DataGridView6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1544,4 +1645,16 @@ Partial Class Form8
     Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
+    Friend WithEvents DataGridView6 As System.Windows.Forms.DataGridView
+    Friend WithEvents DiscID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DiscDesc As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DiscType As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DiscRule As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DiscArticle As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DiscExpiration As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DiscCustQualifier As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DiscKeystroke As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Button13 As System.Windows.Forms.Button
+    Friend WithEvents Button12 As System.Windows.Forms.Button
 End Class

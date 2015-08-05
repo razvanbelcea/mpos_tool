@@ -97,7 +97,6 @@ Partial Class Form1
         Me.ip = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.statuss = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.vers = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.storeno = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ContextMenuStrip4 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.OpenInSCCMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RefreshStatusToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -699,7 +698,7 @@ Partial Class Form1
         Me.serverlist.AutoArrange = False
         Me.serverlist.BackColor = System.Drawing.Color.White
         Me.serverlist.BackgroundImageTiled = True
-        Me.serverlist.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.country, Me.servername, Me.ip, Me.statuss, Me.vers, Me.storeno})
+        Me.serverlist.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.country, Me.servername, Me.ip, Me.statuss, Me.vers})
         Me.serverlist.ContextMenuStrip = Me.ContextMenuStrip4
         Me.serverlist.Cursor = System.Windows.Forms.Cursors.Hand
         Me.serverlist.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -714,7 +713,7 @@ Partial Class Form1
         Me.serverlist.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2})
         Me.serverlist.HideSelection = False
         Me.serverlist.LabelWrap = False
-        Me.serverlist.Location = New System.Drawing.Point(12, 12)
+        Me.serverlist.Location = New System.Drawing.Point(19, 12)
         Me.serverlist.MultiSelect = False
         Me.serverlist.Name = "serverlist"
         Me.serverlist.Size = New System.Drawing.Size(475, 509)
@@ -726,32 +725,27 @@ Partial Class Form1
         'country
         '
         Me.country.Text = "Country"
-        Me.country.Width = 50
+        Me.country.Width = 98
         '
         'servername
         '
         Me.servername.Text = "Server Name"
-        Me.servername.Width = 110
+        Me.servername.Width = 106
         '
         'ip
         '
         Me.ip.Text = "IP"
-        Me.ip.Width = 80
+        Me.ip.Width = 86
         '
         'statuss
         '
         Me.statuss.Text = "Status"
-        Me.statuss.Width = 40
+        Me.statuss.Width = 58
         '
         'vers
         '
         Me.vers.Text = "Version"
-        Me.vers.Width = 100
-        '
-        'storeno
-        '
-        Me.storeno.Text = "Store"
-        Me.storeno.Width = 50
+        Me.vers.Width = 114
         '
         'ContextMenuStrip4
         '
@@ -1076,7 +1070,6 @@ Partial Class Form1
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents vers As System.Windows.Forms.ColumnHeader
-    Friend WithEvents storeno As System.Windows.Forms.ColumnHeader
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents OpenInSCCMToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem

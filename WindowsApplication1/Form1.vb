@@ -14,8 +14,8 @@ Imports Microsoft.VisualBasic
 Imports System.IO
 Imports System.Security.Permissions
 Class Form1
-    Public Shared UID As String = "sa"
-    Public Shared PSW As String = "Pa$$w0rd"
+    Public Shared UID As String = "TpAdmin"
+    Public Shared PSW As String = "Cawt6__56UBn_szF8_10"
     Public Shared cred1 As String = "Integrated Security=SSPI"
     Public Shared cred2 As String = "Uid=" & UID & "; Password=" & PSW
     Public Shared cred As String = cred1
@@ -859,7 +859,9 @@ Class Form1
     End Sub
 
     Private Sub label9_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles label9.LinkClicked
-        My.Computer.Clipboard.SetText(label9.Text)
+        '   My.Computer.Clipboard.SetText(label9.Text)
+        System.Diagnostics.Process.Start("mstsc.exe", "/v " & label9.Text)
+
     End Sub
 
 End Class
