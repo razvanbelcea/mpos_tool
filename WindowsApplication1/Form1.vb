@@ -39,6 +39,7 @@ Class Form1
     Private con2 As SqlConnection
     Private cmd2 As SqlCommand
     Private dat2 As SqlDataReader
+
     '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN form load/unload
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         If x = False Then
@@ -62,6 +63,8 @@ Class Form1
             Me.TopMost = False
         End If
         taskserver()
+        CurrentVersion()
+        CheckForUpdates()
     End Sub
     '-----------------------------------------------------------------------------------------------------------------------------------------END form load/unload
     '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN read xml files
@@ -121,7 +124,7 @@ Class Form1
                                 folderlist.Items.Add(readfolder.Value)
                             Case "Path"
                                 readfolder.Read()
-                                folderlist.Items(i).SubItems.Add("\\" + Label9.Text + readfolder.Value)
+                                folderlist.Items(i).SubItems.Add("\\" + label9.Text + readfolder.Value)
                                 i = i + 1
                         End Select
                 End Select
@@ -172,7 +175,7 @@ Class Form1
     End Sub
     Private Sub statusserver()
         Try
-            If My.Computer.Network.Ping(Label9.Text) Then
+            If My.Computer.Network.Ping(label9.Text) Then
                 PictureBox2.Visible = False
                 PictureBox1.Visible = True
                 Label11.Text = "ONLINE"
@@ -198,8 +201,8 @@ Class Form1
         operators.Visible = True
         For Each item As ListViewItem In serverlist.Items
             If item.Selected = True Then
-                Label9.Text = item.SubItems(2).Text
-                Label8.Text = item.SubItems(1).Text
+                label9.Text = item.SubItems(2).Text
+                label8.Text = item.SubItems(1).Text
                 Label10.Text = item.SubItems(0).Text
                 Try
                     Dim MyReg As RegistryKey
@@ -237,7 +240,7 @@ Class Form1
     Private Sub loaddatabase()
         operatorlist.Items.Clear()
         tilllist.Items.Clear()
-        con = New SqlConnection("Data Source=" & Label9.Text & ";Database=TPCentralDB;" & cred & ";")
+        con = New SqlConnection("Data Source=" & label9.Text & ";Database=TPCentralDB;" & cred & ";")
         If Label11.Text = "ONLINE" Then
             Try
                 con.Open()
@@ -272,7 +275,7 @@ Class Form1
     Private Sub loadoperators(tokenoperators As CancellationToken)
         Dim i As Integer = 0
         Try
-            con1 = New SqlConnection("Data Source=" & Label9.Text & ";Database=TPCentralDB;" & cred & ";")
+            con1 = New SqlConnection("Data Source=" & label9.Text & ";Database=TPCentralDB;" & cred & ";")
             cmd1 = con1.CreateCommand
             con1.Open()
             cmd1.CommandText = "select lOperatorID,szname from OperatorProfileAffiliation as a join profile as b on a.lProfileID=b.lProfileID"
@@ -297,7 +300,7 @@ Class Form1
         Dim i As Integer = 0
         Dim arr As Array = {"-", "-", "-", "-", "-", "-", "-"}
         Try
-            con = New SqlConnection("Data Source=" & Label9.Text & ";Database=TPCentralDB;" & cred & ";")
+            con = New SqlConnection("Data Source=" & label9.Text & ";Database=TPCentralDB;" & cred & ";")
             cmd = con.CreateCommand
             cmd.CommandText = "select szWorkstationID,lWorkstationNmbr, szWorkstationGroupID,lOperatorID from workstation left join operator on lLoggedOnWorkstationNmbr=lWorkstationNmbr where bisthickpos<>0"
             con.Open()
@@ -367,7 +370,7 @@ Class Form1
     End Sub
     Private Sub loadcounts()
         Dim readcounts As XmlTextReader = New XmlTextReader(cfl)
-        Dim con3 As New SqlConnection("Data Source=" & Label9.Text & ";Database=TPCentralDB;" & cred & ";")
+        Dim con3 As New SqlConnection("Data Source=" & label9.Text & ";Database=TPCentralDB;" & cred & ";")
         Dim cmd3 As New SqlCommand
         Dim dat3 As SqlDataReader
         cnt = vbTab & vbTab & vbTab & vbTab & vbTab & vbCrLf
@@ -375,7 +378,7 @@ Class Form1
             If Label11.Text = "ONLINE" Then
                 con3.Open()
                 cmd3 = con3.CreateCommand
-                cmd3.CommandText = "select lRetailStoreID from workstation where szWorkstationID='" & Label8.Text & "'"
+                cmd3.CommandText = "select lRetailStoreID from workstation where szWorkstationID='" & label8.Text & "'"
                 dat3 = cmd3.ExecuteReader()
                 dat3.Read()
                 Label7.Text = dat3(0)
@@ -428,7 +431,7 @@ Class Form1
             For Each item As ListViewItem In servicelist.Items
                 tokenservice.ThrowIfCancellationRequested()
                 Try
-                    Dim serv As New ServiceController(item.SubItems(0).Text, Label8.Text & ".mpos.madm.net")
+                    Dim serv As New ServiceController(item.SubItems(0).Text, label8.Text & ".mpos.madm.net")
                     item.SubItems.Add(serv.DisplayName)
                     item.SubItems.Add(serv.Status.ToString)
                     serv.Dispose()
@@ -517,7 +520,7 @@ Class Form1
     '-----------------------------------------------------------------------------------------------------------------------------------------END tasks
     '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN menus
     Private Sub logoffoperator()
-        Dim con As New SqlConnection("Data Source=" & Label9.Text & ";Database=TPCentralDB;" & cred & ";")
+        Dim con As New SqlConnection("Data Source=" & label9.Text & ";Database=TPCentralDB;" & cred & ";")
         Dim cmd As New SqlCommand
         Try
             con.Open()
@@ -554,7 +557,7 @@ Class Form1
         Next
     End Sub
     Private Sub resetoperator()
-        Dim con As New SqlConnection("Data Source=" & Label9.Text & ";Database=TPCentralDB;" & cred & ";")
+        Dim con As New SqlConnection("Data Source=" & label9.Text & ";Database=TPCentralDB;" & cred & ";")
         Dim cmd As New SqlCommand
         Try
             If Label11.Text = "ONLINE" Then
@@ -604,7 +607,7 @@ Class Form1
         Try
             For Each item As ListViewItem In servicelist.Items
                 If item.Selected AndAlso Label11.Text = "ONLINE" Then
-                    Dim serv As New ServiceController(item.SubItems(0).Text, Label8.Text & ".mpos.madm.net")
+                    Dim serv As New ServiceController(item.SubItems(0).Text, label8.Text & ".mpos.madm.net")
                     serv.Stop()
                     Sleep(200)
                     serv.Start()
@@ -619,7 +622,7 @@ Class Form1
         Try
             For Each item As ListViewItem In servicelist.Items
                 If item.Selected AndAlso Label11.Text = "ONLINE" Then
-                    Dim serv As New ServiceController(item.SubItems(0).Text, Label8.Text & ".mpos.madm.net")
+                    Dim serv As New ServiceController(item.SubItems(0).Text, label8.Text & ".mpos.madm.net")
                     If serv.Status = ServiceProcess.ServiceControllerStatus.Running Then
                         serv.Stop()
                     Else
@@ -634,17 +637,17 @@ Class Form1
     End Sub
     Private Sub CreateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CreateToolStripMenuItem.Click
         Dim ff As String
-        ff = "\\" & Label9.Text & "\e$\TpDotnet\cfg\Metro.Mpos.Router.xml"
+        ff = "\\" & label9.Text & "\e$\TpDotnet\cfg\Metro.Mpos.Router.xml"
         If Label11.Text = "ONLINE" Then
             My.Computer.FileSystem.CopyFile("Metro.Mpos.Router.xml", ff, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs, Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing)
-            My.Computer.FileSystem.WriteAllText(ff, My.Computer.FileSystem.ReadAllText(ff).Replace("XXX", Label9.Text), False)
+            My.Computer.FileSystem.WriteAllText(ff, My.Computer.FileSystem.ReadAllText(ff).Replace("XXX", label9.Text), False)
             My.Computer.FileSystem.WriteAllText(ff, My.Computer.FileSystem.ReadAllText(ff).Replace("YYY", Label7.Text), False)
             System.Diagnostics.Process.Start("Notepad.Exe", ff)
         End If
     End Sub
     Private Sub EditToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditToolStripMenuItem.Click
         Dim ff As String
-        ff = "\\" & Label9.Text & "\e$\TpDotnet\cfg\Metro.Mpos.Router.xml"
+        ff = "\\" & label9.Text & "\e$\TpDotnet\cfg\Metro.Mpos.Router.xml"
         If Label11.Text = "ONLINE" AndAlso My.Computer.FileSystem.FileExists(ff) Then
             System.Diagnostics.Process.Start("Notepad.Exe", ff)
         Else
@@ -836,7 +839,7 @@ Class Form1
     End Sub
     Private Sub ContextMenuStrip6_Opening(sender As Object, e As CancelEventArgs) Handles ContextMenuStrip6.Opening
         Dim ff As String
-        ff = "\\" & Label9.Text & "\e$\TpDotnet\cfg\Metro.Mpos.Router.xml"
+        ff = "\\" & label9.Text & "\e$\TpDotnet\cfg\Metro.Mpos.Router.xml"
         If Label11.Text = "ONLINE" AndAlso My.Computer.FileSystem.FileExists(ff) Then
             CreateToolStripMenuItem.Text = "Overwrite"
         Else
@@ -863,7 +866,41 @@ Class Form1
         System.Diagnostics.Process.Start("mstsc.exe", "/v " & label9.Text)
 
     End Sub
-
+    '-----------------------------------------------------------------------------------------------------------
+    Public Sub CheckForUpdates()
+        Dim file As String = Application.StartupPath & "/version.txt"
+        Dim MyVer As String = My.Application.Info.Version.ToString
+        If My.Computer.FileSystem.FileExists(file) Then
+            My.Computer.FileSystem.DeleteFile(file)
+        End If
+        Try
+            My.Computer.Network.DownloadFile("http://sunt.pro/update/Update.txt", file)
+        Catch ex As Exception
+            MsgBox(ex.Message + " Can''t Check for updates")
+        End Try
+        Dim LastVer As String = My.Computer.FileSystem.ReadAllText(file)
+        If MyVer < LastVer Then
+            MsgBox("Update Available")
+            Try
+                My.Computer.Network.DownloadFile("http://sunt.pro/update/MPOS Server Tool v1.0.exe", Application.StartupPath + "/MPOS Server Tool V" & LastVer + ".exe")
+                If My.Computer.FileSystem.FileExists(Application.StartupPath + "/MPOS Server Tool V" & LastVer + ".exe") Then
+                    Application.Exit()
+                    Me.Close()
+                    System.Threading.Thread.Sleep(3000)
+                    My.Computer.FileSystem.DeleteFile(Application.StartupPath + "/MPOS Server Tool V" & MyVer + ".exe")
+                End If
+            Catch ex As Exception
+                MsgBox(ex.Message + " Error Downloading update.")
+            End Try
+            Process.Start(Application.StartupPath + "/MPOS Server Tool V" & LastVer + ".exe")
+        Else
+            MsgBox("Program is up to date")
+        End If
+    End Sub
+    Public Sub CurrentVersion()
+        Dim cversion As String = Application.ProductVersion
+        Label15.Text = cversion.ToString
+    End Sub
 End Class
 
 

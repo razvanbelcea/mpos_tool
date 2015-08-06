@@ -122,6 +122,8 @@ Partial Class Form1
         Me.Button4 = New System.Windows.Forms.Button()
         Me.sss = New System.Windows.Forms.Label()
         Me.ToolTip2 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.status.SuspendLayout()
         Me.ContextMenuStrip3.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -938,11 +940,31 @@ Partial Class Form1
         Me.sss.TabIndex = 27
         Me.sss.Text = "Ping servers ..."
         '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(922, 547)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(45, 13)
+        Me.Label15.TabIndex = 28
+        Me.Label15.Text = "Label15"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(878, 547)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(45, 13)
+        Me.Label16.TabIndex = 29
+        Me.Label16.Text = "Version:"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1113, 569)
+        Me.Controls.Add(Me.Label16)
+        Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.sss)
@@ -1084,4 +1106,6 @@ Partial Class Form1
     Friend WithEvents ToolTip2 As System.Windows.Forms.ToolTip
     Friend WithEvents label8 As System.Windows.Forms.LinkLabel
     Friend WithEvents label9 As System.Windows.Forms.LinkLabel
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents Label16 As System.Windows.Forms.Label
 End Class
