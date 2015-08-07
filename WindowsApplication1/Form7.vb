@@ -10,7 +10,7 @@ Imports System.ComponentModel
 Imports System.Threading
 Imports System.IO
 Imports System.Threading.Thread
-Imports System.IO.Packaging
+'Imports System.IO.Packaging
 Imports System.IO.Compression
 Imports MPOS.My.Resources
 Public Class Form7

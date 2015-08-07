@@ -57,14 +57,24 @@ Class Form1
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Control.CheckForIllegalCrossThreadCalls = False
-        Me.Show()
-        If Me.TopMost = False Then
-            Me.TopMost = True
-            Me.TopMost = False
+        Dim request As System.Net.HttpWebRequest = System.Net.HttpWebRequest.Create("http://sunt.pro/update/Update.txt")
+        Dim response As System.Net.HttpWebResponse = request.GetResponse()
+        Dim sr As System.IO.StreamReader = New System.IO.StreamReader(response.GetResponseStream())
+        Dim newestversion As String = sr.ReadToEnd()
+        Dim currentversion As String = Application.ProductVersion
+        If currentversion < newestversion Then
+            MsgBox("Update Available")
+            CheckForUpdates()
+        Else
+            Me.Show()
+            If Me.TopMost = False Then
+                Me.TopMost = True
+                Me.TopMost = False
+            End If
+            taskserver()
+            ActualVersion()
+            ' XmlVersion("server")
         End If
-        taskserver()
-        CurrentVersion()
-        CheckForUpdates()
     End Sub
     '-----------------------------------------------------------------------------------------------------------------------------------------END form load/unload
     '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN read xml files
@@ -866,40 +876,89 @@ Class Form1
         System.Diagnostics.Process.Start("mstsc.exe", "/v " & label9.Text)
 
     End Sub
-    '-----------------------------------------------------------------------------------------------------------
+ '-----------------------------------------------------------------------------------------------------------
     Public Sub CheckForUpdates()
         Dim file As String = Application.StartupPath & "/version.txt"
         Dim MyVer As String = My.Application.Info.Version.ToString
-        If My.Computer.FileSystem.FileExists(file) Then
-            My.Computer.FileSystem.DeleteFile(file)
-        End If
+        Dim request As System.Net.HttpWebRequest = System.Net.HttpWebRequest.Create("http://sunt.pro/update/Update.txt")
+        Dim response As System.Net.HttpWebResponse = request.GetResponse()
+        Dim sr As System.IO.StreamReader = New System.IO.StreamReader(response.GetResponseStream())
+        Dim newestversion As String = sr.ReadToEnd()
+        Dim currentversion As String = Application.ProductVersion
+        Dim webbrowser1 As New WebBrowser
+
         Try
-            My.Computer.Network.DownloadFile("http://sunt.pro/update/Update.txt", file)
+            My.Computer.Network.DownloadFile("http://sunt.pro/update/MPOS Server Tool v1.0.exe", Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe")
+            If My.Computer.FileSystem.FileExists(Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe") Then
+                x = True
+                Me.Close()
+                System.Threading.Thread.Sleep(1000)
+                Process.Start(Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe")
+            End If
         Catch ex As Exception
-            MsgBox(ex.Message + " Can''t Check for updates")
+            MsgBox(ex.Message + " Error Downloading update.")
         End Try
-        Dim LastVer As String = My.Computer.FileSystem.ReadAllText(file)
-        If MyVer < LastVer Then
-            MsgBox("Update Available")
+    End Sub
+    Public Sub ActualVersion()
+        Dim cversion As String = Application.ProductVersion
+        Label15.Text = cversion.ToString
+    End Sub
+    Public Sub DeleteOldVersion()
+
+    End Sub
+    Public Sub XmlVersion(files)
+
+        Dim ttr As String = ""
+        Dim link As String = ""
+
+        If files = "server" Then
+            ttr = Form1.svl
+            link = "http://sunt.pro/update/serverlist.xml"
+        ElseIf files = Folder Then
+            ttr = Form1.ffl
+        ElseIf files = "service" Then
+            ttr = Form1.srl
+        ElseIf files = "countlist" Then
+            ttr = Form1.cfl
+        End If
+
+
+        Dim xmlread As XmlTextReader = New XmlTextReader(ttr)
+        Try
+            Do While (xmlread.Read())
+                Select Case xmlread.NodeType
+                    Case XmlNodeType.Element
+                        Select Case xmlread.Name
+                            Case "Version"
+                                xmlread.Read()
+                                'currentversion = xmlread.Value
+                        End Select
+                End Select
+            Loop
+        Catch ex As Exception
+        End Try
+
+        Dim reader As XmlTextReader = New XmlTextReader(link)
+        MsgBox(link)
+        Do While reader.Read()
+            Select reader.NodeType
+                Case XmlNodeType.Element
+                        Select reader.Name
+                        Case "Version"
+                            reader.Read()
+                            'newestversion = reader.Value
+                    End Select
+            End Select
+        Loop
+        Dim newestversion As String = xmlread.Value
+        Dim currentversion As String = reader.Value
+        If currentversion < newestversion Then
             Try
-                My.Computer.Network.DownloadFile("http://sunt.pro/update/MPOS Server Tool v1.0.exe", Application.StartupPath + "/MPOS Server Tool V" & LastVer + ".exe")
-                If My.Computer.FileSystem.FileExists(Application.StartupPath + "/MPOS Server Tool V" & LastVer + ".exe") Then
-                    Application.Exit()
-                    Me.Close()
-                    System.Threading.Thread.Sleep(3000)
-                    My.Computer.FileSystem.DeleteFile(Application.StartupPath + "/MPOS Server Tool V" & MyVer + ".exe")
-                End If
+                My.Computer.Network.DownloadFile("http://sunt.pro/update/" + ttr, Application.StartupPath + "/" + ttr)
             Catch ex As Exception
                 MsgBox(ex.Message + " Error Downloading update.")
             End Try
-            Process.Start(Application.StartupPath + "/MPOS Server Tool V" & LastVer + ".exe")
-        Else
-            MsgBox("Program is up to date")
         End If
-    End Sub
-    Public Sub CurrentVersion()
-        Dim cversion As String = Application.ProductVersion
-        Label15.Text = cversion.ToString
     End Sub
 End Class
 
