@@ -57,24 +57,15 @@ Class Form1
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Control.CheckForIllegalCrossThreadCalls = False
-        Dim request As System.Net.HttpWebRequest = System.Net.HttpWebRequest.Create("http://sunt.pro/update/Update.txt")
-        Dim response As System.Net.HttpWebResponse = request.GetResponse()
-        Dim sr As System.IO.StreamReader = New System.IO.StreamReader(response.GetResponseStream())
-        Dim newestversion As String = sr.ReadToEnd()
-        Dim currentversion As String = Application.ProductVersion
-        If currentversion < newestversion Then
-            MsgBox("Update Available")
-            CheckForUpdates()
-        Else
-            Me.Show()
-            If Me.TopMost = False Then
-                Me.TopMost = True
-                Me.TopMost = False
-            End If
-            taskserver()
-            ActualVersion()
-            ' XmlVersion("server")
+        UpdateButton()
+        Me.Show()
+        If Me.TopMost = False Then
+            Me.TopMost = True
+            Me.TopMost = False
         End If
+        taskserver()
+        ActualVersion()
+        XmlVersion("server")
     End Sub
     '-----------------------------------------------------------------------------------------------------------------------------------------END form load/unload
     '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN read xml files
@@ -862,6 +853,7 @@ Class Form1
     End Sub
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Form9.ShowDialog()
+        Me.UpdateButton()
     End Sub
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
         ContextMenuStrip6.Show(Cursor.Position)
@@ -877,28 +869,6 @@ Class Form1
 
     End Sub
  '-----------------------------------------------------------------------------------------------------------
-    Public Sub CheckForUpdates()
-        Dim file As String = Application.StartupPath & "/version.txt"
-        Dim MyVer As String = My.Application.Info.Version.ToString
-        Dim request As System.Net.HttpWebRequest = System.Net.HttpWebRequest.Create("http://sunt.pro/update/Update.txt")
-        Dim response As System.Net.HttpWebResponse = request.GetResponse()
-        Dim sr As System.IO.StreamReader = New System.IO.StreamReader(response.GetResponseStream())
-        Dim newestversion As String = sr.ReadToEnd()
-        Dim currentversion As String = Application.ProductVersion
-        Dim webbrowser1 As New WebBrowser
-
-        Try
-            My.Computer.Network.DownloadFile("http://sunt.pro/update/MPOS Server Tool v1.0.exe", Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe")
-            If My.Computer.FileSystem.FileExists(Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe") Then
-                x = True
-                Me.Close()
-                System.Threading.Thread.Sleep(1000)
-                Process.Start(Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe")
-            End If
-        Catch ex As Exception
-            MsgBox(ex.Message + " Error Downloading update.")
-        End Try
-    End Sub
     Public Sub ActualVersion()
         Dim cversion As String = Application.ProductVersion
         Label15.Text = cversion.ToString
@@ -914,16 +884,19 @@ Class Form1
         If files = "server" Then
             ttr = Form1.svl
             link = "http://sunt.pro/update/serverlist.xml"
-        ElseIf files = Folder Then
+        ElseIf files = "folder" Then
             ttr = Form1.ffl
+            link = "http://sunt.pro/update/folderlist.xml"
         ElseIf files = "service" Then
             ttr = Form1.srl
+            link = "http://sunt.pro/update/servicelist.xml"
         ElseIf files = "countlist" Then
             ttr = Form1.cfl
+            link = "http://sunt.pro/update/countlist.xml"
         End If
 
-
         Dim xmlread As XmlTextReader = New XmlTextReader(ttr)
+        Dim myArr As New ArrayList()
         Try
             Do While (xmlread.Read())
                 Select Case xmlread.NodeType
@@ -931,7 +904,7 @@ Class Form1
                         Select Case xmlread.Name
                             Case "Version"
                                 xmlread.Read()
-                                'currentversion = xmlread.Value
+                                myArr.Add(xmlread.Value)
                         End Select
                 End Select
             Loop
@@ -939,25 +912,41 @@ Class Form1
         End Try
 
         Dim reader As XmlTextReader = New XmlTextReader(link)
-        MsgBox(link)
         Do While reader.Read()
-            Select reader.NodeType
+            Select Case reader.NodeType
                 Case XmlNodeType.Element
-                        Select reader.Name
+                    Select Case reader.Name
                         Case "Version"
                             reader.Read()
-                            'newestversion = reader.Value
+                            myArr.Add(reader.Value)
                     End Select
             End Select
         Loop
-        Dim newestversion As String = xmlread.Value
-        Dim currentversion As String = reader.Value
-        If currentversion < newestversion Then
+        If myArr(0).ToString < myArr(1).ToString Then
             Try
-                My.Computer.Network.DownloadFile("http://sunt.pro/update/" + ttr, Application.StartupPath + "/" + ttr)
+                My.Computer.Network.DownloadFile("http://sunt.pro/update/" + ttr, _
+                                         Application.StartupPath + "\" + ttr, _
+                                         "", "", False, 500, True)
+
             Catch ex As Exception
                 MsgBox(ex.Message + " Error Downloading update.")
             End Try
+        Else
+            Form7.balon("XML files are up to date!")
+        End If
+    End Sub
+    Sub UpdateButton()
+        Dim request As System.Net.HttpWebRequest = System.Net.HttpWebRequest.Create("http://sunt.pro/update/Update.txt")
+        Dim response As System.Net.HttpWebResponse = request.GetResponse()
+        Dim sr As System.IO.StreamReader = New System.IO.StreamReader(response.GetResponseStream())
+        Dim exenewestversion As String = sr.ReadToEnd()
+        Dim execurrentversion As String = Application.ProductVersion
+        If execurrentversion < exenewestversion Then
+            Form9.Button2.Enabled = True
+            Form9.Button2.Text = "Updates available"
+        ElseIf execurrentversion = exenewestversion Then
+            Form9.Button2.Enabled = False
+            Form9.Button2.Text = "No updates available"
         End If
     End Sub
 End Class
