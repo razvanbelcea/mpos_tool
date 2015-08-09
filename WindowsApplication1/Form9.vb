@@ -1,4 +1,6 @@
 ﻿Imports System.Xml
+Imports System
+Imports System.IO
 Public Class Form9
     Private Sub Form9_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Form1.TopMost = True Then
@@ -45,6 +47,14 @@ Public Class Form9
             Try
                 My.Computer.Network.DownloadFile("http://sunt.pro/update/MPOS Server Tool v1.0.exe", Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe")
                 If My.Computer.FileSystem.FileExists(Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe") Then
+                    Dim path As String = "oldversion.txt"
+
+                    If Not File.Exists(path) Then
+                        Using sw As StreamWriter = File.CreateText(path)
+                            sw.WriteLine(currentversion)
+                        End Using
+                    End If
+
                     Form1.x = True
                     Form1.Close()
                     System.Threading.Thread.Sleep(1000)

@@ -58,6 +58,7 @@ Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Control.CheckForIllegalCrossThreadCalls = False
         XmlVersion("server")
+        DeleteOldVersion()
         'XmlVersion("folder")
         ' XmlVersion("service")
         Me.Show()
@@ -875,7 +876,20 @@ Class Form1
         Label15.Text = cversion.ToString
     End Sub
     Public Sub DeleteOldVersion()
-
+        Dim smallArr As New ArrayList()
+        Dim path As String = "oldversion.txt"
+        Dim execurrentversion As String = Application.ProductVersion
+        If My.Computer.FileSystem.FileExists("oldversion.txt") Then
+            Using sr As StreamReader = File.OpenText(Path)
+                Do While sr.Peek() >= 0
+                    smallArr.Add(sr.ReadLine())
+                Loop
+            End Using
+            If execurrentversion > smallArr(0) Then
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath + "/MPOS Server Tool V" & smallArr(0) + ".exe")
+                My.Computer.FileSystem.DeleteFile("oldversion.txt")
+            End If
+        End If
     End Sub
     Public Sub XmlVersion(files)
 
