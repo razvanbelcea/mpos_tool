@@ -57,17 +57,17 @@ Class Form1
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Control.CheckForIllegalCrossThreadCalls = False
-        XmlVersion("server")
-        DeleteOldVersion()
-        'XmlVersion("folder")
-        ' XmlVersion("service")
-        Me.Show()
-        If Me.TopMost = False Then
-            Me.TopMost = True
-            Me.TopMost = False
-        End If
-        taskserver()
-        ActualVersion()
+            XmlVersion("server")
+            DeleteOldVersion()
+            'XmlVersion("folder")
+            'XmlVersion("service")
+            Me.Show()
+            If Me.TopMost = False Then
+                Me.TopMost = True
+                Me.TopMost = False
+            End If
+            taskserver()
+            ActualVersion()
     End Sub
     '-----------------------------------------------------------------------------------------------------------------------------------------END form load/unload
     '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN read xml files
@@ -892,6 +892,9 @@ Class Form1
         End If
     End Sub
     Public Sub XmlVersion(files)
+        Dim WbReq As New Net.WebClient
+        WbReq.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials
+        WbReq.Dispose()
 
         Dim ttr As String = ""
         Dim link As String = ""
@@ -944,18 +947,35 @@ Class Form1
             Form7.balon("Invalid address at " + link)
         End If
         If myArr(0).ToString < myArr(1).ToString Then
+            'Try
+            'My.Computer.Network.DownloadFile(link, _
+            '                           ttr, _
+            '                            "", "", False, 500, True)
+            '    Catch ex As Exception
+            'MsgBox(ex.Message + " Error Downloading update.")
+            '   End Try
+            Dim wWebClient As New WebClient
+            Dim strPicPath As String
+            Dim uri As System.Uri = New System.Uri(link)
+
             Try
-                My.Computer.Network.DownloadFile(link, _
-                                         ttr, _
-                                         "", "", False, 500, True) 'Then
+                strPicPath = Application.StartupPath + "\" + ttr.ToString
+                wWebClient.DownloadFileAsync(uri, strPicPath)
+                MsgBox(strPicPath)
             Catch ex As Exception
-            MsgBox(ex.Message + " Error Downloading update.")
-        End Try
+                MsgBox("Error: " & ex.Message)
+            Finally
+                wWebClient = Nothing
+            End Try
         Else
             Form7.balon("XML files are up to date!")
         End If
     End Sub
     Sub UpdateButton()
+        Dim WbReq As New Net.WebClient
+        WbReq.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials
+        WbReq.Dispose()
+
         Dim request As System.Net.HttpWebRequest = System.Net.HttpWebRequest.Create("http://sunt.pro/update/Update.txt")
         Dim response As System.Net.HttpWebResponse = request.GetResponse()
         Dim sr As System.IO.StreamReader = New System.IO.StreamReader(response.GetResponseStream())
@@ -970,6 +990,10 @@ Class Form1
         End If
     End Sub
     Public Function ResourceExists(location As Uri) As Boolean
+        Dim WbReq As New Net.WebClient
+        WbReq.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials
+        WbReq.Dispose()
+
         If (Not String.Equals(location.Scheme, Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase)) And (Not String.Equals(location.Scheme, Uri.UriSchemeHttps, StringComparison.InvariantCultureIgnoreCase)) Then
             Throw New NotSupportedException("URI scheme is not supported")
         End If

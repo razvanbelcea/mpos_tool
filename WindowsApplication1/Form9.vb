@@ -36,6 +36,10 @@ Public Class Form9
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim WbReq As New Net.WebClient
+        WbReq.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials
+        WbReq.Dispose()
+
         Dim result As Integer = MessageBox.Show("Updating will close current session. Are you sure you want to continue ?", "MPOS Tool Updater", MessageBoxButtons.YesNo)
         If result = DialogResult.No Then
         ElseIf result = DialogResult.Yes Then
