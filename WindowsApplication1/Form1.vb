@@ -57,7 +57,9 @@ Class Form1
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Control.CheckForIllegalCrossThreadCalls = False
-        UpdateButton()
+        XmlVersion("server")
+        'XmlVersion("folder")
+        ' XmlVersion("service")
         Me.Show()
         If Me.TopMost = False Then
             Me.TopMost = True
@@ -65,7 +67,6 @@ Class Form1
         End If
         taskserver()
         ActualVersion()
-        XmlVersion("server")
     End Sub
     '-----------------------------------------------------------------------------------------------------------------------------------------END form load/unload
     '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN read xml files
@@ -852,8 +853,8 @@ Class Form1
         Me.Close()
     End Sub
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        Form9.ShowDialog()
         Me.UpdateButton()
+        Form9.ShowDialog()
     End Sub
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
         ContextMenuStrip6.Show(Cursor.Position)
@@ -911,26 +912,31 @@ Class Form1
         Catch ex As Exception
         End Try
 
+        Dim itExists As Boolean = ResourceExists(New Uri(link))
         Dim reader As XmlTextReader = New XmlTextReader(link)
-        Do While reader.Read()
-            Select Case reader.NodeType
-                Case XmlNodeType.Element
-                    Select Case reader.Name
-                        Case "Version"
-                            reader.Read()
-                            myArr.Add(reader.Value)
-                    End Select
-            End Select
-        Loop
+        If itExists = True Then
+            Do While reader.Read()
+                Select Case reader.NodeType
+                    Case XmlNodeType.Element
+                        Select Case reader.Name
+                            Case "Version"
+                                reader.Read()
+                                myArr.Add(reader.Value)
+                        End Select
+                End Select
+            Loop
+        Else
+            myArr.Add(xmlread.Value)
+            Form7.balon("Invalid address at " + link)
+        End If
         If myArr(0).ToString < myArr(1).ToString Then
             Try
-                My.Computer.Network.DownloadFile("http://sunt.pro/update/" + ttr, _
-                                         Application.StartupPath + "\" + ttr, _
-                                         "", "", False, 500, True)
-
+                My.Computer.Network.DownloadFile(link, _
+                                         ttr, _
+                                         "", "", False, 500, True) 'Then
             Catch ex As Exception
-                MsgBox(ex.Message + " Error Downloading update.")
-            End Try
+            MsgBox(ex.Message + " Error Downloading update.")
+        End Try
         Else
             Form7.balon("XML files are up to date!")
         End If
@@ -949,6 +955,25 @@ Class Form1
             Form9.Button2.Text = "No updates available"
         End If
     End Sub
+    Public Function ResourceExists(location As Uri) As Boolean
+        If (Not String.Equals(location.Scheme, Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase)) And (Not String.Equals(location.Scheme, Uri.UriSchemeHttps, StringComparison.InvariantCultureIgnoreCase)) Then
+            Throw New NotSupportedException("URI scheme is not supported")
+        End If
+        Dim request = Net.WebRequest.Create(location)
+        request.Method = "HEAD"
+        Try
+            Using response = request.GetResponse
+                Return DirectCast(response, Net.HttpWebResponse).StatusCode = Net.HttpStatusCode.OK
+            End Using
+        Catch ex As Net.WebException
+            Select Case DirectCast(ex.Response, Net.HttpWebResponse).StatusCode
+                Case Net.HttpStatusCode.NotFound
+                    Return False
+                Case Else
+                    Throw
+            End Select
+        End Try
+    End Function
 End Class
 
 
