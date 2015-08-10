@@ -25,6 +25,7 @@ Class Form1
     Public Shared cfl As String = "countlist.xml"
     Public Shared hff As String = "\c$\mgi\mposinstallstate.xml"
     Public Shared x As Boolean = False
+    Public Shared w As Boolean = False
     Dim anulareserver As CancellationTokenSource
     Dim anulareservice As CancellationTokenSource
     Dim anularetills As CancellationTokenSource
@@ -57,10 +58,16 @@ Class Form1
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Control.CheckForIllegalCrossThreadCalls = False
-        'XmlVersion("server")
         DeleteOldVersion()
-        'XmlVersion("folder")
-        'XmlVersion("service")
+        XmlVersion("sqllist")
+        XmlVersion("server")
+        XmlVersion("folder")
+        XmlVersion("service")
+        If w = True Then
+            Form7.balon("New XML files downloaded!!!")
+        Else
+            Form7.balon("XML files are up to date!!")
+        End If
         Me.Show()
         If Me.TopMost = False Then
             Me.TopMost = True
@@ -908,9 +915,9 @@ Class Form1
         ElseIf files = "service" Then
             ttr = Form1.srl
             link = "http://sunt.pro/update/servicelist.xml"
-        ElseIf files = "countlist" Then
-            ttr = Form1.cfl
-            link = "http://sunt.pro/update/countlist.xml"
+        ElseIf files = "sqllist" Then
+            ttr = "sqllist.xml"
+            link = "http://sunt.pro/update/sqllist.xml"
         End If
 
         Dim xmlread As XmlTextReader = New XmlTextReader(ttr)
@@ -926,6 +933,8 @@ Class Form1
                         End Select
                 End Select
             Loop
+            xmlread.Close()
+            xmlread.Dispose()
         Catch ex As Exception
         End Try
 
@@ -964,13 +973,12 @@ Class Form1
                 End If
                 strPicPath = Application.StartupPath + "\" + ttr.ToString
                 wWebClient.DownloadFileAsync(uri, strPicPath)
+                w = True
             Catch ex As Exception
                 MsgBox("Error: " & ex.Message)
             Finally
                 wWebClient = Nothing
             End Try
-        Else
-            Form7.balon("XML files are up to date!")
         End If
     End Sub
     Sub UpdateButton()
