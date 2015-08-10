@@ -57,17 +57,17 @@ Class Form1
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Control.CheckForIllegalCrossThreadCalls = False
-            XmlVersion("server")
-            DeleteOldVersion()
-            'XmlVersion("folder")
-            'XmlVersion("service")
-            Me.Show()
-            If Me.TopMost = False Then
-                Me.TopMost = True
-                Me.TopMost = False
-            End If
-            taskserver()
-            ActualVersion()
+        'XmlVersion("server")
+        DeleteOldVersion()
+        'XmlVersion("folder")
+        'XmlVersion("service")
+        Me.Show()
+        If Me.TopMost = False Then
+            Me.TopMost = True
+            Me.TopMost = False
+        End If
+        taskserver()
+        ActualVersion()
     End Sub
     '-----------------------------------------------------------------------------------------------------------------------------------------END form load/unload
     '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN read xml files
@@ -959,9 +959,11 @@ Class Form1
             Dim uri As System.Uri = New System.Uri(link)
 
             Try
+                If My.Computer.FileSystem.FileExists(ttr) Then
+                    My.Computer.FileSystem.DeleteFile(ttr)
+                End If
                 strPicPath = Application.StartupPath + "\" + ttr.ToString
                 wWebClient.DownloadFileAsync(uri, strPicPath)
-                MsgBox(strPicPath)
             Catch ex As Exception
                 MsgBox("Error: " & ex.Message)
             Finally
