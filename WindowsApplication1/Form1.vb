@@ -58,7 +58,9 @@ Class Form1
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Control.CheckForIllegalCrossThreadCalls = False
-        DeleteOldVersion()
+        Timer1.Interval = 5000
+        Timer1.Enabled = True
+        Timer1.Start()
         XmlVersion("sqllist")
         XmlVersion("server")
         XmlVersion("folder")
@@ -74,7 +76,7 @@ Class Form1
             Me.TopMost = False
         End If
         taskserver()
-        ActualVersion()
+        'ActualVersion()
     End Sub
     '-----------------------------------------------------------------------------------------------------------------------------------------END form load/unload
     '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN read xml files
@@ -893,10 +895,14 @@ Class Form1
                 Loop
             End Using
             If execurrentversion > smallArr(0) Then
-                My.Computer.FileSystem.DeleteFile(Application.StartupPath + "/MPOS Server Tool V" & smallArr(0) + ".exe")
-                My.Computer.FileSystem.DeleteFile("oldversion.txt")
+                If My.Computer.FileSystem.FileExists(Application.StartupPath + "/MPOS Server Tool V" & smallArr(0) + ".exe") Then
+                    My.Computer.FileSystem.DeleteFile(Application.StartupPath + "/MPOS Server Tool V" & smallArr(0) + ".exe")
+                    My.Computer.FileSystem.DeleteFile("oldversion.txt")
+                Else
+                    MsgBox("bad bad bad")
+                End If
             End If
-        End If
+            End If
     End Sub
     Public Sub XmlVersion(files)
         Dim WbReq As New Net.WebClient
@@ -1022,6 +1028,15 @@ Class Form1
             End Select
         End Try
     End Function
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+
+            DeleteOldVersion()
+            Timer1.Stop()
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Form9.ShowDialog()
+    End Sub
 End Class
 
 

@@ -124,6 +124,8 @@ Partial Class Form1
         Me.ToolTip2 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.status.SuspendLayout()
         Me.ContextMenuStrip3.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -747,7 +749,7 @@ Partial Class Form1
         'vers
         '
         Me.vers.Text = "Version"
-        Me.vers.Width = 114
+        Me.vers.Width = 99
         '
         'ContextMenuStrip4
         '
@@ -888,7 +890,7 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(322, 537)
+        Me.Button1.Location = New System.Drawing.Point(329, 533)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(165, 29)
         Me.Button1.TabIndex = 18
@@ -958,11 +960,29 @@ Partial Class Form1
         Me.Label16.TabIndex = 29
         Me.Label16.Text = "Version:"
         '
+        'Timer1
+        '
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.SystemColors.Control
+        Me.Button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.ForeColor = System.Drawing.Color.Red
+        Me.Button2.Location = New System.Drawing.Point(852, 540)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(115, 26)
+        Me.Button2.TabIndex = 30
+        Me.Button2.Text = "Update Available"
+        Me.Button2.UseVisualStyleBackColor = False
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1113, 569)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Button1)
@@ -1108,4 +1128,6 @@ Partial Class Form1
     Friend WithEvents label9 As System.Windows.Forms.LinkLabel
     Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents Timer1 As System.Windows.Forms.Timer
+    Friend WithEvents Button2 As System.Windows.Forms.Button
 End Class

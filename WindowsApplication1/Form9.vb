@@ -61,7 +61,7 @@ Public Class Form9
 
                     Form1.x = True
                     Form1.Close()
-                    System.Threading.Thread.Sleep(1000)
+                    System.Threading.Thread.Sleep(3000)
                     Process.Start(Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe")
                 End If
             Catch ex As Exception
