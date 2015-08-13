@@ -450,13 +450,13 @@ Public Class Form8
 
         Try
             If RadioButton10.Checked Then
-                ssql = "select * from mgirecalltransactioncod where szprocessingdate='" & Format(DateTimePicker1.Value, "yyyyMMdd") & "'"
+                ssql = "select szstatuscode Status, szExternalID ExternalID, szStoreID StoreNr, lPaymentType PaymentType, szLoadDate LoadDate, szErrorAddInfo Error, szInvoiceID InvoiceID from mgirecalltransactioncod where szprocessingdate='" & Format(DateTimePicker1.Value, "yyyyMMdd") & "'"
             ElseIf RadioButton4.Checked Then
-                ssql = "select * from mgirecalltransactioncod where szprocessingdate='" & Format(Today, "yyyyMMdd") & "'"
+                ssql = "select szstatuscode Status, szExternalID ExternalID, szStoreID StoreNr, lPaymentType PaymentType, szLoadDate LoadDate, szErrorAddInfo Error, szInvoiceID InvoiceID from mgirecalltransactioncod where szprocessingdate='" & Format(Today, "yyyyMMdd") & "'"
             ElseIf RadioButton6.Checked Then
-                ssql = "select top 10 * from mgirecalltransactioncod order by szprocessingdate desc, szprocessingtime desc"
+                ssql = "select top 10 szstatuscode Status, szExternalID ExternalID, szStoreID StoreNr, lPaymentType PaymentType, szLoadDate LoadDate, szErrorAddInfo Error, szInvoiceID InvoiceID from mgirecalltransactioncod order by szprocessingdate desc, szprocessingtime desc"
             Else
-                ssql = "select * from mgirecalltransactioncod"
+                ssql = "select szstatuscode Status, szExternalID ExternalID, szStoreID StoreNr, lPaymentType PaymentType, szLoadDate LoadDate, szErrorAddInfo Error, szInvoiceID InvoiceID from mgirecalltransactioncod"
             End If
 
             con1 = New SqlConnection("Data Source=" & Form1.label9.Text & ";Database=TPCentralDB;" & Form1.cred & ";")
@@ -482,13 +482,13 @@ Public Class Form8
 
         Try
             If RadioButton11.Checked Then
-                ssql = "select * from maitxinvoice where szdate='" & Format(DateTimePicker2.Value, "yyyyMMdd") & "'"
+                ssql = "select lHostInterfaceID1 Host1, lHostInterfaceID2 Host2 ,lTaNmbr TaNr, dInvoiceTotalToPayAmount Total ,lInvoiceBookNumber BookNr, szMetroInvoiceNumber InvoiceNr, szCustomerNumber CustomerNr, szDate Date from MAITXInvoice where szdate='" & Format(DateTimePicker2.Value, "yyyyMMdd") & "'"
             ElseIf RadioButton9.Checked Then
-                ssql = "select * from maitxinvoice where szdate='" & Format(Today, "yyyyMMdd") & "'"
+                ssql = "select lHostInterfaceID1 Host1, lHostInterfaceID2 Host2 ,lTaNmbr TaNr, dInvoiceTotalToPayAmount Total ,lInvoiceBookNumber BookNr, szMetroInvoiceNumber InvoiceNr, szCustomerNumber CustomerNr, szDate Date from MAITXInvoice where szdate='" & Format(Today, "yyyyMMdd") & "'"
             ElseIf RadioButton7.Checked Then
-                ssql = "select top 10 * from maitxinvoice order by szdate desc, sztime desc"
+                ssql = "select lHostInterfaceID1 Host1, lHostInterfaceID2 Host2 ,lTaNmbr TaNr, dInvoiceTotalToPayAmount Total ,lInvoiceBookNumber BookNr, szMetroInvoiceNumber InvoiceNr, szCustomerNumber CustomerNr, szDate Date from MAITXInvoice order by szdate desc, sztime desc"
             Else
-                ssql = "select * from maitxinvoice"
+                ssql = "select lHostInterfaceID1 Host1, lHostInterfaceID2 Host2 ,lTaNmbr TaNr, dInvoiceTotalToPayAmount Total ,lInvoiceBookNumber BookNr, szMetroInvoiceNumber InvoiceNr, szCustomerNumber CustomerNr, szDate Date from maitxinvoice"
             End If
 
             con1 = New SqlConnection("Data Source=" & Form1.label9.Text & ";Database=TPCentralDB;" & Form1.cred & ";")

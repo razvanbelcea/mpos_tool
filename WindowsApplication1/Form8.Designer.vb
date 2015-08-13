@@ -818,7 +818,7 @@ Partial Class Form8
         Me.DataGridView3.AllowUserToResizeRows = False
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.LightGreen
         Me.DataGridView3.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
-        Me.DataGridView3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader
+        Me.DataGridView3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.DataGridView3.BackgroundColor = System.Drawing.SystemColors.ButtonFace
         Me.DataGridView3.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
         Me.DataGridView3.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
@@ -944,7 +944,7 @@ Partial Class Form8
         Me.DataGridView4.AllowUserToResizeRows = False
         DataGridViewCellStyle4.BackColor = System.Drawing.Color.LightGreen
         Me.DataGridView4.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
-        Me.DataGridView4.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader
+        Me.DataGridView4.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.DataGridView4.BackgroundColor = System.Drawing.SystemColors.ButtonFace
         Me.DataGridView4.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
         Me.DataGridView4.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
