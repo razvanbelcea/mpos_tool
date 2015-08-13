@@ -863,7 +863,6 @@ Class Form1
         Me.Close()
     End Sub
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        Me.UpdateButton()
         Form9.ShowDialog()
     End Sub
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
@@ -904,107 +903,107 @@ Class Form1
             End If
             End If
     End Sub
-    Public Sub XmlVersion(files)
-        Dim WbReq As New Net.WebClient
-        WbReq.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials
-        WbReq.Dispose()
+    'Public Sub XmlVersionWeb(files)
+    '    Dim WbReq As New Net.WebClient
+    '    WbReq.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials
+    '    WbReq.Dispose()
 
-        Dim ttr As String = ""
-        Dim link As String = ""
+    '    Dim ttr As String = ""
+    '    Dim link As String = ""
 
-        If files = "server" Then
-            ttr = Form1.svl
-            link = "http://sunt.pro/update/serverlist.xml"
-        ElseIf files = "folder" Then
-            ttr = Form1.ffl
-            link = "http://sunt.pro/update/folderlist.xml"
-        ElseIf files = "service" Then
-            ttr = Form1.srl
-            link = "http://sunt.pro/update/servicelist.xml"
-        ElseIf files = "sqllist" Then
-            ttr = "sqllist.xml"
-            link = "http://sunt.pro/update/sqllist.xml"
-        End If
+    '    If files = "server" Then
+    '        ttr = Form1.svl
+    '        link = "http://sunt.pro/update/serverlist.xml"
+    '    ElseIf files = "folder" Then
+    '        ttr = Form1.ffl
+    '        link = "http://sunt.pro/update/folderlist.xml"
+    '    ElseIf files = "service" Then
+    '        ttr = Form1.srl
+    '        link = "http://sunt.pro/update/servicelist.xml"
+    '    ElseIf files = "sqllist" Then
+    '        ttr = "sqllist.xml"
+    '        link = "http://sunt.pro/update/sqllist.xml"
+    '    End If
 
-        Dim xmlread As XmlTextReader = New XmlTextReader(ttr)
-        Dim myArr As New ArrayList()
-        Try
-            Do While (xmlread.Read())
-                Select Case xmlread.NodeType
-                    Case XmlNodeType.Element
-                        Select Case xmlread.Name
-                            Case "Version"
-                                xmlread.Read()
-                                myArr.Add(xmlread.Value)
-                        End Select
-                End Select
-            Loop
-            xmlread.Close()
-            xmlread.Dispose()
-        Catch ex As Exception
-        End Try
+    '    Dim xmlread As XmlTextReader = New XmlTextReader(ttr)
+    '    Dim myArr As New ArrayList()
+    '    Try
+    '        Do While (xmlread.Read())
+    '            Select Case xmlread.NodeType
+    '                Case XmlNodeType.Element
+    '                    Select Case xmlread.Name
+    '                        Case "Version"
+    '                            xmlread.Read()
+    '                            myArr.Add(xmlread.Value)
+    '                    End Select
+    '            End Select
+    '        Loop
+    '        xmlread.Close()
+    '        xmlread.Dispose()
+    '    Catch ex As Exception
+    '    End Try
 
-        Dim itExists As Boolean = ResourceExists(New Uri(link))
-        Dim reader As XmlTextReader = New XmlTextReader(link)
-        If itExists = True Then
-            Do While reader.Read()
-                Select Case reader.NodeType
-                    Case XmlNodeType.Element
-                        Select Case reader.Name
-                            Case "Version"
-                                reader.Read()
-                                myArr.Add(reader.Value)
-                        End Select
-                End Select
-            Loop
-        Else
-            myArr.Add(xmlread.Value)
-            Form7.balon("Invalid address at " + link)
-        End If
-        If myArr(0).ToString < myArr(1).ToString Then
-            'Try
-            'My.Computer.Network.DownloadFile(link, _
-            '                           ttr, _
-            '                            "", "", False, 500, True)
-            '    Catch ex As Exception
-            'MsgBox(ex.Message + " Error Downloading update.")
-            '   End Try
-            Dim wWebClient As New WebClient
-            Dim strPicPath As String
-            Dim uri As System.Uri = New System.Uri(link)
+    '    Dim itExists As Boolean = ResourceExists(New Uri(link))
+    '    Dim reader As XmlTextReader = New XmlTextReader(link)
+    '    If itExists = True Then
+    '        Do While reader.Read()
+    '            Select Case reader.NodeType
+    '                Case XmlNodeType.Element
+    '                    Select Case reader.Name
+    '                        Case "Version"
+    '                            reader.Read()
+    '                            myArr.Add(reader.Value)
+    '                    End Select
+    '            End Select
+    '        Loop
+    '    Else
+    '        myArr.Add(xmlread.Value)
+    '        Form7.balon("Invalid address at " + link)
+    '    End If
+    '    If myArr(0).ToString < myArr(1).ToString Then
+    '        'Try
+    '        'My.Computer.Network.DownloadFile(link, _
+    '        '                           ttr, _
+    '        '                            "", "", False, 500, True)
+    '        '    Catch ex As Exception
+    '        'MsgBox(ex.Message + " Error Downloading update.")
+    '        '   End Try
+    '        Dim wWebClient As New WebClient
+    '        Dim strPicPath As String
+    '        Dim uri As System.Uri = New System.Uri(link)
 
-            Try
-                If My.Computer.FileSystem.FileExists(ttr) Then
-                    My.Computer.FileSystem.DeleteFile(ttr)
-                End If
-                strPicPath = Application.StartupPath + "\" + ttr.ToString
-                wWebClient.DownloadFileAsync(uri, strPicPath)
-                w = True
-            Catch ex As Exception
-                MsgBox("Error: " & ex.Message)
-            Finally
-                wWebClient = Nothing
-            End Try
-        End If
-    End Sub
-    Sub UpdateButton()
-        Dim WbReq As New Net.WebClient
-        WbReq.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials
-        WbReq.Dispose()
+    '        Try
+    '            If My.Computer.FileSystem.FileExists(ttr) Then
+    '                My.Computer.FileSystem.DeleteFile(ttr)
+    '            End If
+    '            strPicPath = Application.StartupPath + "\" + ttr.ToString
+    '            wWebClient.DownloadFileAsync(uri, strPicPath)
+    '            w = True
+    '        Catch ex As Exception
+    '            MsgBox("Error: " & ex.Message)
+    '        Finally
+    '            wWebClient = Nothing
+    '        End Try
+    '    End If
+    'End Sub
+    'Sub UpdateButton()
+    '    Dim WbReq As New Net.WebClient
+    '    WbReq.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials
+    '    WbReq.Dispose()
 
-        Dim request As System.Net.HttpWebRequest = System.Net.HttpWebRequest.Create("http://sunt.pro/update/Update.txt")
-        Dim response As System.Net.HttpWebResponse = request.GetResponse()
-        Dim sr As System.IO.StreamReader = New System.IO.StreamReader(response.GetResponseStream())
-        Dim exenewestversion As String = sr.ReadToEnd()
-        Dim execurrentversion As String = Application.ProductVersion
-        If execurrentversion < exenewestversion Then
-            Form9.Button2.Enabled = True
-            Form9.Button2.Text = "Updates available"
-        ElseIf execurrentversion = exenewestversion Then
-            Form9.Button2.Enabled = False
-            Form9.Button2.Text = "No updates available"
-        End If
-    End Sub
+    '    Dim request As System.Net.HttpWebRequest = System.Net.HttpWebRequest.Create("http://sunt.pro/update/Update.txt")
+    '    Dim response As System.Net.HttpWebResponse = request.GetResponse()
+    '    Dim sr As System.IO.StreamReader = New System.IO.StreamReader(response.GetResponseStream())
+    '    Dim exenewestversion As String = sr.ReadToEnd()
+    '    Dim execurrentversion As String = Application.ProductVersion
+    '    If execurrentversion < exenewestversion Then
+    '        Form9.Button2.Enabled = True
+    '        Form9.Button2.Text = "Updates available"
+    '    ElseIf execurrentversion = exenewestversion Then
+    '        Form9.Button2.Enabled = False
+    '        Form9.Button2.Text = "No updates available"
+    '    End If
+    'End Sub
     Public Function ResourceExists(location As Uri) As Boolean
         Dim WbReq As New Net.WebClient
         WbReq.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials
@@ -1035,7 +1034,100 @@ Class Form1
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Form9.ShowDialog()
+        Dim result As Integer = MessageBox.Show("Updating will close current session. Are you sure you want to continue ?", "MPOS Tool Updater", MessageBoxButtons.YesNo)
+        If result = DialogResult.No Then
+        ElseIf result = DialogResult.Yes Then
+            Dim sr As StreamReader
+            sr = New StreamReader("\\buk11fsr001\GRP_MSYS_MPOS_DELIVERY\pos\Users\public\Update.txt")
+            Dim newestversion As String = sr.ReadToEnd()
+            Dim currentversion As String = Application.ProductVersion
+            Try
+                My.Computer.Network.DownloadFile("\\buk11fsr001\GRP_MSYS_MPOS_DELIVERY\pos\Users\public\MPOS Server Tool v1.0.exe", Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe")
+                If My.Computer.FileSystem.FileExists(Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe") Then
+                    Dim path As String = "oldversion.txt"
+
+                    If Not File.Exists(path) Then
+                        Using sw As StreamWriter = File.CreateText(path)
+                            sw.WriteLine(currentversion)
+                        End Using
+                    End If
+
+                    Form1.x = True
+                    Me.Close()
+                    System.Threading.Thread.Sleep(3000)
+                    Process.Start(Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe")
+                End If
+            Catch ex As Exception
+                MsgBox(ex.Message + " Error Downloading update.")
+            End Try
+            sr.Close()
+        End If
+    End Sub
+    Public Sub XmlVersion(files)
+
+        Dim ttr As String = ""
+        Dim link As String = ""
+
+        If files = "server" Then
+            ttr = Form1.svl
+            link = "\\buk11fsr001\GRP_MSYS_MPOS_DELIVERY\pos\Users\public\serverlist.xml"
+        ElseIf files = "folder" Then
+            ttr = Form1.ffl
+            link = "\\buk11fsr001\GRP_MSYS_MPOS_DELIVERY\pos\Users\public\folderlist.xml"
+        ElseIf files = "service" Then
+            ttr = Form1.srl
+            link = "\\buk11fsr001\GRP_MSYS_MPOS_DELIVERY\pos\Users\public\servicelist.xml"
+        ElseIf files = "sqllist" Then
+            ttr = "sqllist.xml"
+            link = "\\buk11fsr001\GRP_MSYS_MPOS_DELIVERY\pos\Users\public\sqllist.xml"
+        End If
+
+        Dim xmlread As XmlTextReader = New XmlTextReader(ttr)
+        Dim myArr As New ArrayList()
+        Try
+            Do While (xmlread.Read())
+                Select Case xmlread.NodeType
+                    Case XmlNodeType.Element
+                        Select Case xmlread.Name
+                            Case "Version"
+                                xmlread.Read()
+                                myArr.Add(xmlread.Value)
+                        End Select
+                End Select
+            Loop
+            xmlread.Close()
+            xmlread.Dispose()
+        Catch ex As Exception
+        End Try
+
+        Dim reader As XmlTextReader = New XmlTextReader(link)
+        If My.Computer.FileSystem.FileExists(link) Then
+            Do While reader.Read()
+                Select Case reader.NodeType
+                    Case XmlNodeType.Element
+                        Select Case reader.Name
+                            Case "Version"
+                                reader.Read()
+                                myArr.Add(reader.Value)
+                        End Select
+                End Select
+            Loop
+        Else
+            myArr.Add(xmlread.Value)
+            MsgBox("Invalid address at " + link)
+        End If
+        If myArr(0).ToString < myArr(1).ToString Then
+            Try
+                If My.Computer.FileSystem.FileExists(ttr) Then
+                    My.Computer.FileSystem.DeleteFile(ttr)
+                End If
+                My.Computer.Network.DownloadFile(link, _
+                                           ttr, _
+                                            "", "", False, 500, True)
+            Catch ex As Exception
+                MsgBox(ex.Message + " Error Downloading update.")
+            End Try
+        End If
     End Sub
 End Class
 
