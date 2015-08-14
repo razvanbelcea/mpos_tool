@@ -149,6 +149,7 @@ Partial Class Form8
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.Form8BindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.Button13 = New System.Windows.Forms.Button()
@@ -185,6 +186,7 @@ Partial Class Form8
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        CType(Me.Form8BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage1.SuspendLayout()
         CType(Me.DataGridView6, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -1305,6 +1307,7 @@ Partial Class Form8
         'TextBox5
         '
         Me.TextBox5.Location = New System.Drawing.Point(88, 168)
+        Me.TextBox5.MaxLength = 1
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.Size = New System.Drawing.Size(89, 22)
         Me.TextBox5.TabIndex = 13
@@ -1321,6 +1324,7 @@ Partial Class Form8
         'TextBox4
         '
         Me.TextBox4.Location = New System.Drawing.Point(88, 140)
+        Me.TextBox4.MaxLength = 2
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(89, 22)
         Me.TextBox4.TabIndex = 11
@@ -1382,6 +1386,10 @@ Partial Class Form8
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(89, 24)
         Me.ComboBox2.TabIndex = 4
+        '
+        'Form8BindingSource
+        '
+        Me.Form8BindingSource.DataSource = GetType(MPOS.Form8)
         '
         'TextBox3
         '
@@ -1518,6 +1526,7 @@ Partial Class Form8
         Me.GroupBox3.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        CType(Me.Form8BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage1.ResumeLayout(False)
         CType(Me.DataGridView6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -1657,4 +1666,5 @@ Partial Class Form8
     Friend WithEvents DiscKeystroke As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Button13 As System.Windows.Forms.Button
     Friend WithEvents Button12 As System.Windows.Forms.Button
+    Friend WithEvents Form8BindingSource As System.Windows.Forms.BindingSource
 End Class

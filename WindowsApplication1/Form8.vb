@@ -50,6 +50,7 @@ Public Class Form8
         readlist()
         settemp()
         chnrefresh()
+        loadcombo2()
 
     End Sub
 
@@ -841,6 +842,32 @@ Public Class Form8
     '   con1.Close()
     'End Try
     'End Function
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        createmanualbarcode()
+    End Sub
+    Function createmanualbarcode()
+        Dim mbarcode As String
+        mbarcode = ComboBox2.Text & TextBox3.Text & TextBox1.Text & TextBox2.Text & TextBox4.Text & TextBox5.Text
+        MsgBox(mbarcode.ToString)
+    End Function
+    Public Sub loadcombo2()
+        Dim newArr As New ArrayList()
+
+        Dim reader As XmlTextReader = New XmlTextReader(Form1.svl)
+        Do While reader.Read()
+            Select Case reader.NodeType
+                Case XmlNodeType.Element
+                    Select Case reader.Name
+                        Case "Country"
+                            reader.Read()
+                            newArr.Add(reader.Value)
+                    End Select
+            End Select
+        Loop
+      
+        ComboBox2.DataSource = newArr
+    End Sub
 End Class
 
 
