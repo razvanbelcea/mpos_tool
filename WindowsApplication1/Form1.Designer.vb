@@ -720,7 +720,7 @@ Partial Class Form1
         Me.serverlist.Location = New System.Drawing.Point(19, 12)
         Me.serverlist.MultiSelect = False
         Me.serverlist.Name = "serverlist"
-        Me.serverlist.Size = New System.Drawing.Size(475, 509)
+        Me.serverlist.Size = New System.Drawing.Size(458, 509)
         Me.serverlist.TabIndex = 0
         Me.serverlist.TileSize = New System.Drawing.Size(100, 100)
         Me.serverlist.UseCompatibleStateImageBehavior = False
@@ -729,17 +729,17 @@ Partial Class Form1
         'country
         '
         Me.country.Text = "Country"
-        Me.country.Width = 98
+        Me.country.Width = 86
         '
         'servername
         '
         Me.servername.Text = "Server Name"
-        Me.servername.Width = 106
+        Me.servername.Width = 103
         '
         'ip
         '
         Me.ip.Text = "IP"
-        Me.ip.Width = 86
+        Me.ip.Width = 81
         '
         'statuss
         '
@@ -749,7 +749,7 @@ Partial Class Form1
         'vers
         '
         Me.vers.Text = "Version"
-        Me.vers.Width = 99
+        Me.vers.Width = 96
         '
         'ContextMenuStrip4
         '
@@ -1002,7 +1002,6 @@ Partial Class Form1
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
         Me.MaximizeBox = False
-        Me.MinimizeBox = False
         Me.Name = "Form1"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

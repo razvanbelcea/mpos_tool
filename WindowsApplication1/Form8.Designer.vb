@@ -149,7 +149,6 @@ Partial Class Form8
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.Form8BindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.Button13 = New System.Windows.Forms.Button()
@@ -164,6 +163,7 @@ Partial Class Form8
         Me.DiscCustQualifier = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DiscKeystroke = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Form8BindingSource = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -186,9 +186,9 @@ Partial Class Form8
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
-        CType(Me.Form8BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage1.SuspendLayout()
         CType(Me.DataGridView6, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Form8BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DataGridView1
@@ -1387,13 +1387,10 @@ Partial Class Form8
         Me.ComboBox2.Size = New System.Drawing.Size(89, 24)
         Me.ComboBox2.TabIndex = 4
         '
-        'Form8BindingSource
-        '
-        Me.Form8BindingSource.DataSource = GetType(MPOS.Form8)
-        '
         'TextBox3
         '
         Me.TextBox3.Location = New System.Drawing.Point(88, 56)
+        Me.TextBox3.MaxLength = 3
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(89, 22)
         Me.TextBox3.TabIndex = 5
@@ -1481,6 +1478,10 @@ Partial Class Form8
         Me.DiscKeystroke.HeaderText = "DiscKeystroke"
         Me.DiscKeystroke.Name = "DiscKeystroke"
         '
+        'Form8BindingSource
+        '
+        Me.Form8BindingSource.DataSource = GetType(MPOS.Form8)
+        '
         'Form8
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1526,9 +1527,9 @@ Partial Class Form8
         Me.GroupBox3.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        CType(Me.Form8BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage1.ResumeLayout(False)
         CType(Me.DataGridView6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Form8BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

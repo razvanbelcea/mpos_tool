@@ -9,6 +9,7 @@ Imports Excel = Microsoft.Office.Interop.Excel
 Imports iTextSharp.text.pdf
 Imports iTextSharp.text
 Imports System.IO
+Imports System.Threading
 
 Public Class Form8
     Public tempda As String = "temp\ART"
@@ -50,7 +51,7 @@ Public Class Form8
         readlist()
         settemp()
         chnrefresh()
-        loadcombo2()
+        'loadcombo()
 
     End Sub
 
@@ -813,11 +814,11 @@ Public Class Form8
                     End While
                     dat.Close()
                 End If
-        cmd.Dispose()
-        con.Dispose()
+                cmd.Dispose()
+                con.Dispose()
             Catch af As Exception
-            Form7.balon(af.Message)
-        End Try
+                Form7.balon(af.Message)
+            End Try
         Else
             Form7.balon("Server is offline ...")
         End If
@@ -843,14 +844,14 @@ Public Class Form8
     'End Try
     'End Function
 
-    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        createmanualbarcode()
-    End Sub
-    Function createmanualbarcode()
-        Dim mbarcode As String
-        mbarcode = ComboBox2.Text & TextBox3.Text & TextBox1.Text & TextBox2.Text & TextBox4.Text & TextBox5.Text
-        MsgBox(mbarcode.ToString)
-    End Function
+    'Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+    '    createmanualbarcode()
+    'End Sub
+    'Function createmanualbarcode()
+    '    Dim mbarcode As String
+    '    mbarcode = ComboBox2.Text & TextBox3.Text & TextBox1.Text & TextBox2.Text & TextBox4.Text & TextBox5.Text
+    '    MsgBox(mbarcode.ToString)
+    'End Function
     Public Sub loadcombo2()
         Dim newArr As New ArrayList()
 
@@ -865,9 +866,63 @@ Public Class Form8
                     End Select
             End Select
         Loop
-      
+
         ComboBox2.DataSource = newArr
     End Sub
+    'Function loadcombo()
+    '    Dim i As Integer = 0
+    '    Dim con1 As SqlConnection
+    '    Dim cmd1 As SqlCommand
+    '    Dim myStructures As ArrayList = New ArrayList
+    '    Try
+    '        con1 = New SqlConnection("Data Source=" & "10.23.90.11" & ";Database=TPCentralDB;" & Form1.cred & ";")
+    '        cmd1 = con1.CreateCommand
+    '        con1.Open()
+    '        cmd1.CommandText = "select szCountryCode,szNumericCountryCode from MGICountryCode where szCountryCode in ('BGR','CHN','DEU','ESP','FRA','GRC','HRV','HUN','IND','ITA','JPN','KAZ','MLD','NLD','POL','PRT','ROU','RUS','SRB','SVK','TUR','UKR','VNM')"
+    '        dat1 = cmd1.ExecuteReader()
+    '        While dat1.Read()
+    '            myStructures.Add(New MyStructure(dat1(0), dat1(1)))
+    '        End While
+    '        dat1.Close()
+    '        con1.Close()
+    '    Catch ev As Exception
+    '        MsgBox(ev.Message)
+    '    End Try
+    '    ComboBox2.DataSource = 
+    'End Function
+
+    Public Structure MyStructure
+        Private _country As String
+        Private _numeric As String
+
+
+        Public Property country() As String
+            Get
+                Return _country
+            End Get
+            Set(ByVal value As String)
+                _country = value
+            End Set
+        End Property
+
+
+        Public Property numeric() As String
+            Get
+                Return _numeric
+            End Get
+            Set(ByVal value As String)
+                _numeric = value
+            End Set
+        End Property
+
+
+        Public Sub New(ByRef country As String, ByRef numeric As String)
+            _country = country
+            _numeric = numeric
+        End Sub
+
+
+    End Structure
 End Class
 
 
