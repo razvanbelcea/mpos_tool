@@ -237,37 +237,19 @@ Class Form1
                 label9.Text = item.SubItems(2).Text
                 label8.Text = item.SubItems(1).Text
                 Label10.Text = item.SubItems(0).Text
-                'Try
-                '    Dim verArray As New ArrayList()
-                '    Dim reader As XmlTextReader = New XmlTextReader("\\" & item.SubItems(2).Text & hff)
-                '    If My.Computer.FileSystem.FileExists("\\" & item.SubItems(2).Text & hff) Then
-                '        Do While reader.Read()
-                '            If reader.Name.Equals("CurrentVersion") Then
-                '                verArray.Add(reader.GetAttribute("version") + " " + "HF" + reader.GetAttribute("hotfix"))
-                '                ' MsgBox(reader.GetAttribute("version") + " " + "HF" + reader.GetAttribute("hotfix"))
-                '            End If
-                '        Loop
-                '        Label13.Text = verArray(0).ToString
-                '    Else
-                '        'Form7.balon("Invalid address at " + "\\" & item.SubItems(2).Text & hff)
-                '        Label13.Text = "-"
-                '    End If
-                '    reader.Dispose()
-                '    reader.Close()
-                'Catch a As Exception
-                '    MsgBox(a.Message)
-                'End Try
                 Try
                     Dim arr As New ArrayList
                     Dim arr1 As New ArrayList
                     Dim conex1 As SqlConnection
-                    Try
-                        conex1 = New SqlConnection("Data Source=" & item.SubItems(2).Text & ";Database=TPCentralDB;" & cred & ";")
-                        cmd = conex1.CreateCommand
-                        cmd1 = conex1.CreateCommand
-                        cmd.CommandText = "select top 1 szDatabaseVersionID from MGIDatabaseVersionUpdate order by szDatabaseInstallDate desc"
-                        cmd1.CommandText = "select top 1 szPackageName from EUSoftwareVersion where szResult = 'Success' and szState = 'Finished' and szPackageName like 'Hotfix%' and szWorkstationID in (select top 10 szworkstationid from workstation order by lWorkstationNmbr desc)order by szTimestamp desc"
-                        conex1.Open()
+                    Dim t As Boolean = False
+
+                    conex1 = New SqlConnection("Data Source=" & item.SubItems(2).Text & ";Database=TPCentralDB;" & cred & ";")
+                    cmd = conex1.CreateCommand
+                    cmd1 = conex1.CreateCommand
+                    cmd.CommandText = "select top 1 szDatabaseVersionID from MGIDatabaseVersionUpdate order by szDatabaseInstallDate desc"
+                    cmd1.CommandText = "select * from (select top 1 szPackageName from EUSoftwareVersion where szResult = 'Success' and szState = 'Finished' and szPackageName like 'Hotfix%' and szWorkstationID in (select top 10 szworkstationid from workstation order by lWorkstationNmbr desc)order by szTimestamp desc) a union select 'Hotfix_00'where (select COUNT(*) from EUSoftwareVersion where szResult = 'Success' and szState = 'Finished' and szPackageName like 'Hotfix%' and szWorkstationID in (select top 10 szworkstationid from workstation order by lWorkstationNmbr desc))=0"
+                    conex1.Open()
+                    If conex1.State = ConnectionState.Open Then
                         dat = cmd.ExecuteReader()
                         While dat.Read()
                             arr.Add(dat(0))
@@ -279,12 +261,13 @@ Class Form1
                         End While
                         dat.Close()
                         conex1.Close()
-                    Catch a As Exception
-                        MsgBox(a.Message)
-                    End Try
+                        t = True
+                    ElseIf conex1.State = ConnectionState.Closed Then
+                        Form7.balon("DB Offline")
+                    End If
                     Label13.Text = arr(0).ToString + " " + arr1(0).ToString
                 Catch a As Exception
-                    Form7.balon(a.Message)
+                    'Form7.balon(a.Message)
                 End Try
                 Exit For
             End If
@@ -526,29 +509,6 @@ Class Form1
             If My.Computer.Network.Ping(item.SubItems(2).Text) Then
                 item.ForeColor = Color.Green
                 item.SubItems.Add("ON")
-                'Try
-                '    '    MyReg = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, item.SubItems(1).Text & ".mpos.madm.net", RegistryView.Registry64) _
-                '    '        .OpenSubKey("SOFTWARE\Wincor Nixdorf\TPDotnet\CustomerAddOns", False)
-                '    '    MyVal = MyReg.GetValue("Custom Version")
-                '    '    item.SubItems.Add(MyVal.ToString)
-                '    '    MyReg.Close()
-                '    Dim verArray As New ArrayList()
-                '    Dim reader As XmlTextReader = New XmlTextReader("\\" & item.SubItems(2).Text & hff)
-                '    If My.Computer.FileSystem.FileExists("\\" & item.SubItems(2).Text & hff) Then
-                '        Do While reader.Read()
-                '            If reader.Name.Equals("CurrentVersion") Then
-                '                verArray.Add(reader.GetAttribute("version") + " " + "HF" + reader.GetAttribute("hotfix"))
-                '            End If
-                '        Loop
-                '        item.SubItems.Add(verArray(0).ToString)
-                '    Else
-                '        item.SubItems.Add("-")
-                '    End If
-                '    reader.Dispose()
-                '    reader.Close()
-                'Catch a As Exception
-                '    Form7.balon(a.Message)
-                'End Try
                 Try
                     Dim arr As New ArrayList
                     Dim arr1 As New ArrayList
@@ -578,9 +538,8 @@ Class Form1
                         Form7.balon("DB Offline")
                     End If
                     item.SubItems.Add(arr(0).ToString + " " + arr1(0).ToString)
-                    item.SubItems.Add("-")
                 Catch a As Exception
-                    Form7.balon(a.Message)
+                    'Form7.balon(a.Message)
             End Try
             item.SubItems.Add("-")
             item.SubItems.Add("-")
@@ -988,6 +947,7 @@ Class Form1
     Public Sub ActualVersion()
         Dim cversion As String = Application.ProductVersion
         Label15.Text = cversion.ToString
+        Label1.Text = "MPOS Server Tool V" + cversion.ToString
     End Sub
     Public Sub DeleteOldVersion()
         Dim smallArr As New ArrayList()
