@@ -61,23 +61,39 @@ Class Form1
         Timer1.Interval = 5000
         Timer1.Enabled = True
         Timer1.Start()
-        XmlVersion("sqllist")
-        XmlVersion("server")
-        XmlVersion("folder")
-        XmlVersion("service")
-        If w = True Then
-            Form7.balon("New XML files downloaded!!!")
-        Else
-            Form7.balon("XML files are up to date!!")
-        End If
+
+        Try
+            Dim MyReg As RegistryKey
+            Dim MyVal As Object
+            MyReg = Registry.LocalMachine.OpenSubKey("SOFTWARE\Policies\Microsoft\System\DNSClient", False)
+            If (Not MyReg Is Nothing) Then
+                MyVal = MyReg.GetValue("PrimaryDnsSuffix")
+            Else
+                MyVal = "not_ro"
+            End If
+            If MyVal = "not_ro" Then
+                Form7.balon("XML update not needed!")
+            Else
+                XmlVersion("sqllist")
+                XmlVersion("server")
+                XmlVersion("folder")
+                XmlVersion("service")
+                If w = True Then
+                    Form7.balon("New XML files downloaded!!!")
+                Else
+                    Form7.balon("XML files are up to date!!")
+                End If
+            End If
+            MyReg.Close()
+        Catch a As Exception
+        End Try
+
         Me.Show()
         If Me.TopMost = False Then
             Me.TopMost = True
             Me.TopMost = False
         End If
         taskserver()
-        'ActualVersion()
-        Me.ShowInTaskbar = True
     End Sub
     '-----------------------------------------------------------------------------------------------------------------------------------------END form load/unload
     '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN read xml files
@@ -110,6 +126,8 @@ Class Form1
                                     serverlist.Items.Item(i).Group = serverlist.Groups(0)
                                 ElseIf readserver.Value = "UAT" Then
                                     serverlist.Items.Item(i).Group = serverlist.Groups(1)
+                                ElseIf readserver.Value = "PROD" Then
+                                    serverlist.Items.Item(i).Group = serverlist.Groups(2)
                                 End If
                                 s = readserver.Value & " " & s
                                 Form7.ComboBox1.Items.Add(s)
@@ -217,16 +235,54 @@ Class Form1
                 label9.Text = item.SubItems(2).Text
                 label8.Text = item.SubItems(1).Text
                 Label10.Text = item.SubItems(0).Text
+                'Try
+                '    Dim verArray As New ArrayList()
+                '    Dim reader As XmlTextReader = New XmlTextReader("\\" & item.SubItems(2).Text & hff)
+                '    If My.Computer.FileSystem.FileExists("\\" & item.SubItems(2).Text & hff) Then
+                '        Do While reader.Read()
+                '            If reader.Name.Equals("CurrentVersion") Then
+                '                verArray.Add(reader.GetAttribute("version") + " " + "HF" + reader.GetAttribute("hotfix"))
+                '                ' MsgBox(reader.GetAttribute("version") + " " + "HF" + reader.GetAttribute("hotfix"))
+                '            End If
+                '        Loop
+                '        Label13.Text = verArray(0).ToString
+                '    Else
+                '        'Form7.balon("Invalid address at " + "\\" & item.SubItems(2).Text & hff)
+                '        Label13.Text = "-"
+                '    End If
+                '    reader.Dispose()
+                '    reader.Close()
+                'Catch a As Exception
+                '    MsgBox(a.Message)
+                'End Try
                 Try
-                    Dim MyReg As RegistryKey
-                    Dim MyVal As Object
-                    MyReg = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, item.SubItems(1).Text & ".mpos.madm.net", RegistryView.Registry64) _
-                            .OpenSubKey("SOFTWARE\Wincor Nixdorf\TPDotnet\CustomerAddOns", False)
-                    MyVal = MyReg.GetValue("Custom Version")
-                    Label13.Text = MyVal.ToString
-                    MyReg.Close()
+                    Dim arr As New ArrayList
+                    Dim arr1 As New ArrayList
+                    Dim conex1 As SqlConnection
+                    Try
+                        conex1 = New SqlConnection("Data Source=" & item.SubItems(2).Text & ";Database=TPCentralDB;" & cred & ";")
+                        cmd = conex1.CreateCommand
+                        cmd1 = conex1.CreateCommand
+                        cmd.CommandText = "select top 1 szDatabaseVersionID from MGIDatabaseVersionUpdate order by szDatabaseInstallDate desc"
+                        cmd1.CommandText = "select top 1 szPackageName from EUSoftwareVersion where szResult = 'Success' and szState = 'Finished' and szPackageName like 'Hotfix%' and szWorkstationID in (select top 10 szworkstationid from workstation order by lWorkstationNmbr desc)order by szTimestamp desc"
+                        conex1.Open()
+                        dat = cmd.ExecuteReader()
+                        While dat.Read()
+                            arr.Add(dat(0))
+                        End While
+                        dat.Close()
+                        dat1 = cmd1.ExecuteReader()
+                        While dat1.Read()
+                            arr1.Add(dat1(0))
+                        End While
+                        dat.Close()
+                        conex1.Close()
+                    Catch a As Exception
+                        MsgBox(a.Message)
+                    End Try
+                    Label13.Text = arr(0).ToString + " " + arr1(0).ToString
                 Catch a As Exception
-                    Label13.Text = "-"
+                    Form7.balon(a.Message)
                 End Try
                 Exit For
             End If
@@ -468,14 +524,68 @@ Class Form1
             If My.Computer.Network.Ping(item.SubItems(2).Text) Then
                 item.ForeColor = Color.Green
                 item.SubItems.Add("ON")
+                'Try
+                '    '    MyReg = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, item.SubItems(1).Text & ".mpos.madm.net", RegistryView.Registry64) _
+                '    '        .OpenSubKey("SOFTWARE\Wincor Nixdorf\TPDotnet\CustomerAddOns", False)
+                '    '    MyVal = MyReg.GetValue("Custom Version")
+                '    '    item.SubItems.Add(MyVal.ToString)
+                '    '    MyReg.Close()
+                '    Dim verArray As New ArrayList()
+                '    Dim reader As XmlTextReader = New XmlTextReader("\\" & item.SubItems(2).Text & hff)
+                '    If My.Computer.FileSystem.FileExists("\\" & item.SubItems(2).Text & hff) Then
+                '        Do While reader.Read()
+                '            If reader.Name.Equals("CurrentVersion") Then
+                '                verArray.Add(reader.GetAttribute("version") + " " + "HF" + reader.GetAttribute("hotfix"))
+                '            End If
+                '        Loop
+                '        item.SubItems.Add(verArray(0).ToString)
+                '    Else
+                '        item.SubItems.Add("-")
+                '    End If
+                '    reader.Dispose()
+                '    reader.Close()
+                'Catch a As Exception
+                '    Form7.balon(a.Message)
+                'End Try
                 Try
-                    MyReg = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, item.SubItems(1).Text & ".mpos.madm.net", RegistryView.Registry64) _
-                        .OpenSubKey("SOFTWARE\Wincor Nixdorf\TPDotnet\CustomerAddOns", False)
-                    MyVal = MyReg.GetValue("Custom Version")
-                    item.SubItems.Add(MyVal.ToString)
-                    MyReg.Close()
+                    Dim arr As New ArrayList
+                    Dim arr1 As New ArrayList
+                    Dim conex1 As SqlConnection
+                    Dim t As Boolean = False
+
+                    conex1 = New SqlConnection("Data Source=" & item.SubItems(2).Text & ";Database=TPCentralDB;" & cred & ";")
+                    cmd = conex1.CreateCommand
+                    cmd1 = conex1.CreateCommand
+                    cmd.CommandText = "select top 1 szDatabaseVersionID from MGIDatabaseVersionUpdate order by szDatabaseInstallDate desc"
+                    cmd1.CommandText = "select top 1 szPackageName from EUSoftwareVersion where szResult = 'Success' and szState = 'Finished' and szPackageName like 'Hotfix%' and szWorkstationID in (select top 10 szworkstationid from workstation order by lWorkstationNmbr desc)order by szTimestamp desc"
+                    conex1.Open()
+                    If conex1.State = ConnectionState.Open Then
+                        dat = cmd.ExecuteReader()
+                        While dat.Read()
+                            arr.Add(dat(0))
+                        End While
+                        dat.Close()
+                        dat1 = cmd1.ExecuteReader()
+                        While dat1.Read()
+                            arr1.Add(dat1(0))
+                        End While
+                        dat.Close()
+                        conex1.Close()
+                        t = True
+                    ElseIf conex1.State = ConnectionState.Closed Then
+                        Form7.balon("DB Offline")
+                    End If
+                    If t = True Then
+                        If IsNothing(arr1(0).ToString) Then
+                            item.SubItems.Add(arr(0).ToString + " " + "Hotfix_0")
+                        Else
+                            item.SubItems.Add(arr(0).ToString + " " + arr1(0).ToString)
+                        End If
+                    Else
+                        item.SubItems.Add("-")
+                    End If
                 Catch a As Exception
-                    item.SubItems.Add("-")
+                    MsgBox(a.Message)
                 End Try
                 item.SubItems.Add("-")
                 item.SubItems.Add("-")
@@ -904,107 +1014,6 @@ Class Form1
             End If
             End If
     End Sub
-    'Public Sub XmlVersionWeb(files)
-    '    Dim WbReq As New Net.WebClient
-    '    WbReq.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials
-    '    WbReq.Dispose()
-
-    '    Dim ttr As String = ""
-    '    Dim link As String = ""
-
-    '    If files = "server" Then
-    '        ttr = Form1.svl
-    '        link = "http://sunt.pro/update/serverlist.xml"
-    '    ElseIf files = "folder" Then
-    '        ttr = Form1.ffl
-    '        link = "http://sunt.pro/update/folderlist.xml"
-    '    ElseIf files = "service" Then
-    '        ttr = Form1.srl
-    '        link = "http://sunt.pro/update/servicelist.xml"
-    '    ElseIf files = "sqllist" Then
-    '        ttr = "sqllist.xml"
-    '        link = "http://sunt.pro/update/sqllist.xml"
-    '    End If
-
-    '    Dim xmlread As XmlTextReader = New XmlTextReader(ttr)
-    '    Dim myArr As New ArrayList()
-    '    Try
-    '        Do While (xmlread.Read())
-    '            Select Case xmlread.NodeType
-    '                Case XmlNodeType.Element
-    '                    Select Case xmlread.Name
-    '                        Case "Version"
-    '                            xmlread.Read()
-    '                            myArr.Add(xmlread.Value)
-    '                    End Select
-    '            End Select
-    '        Loop
-    '        xmlread.Close()
-    '        xmlread.Dispose()
-    '    Catch ex As Exception
-    '    End Try
-
-    '    Dim itExists As Boolean = ResourceExists(New Uri(link))
-    '    Dim reader As XmlTextReader = New XmlTextReader(link)
-    '    If itExists = True Then
-    '        Do While reader.Read()
-    '            Select Case reader.NodeType
-    '                Case XmlNodeType.Element
-    '                    Select Case reader.Name
-    '                        Case "Version"
-    '                            reader.Read()
-    '                            myArr.Add(reader.Value)
-    '                    End Select
-    '            End Select
-    '        Loop
-    '    Else
-    '        myArr.Add(xmlread.Value)
-    '        Form7.balon("Invalid address at " + link)
-    '    End If
-    '    If myArr(0).ToString < myArr(1).ToString Then
-    '        'Try
-    '        'My.Computer.Network.DownloadFile(link, _
-    '        '                           ttr, _
-    '        '                            "", "", False, 500, True)
-    '        '    Catch ex As Exception
-    '        'MsgBox(ex.Message + " Error Downloading update.")
-    '        '   End Try
-    '        Dim wWebClient As New WebClient
-    '        Dim strPicPath As String
-    '        Dim uri As System.Uri = New System.Uri(link)
-
-    '        Try
-    '            If My.Computer.FileSystem.FileExists(ttr) Then
-    '                My.Computer.FileSystem.DeleteFile(ttr)
-    '            End If
-    '            strPicPath = Application.StartupPath + "\" + ttr.ToString
-    '            wWebClient.DownloadFileAsync(uri, strPicPath)
-    '            w = True
-    '        Catch ex As Exception
-    '            MsgBox("Error: " & ex.Message)
-    '        Finally
-    '            wWebClient = Nothing
-    '        End Try
-    '    End If
-    'End Sub
-    'Sub UpdateButton()
-    '    Dim WbReq As New Net.WebClient
-    '    WbReq.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials
-    '    WbReq.Dispose()
-
-    '    Dim request As System.Net.HttpWebRequest = System.Net.HttpWebRequest.Create("http://sunt.pro/update/Update.txt")
-    '    Dim response As System.Net.HttpWebResponse = request.GetResponse()
-    '    Dim sr As System.IO.StreamReader = New System.IO.StreamReader(response.GetResponseStream())
-    '    Dim exenewestversion As String = sr.ReadToEnd()
-    '    Dim execurrentversion As String = Application.ProductVersion
-    '    If execurrentversion < exenewestversion Then
-    '        Form9.Button2.Enabled = True
-    '        Form9.Button2.Text = "Updates available"
-    '    ElseIf execurrentversion = exenewestversion Then
-    '        Form9.Button2.Enabled = False
-    '        Form9.Button2.Text = "No updates available"
-    '    End If
-    'End Sub
     Public Function ResourceExists(location As Uri) As Boolean
         Dim WbReq As New Net.WebClient
         WbReq.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials
@@ -1029,7 +1038,6 @@ Class Form1
         End Try
     End Function
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-
             DeleteOldVersion()
             Timer1.Stop()
     End Sub
@@ -1128,6 +1136,7 @@ Class Form1
             Catch ex As Exception
                 MsgBox(ex.Message + " Error Downloading update.")
             End Try
+            w = True
         End If
     End Sub
 End Class

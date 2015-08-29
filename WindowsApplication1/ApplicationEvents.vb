@@ -30,6 +30,7 @@ Namespace My
                 Form1.ActualVersion()
                 Form1.Button2.Hide()
             End If
+            Form1.ShowInTaskbar = True
         End Sub
     End Class
 

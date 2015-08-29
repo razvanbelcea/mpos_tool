@@ -30,6 +30,7 @@ Partial Class Form1
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Dim ListViewGroup1 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("QA", System.Windows.Forms.HorizontalAlignment.Center)
         Dim ListViewGroup2 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("UAT", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup3 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("PROD", System.Windows.Forms.HorizontalAlignment.Center)
         Me.status = New System.Windows.Forms.GroupBox()
         Me.label9 = New System.Windows.Forms.LinkLabel()
         Me.label8 = New System.Windows.Forms.LinkLabel()
@@ -714,7 +715,10 @@ Partial Class Form1
         ListViewGroup2.Header = "UAT"
         ListViewGroup2.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
         ListViewGroup2.Name = "ListViewGroup2"
-        Me.serverlist.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2})
+        ListViewGroup3.Header = "PROD"
+        ListViewGroup3.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup3.Name = "ListViewGroup3"
+        Me.serverlist.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2, ListViewGroup3})
         Me.serverlist.HideSelection = False
         Me.serverlist.LabelWrap = False
         Me.serverlist.Location = New System.Drawing.Point(19, 12)
@@ -729,27 +733,27 @@ Partial Class Form1
         'country
         '
         Me.country.Text = "Country"
-        Me.country.Width = 86
+        Me.country.Width = 77
         '
         'servername
         '
         Me.servername.Text = "Server Name"
-        Me.servername.Width = 103
+        Me.servername.Width = 109
         '
         'ip
         '
         Me.ip.Text = "IP"
-        Me.ip.Width = 81
+        Me.ip.Width = 74
         '
         'statuss
         '
         Me.statuss.Text = "Status"
-        Me.statuss.Width = 58
+        Me.statuss.Width = 42
         '
         'vers
         '
         Me.vers.Text = "Version"
-        Me.vers.Width = 96
+        Me.vers.Width = 120
         '
         'ContextMenuStrip4
         '
