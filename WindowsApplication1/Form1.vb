@@ -73,6 +73,8 @@ Class Form1
             End If
             If MyVal = "not_ro" Then
                 Form7.balon("XML update not needed!")
+            ElseIf MyVal <> "client.ro.r4.madm.net" Then
+                Form7.balon("XML update not needed!")
             Else
                 XmlVersion("sqllist")
                 XmlVersion("server")
@@ -578,7 +580,7 @@ Class Form1
                     item.SubItems.Add(arr(0).ToString + " " + arr1(0).ToString)
                     item.SubItems.Add("-")
                 Catch a As Exception
-                MsgBox(a.Message)
+                    Form7.balon(a.Message)
             End Try
             item.SubItems.Add("-")
             item.SubItems.Add("-")
