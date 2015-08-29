@@ -557,7 +557,7 @@ Class Form1
                     cmd = conex1.CreateCommand
                     cmd1 = conex1.CreateCommand
                     cmd.CommandText = "select top 1 szDatabaseVersionID from MGIDatabaseVersionUpdate order by szDatabaseInstallDate desc"
-                    cmd1.CommandText = "select top 1 szPackageName from EUSoftwareVersion where szResult = 'Success' and szState = 'Finished' and szPackageName like 'Hotfix%' and szWorkstationID in (select top 10 szworkstationid from workstation order by lWorkstationNmbr desc)order by szTimestamp desc"
+                    cmd1.CommandText = "select * from (select top 1 szPackageName from EUSoftwareVersion where szResult = 'Success' and szState = 'Finished' and szPackageName like 'Hotfix%' and szWorkstationID in (select top 10 szworkstationid from workstation order by lWorkstationNmbr desc)order by szTimestamp desc) a union select 'Hotfix_00'where (select COUNT(*) from EUSoftwareVersion where szResult = 'Success' and szState = 'Finished' and szPackageName like 'Hotfix%' and szWorkstationID in (select top 10 szworkstationid from workstation order by lWorkstationNmbr desc))=0"
                     conex1.Open()
                     If conex1.State = ConnectionState.Open Then
                         dat = cmd.ExecuteReader()
@@ -575,28 +575,21 @@ Class Form1
                     ElseIf conex1.State = ConnectionState.Closed Then
                         Form7.balon("DB Offline")
                     End If
-                    If t = True Then
-                        If IsNothing(arr1(0).ToString) Then
-                            item.SubItems.Add(arr(0).ToString + " " + "Hotfix_0")
-                        Else
-                            item.SubItems.Add(arr(0).ToString + " " + arr1(0).ToString)
-                        End If
-                    Else
-                        item.SubItems.Add("-")
-                    End If
+                    item.SubItems.Add(arr(0).ToString + " " + arr1(0).ToString)
+                    item.SubItems.Add("-")
                 Catch a As Exception
-                    MsgBox(a.Message)
-                End Try
-                item.SubItems.Add("-")
-                item.SubItems.Add("-")
-                item.SubItems.Add("-")
+                MsgBox(a.Message)
+            End Try
+            item.SubItems.Add("-")
+            item.SubItems.Add("-")
+            item.SubItems.Add("-")
             Else
-                item.ForeColor = Color.Red
-                item.SubItems.Add("OFF")
-                item.SubItems.Add("-")
-                item.SubItems.Add("-")
-                item.SubItems.Add("-")
-                item.SubItems.Add("-")
+            item.ForeColor = Color.Red
+            item.SubItems.Add("OFF")
+            item.SubItems.Add("-")
+            item.SubItems.Add("-")
+            item.SubItems.Add("-")
+            item.SubItems.Add("-")
             End If
             i = i + 1
             ToolStripProgressBar1.Value = i
