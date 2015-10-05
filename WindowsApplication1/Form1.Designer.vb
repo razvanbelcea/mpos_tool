@@ -32,6 +32,7 @@ Partial Class Form1
         Dim ListViewGroup2 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("UAT", System.Windows.Forms.HorizontalAlignment.Center)
         Dim ListViewGroup3 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("PROD", System.Windows.Forms.HorizontalAlignment.Center)
         Me.status = New System.Windows.Forms.GroupBox()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.label9 = New System.Windows.Forms.LinkLabel()
         Me.label8 = New System.Windows.Forms.LinkLabel()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -63,6 +64,7 @@ Partial Class Form1
         Me.folderlist = New System.Windows.Forms.ListView()
         Me.Folder = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Path = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.UATPath = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ContextMenuStrip6 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.EditRouterxmlToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -150,6 +152,7 @@ Partial Class Form1
         'status
         '
         Me.status.BackColor = System.Drawing.SystemColors.Control
+        Me.status.Controls.Add(Me.Button5)
         Me.status.Controls.Add(Me.label9)
         Me.status.Controls.Add(Me.label8)
         Me.status.Controls.Add(Me.Label13)
@@ -177,6 +180,20 @@ Partial Class Form1
         Me.status.TabStop = False
         Me.status.Text = "Server/Services Status"
         Me.status.Visible = False
+        '
+        'Button5
+        '
+        Me.Button5.BackColor = System.Drawing.Color.Transparent
+        Me.Button5.FlatAppearance.BorderColor = System.Drawing.Color.White
+        Me.Button5.FlatAppearance.BorderSize = 0
+        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button5.Location = New System.Drawing.Point(9, 153)
+        Me.Button5.Margin = New System.Windows.Forms.Padding(1)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(428, 125)
+        Me.Button5.TabIndex = 32
+        Me.Button5.Text = "Get Services"
+        Me.Button5.UseVisualStyleBackColor = False
         '
         'label9
         '
@@ -458,7 +475,7 @@ Partial Class Form1
         Me.folderlist.AutoArrange = False
         Me.folderlist.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.folderlist.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.folderlist.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Folder, Me.Path})
+        Me.folderlist.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Folder, Me.Path, Me.UATPath})
         Me.folderlist.ContextMenuStrip = Me.ContextMenuStrip6
         Me.folderlist.Cursor = System.Windows.Forms.Cursors.Hand
         Me.folderlist.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -487,6 +504,10 @@ Partial Class Form1
         'Path
         '
         Me.Path.Text = "Path"
+        '
+        'UATPath
+        '
+        Me.UATPath.Text = "UATPath"
         '
         'ContextMenuStrip6
         '
@@ -1133,4 +1154,6 @@ Partial Class Form1
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents Button5 As System.Windows.Forms.Button
+    Friend WithEvents UATPath As System.Windows.Forms.ColumnHeader
 End Class

@@ -26,20 +26,14 @@ Class Form1
     Public Shared hff As String = "\c$\mgi\mposinstallstate.xml"
     Public Shared x As Boolean = False
     Public Shared w As Boolean = False
+    Public Shared qatill As Boolean = False
+    Public Shared qafolder As String
+    Public Shared uatfolder As String
     Dim anulareserver As CancellationTokenSource
     Dim anulareservice As CancellationTokenSource
     Dim anularetills As CancellationTokenSource
     Dim anulareoperators As CancellationTokenSource
     Dim cnt As String = ""
-    Private con As SqlConnection
-    Private cmd As SqlCommand
-    Private dat As SqlDataReader
-    Private con1 As SqlConnection
-    Private cmd1 As SqlCommand
-    Private dat1 As SqlDataReader
-    Private con2 As SqlConnection
-    Private cmd2 As SqlCommand
-    Private dat2 As SqlDataReader
 
     '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN form load/unload
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -75,6 +69,14 @@ Class Form1
                 Form7.balon("XML update not needed!")
             ElseIf MyVal <> "client.ro.r4.madm.net" Then
                 Form7.balon("XML update not needed!")
+                'XmlVersion("sqllist")
+                'XmlVersion("folder")
+                'XmlVersion("service")
+                'If w = True Then
+                '    Form7.balon("New XML files downloaded!")
+                'Else
+                '    Form7.balon("XML files are up to date!")
+                'End If
             Else
                 XmlVersion("sqllist")
                 XmlVersion("server")
@@ -88,6 +90,7 @@ Class Form1
             End If
             MyReg.Close()
         Catch a As Exception
+            MsgBox(a.Message)
         End Try
 
         Me.Show()
@@ -126,6 +129,7 @@ Class Form1
                                 readserver.Read()
                                 If readserver.Value = "QA" Then
                                     serverlist.Items.Item(i).Group = serverlist.Groups(0)
+                                    qatill = True
                                 ElseIf readserver.Value = "UAT" Then
                                     serverlist.Items.Item(i).Group = serverlist.Groups(1)
                                 ElseIf readserver.Value = "PROD" Then
@@ -146,6 +150,7 @@ Class Form1
     Private Sub readfolderlist()
         Dim readfolder As XmlTextReader = New XmlTextReader(ffl)
         Dim i As Integer = 0
+
         Try
             folderlist.Items.Clear()
             Do While (readfolder.Read())
@@ -159,6 +164,10 @@ Class Form1
                                 readfolder.Read()
                                 folderlist.Items(i).SubItems.Add("\\" + label9.Text + readfolder.Value)
                                 i = i + 1
+                                'Case "UATPath"
+                                '    readfolder.Read()
+                                '    folderlist.Items(i).SubItems.Add("\\" + label9.Text + readfolder.Value)
+                                '    i = i + 1
                         End Select
                 End Select
             Loop
@@ -198,12 +207,14 @@ Class Form1
     '-----------------------------------------------------------------------------------------------------------------------------------------END read xml files
     '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN server selection
     Private Sub serverlist_SelectedIndexChanged(sender As Object, e As EventArgs) Handles serverlist.SelectedIndexChanged
+        servicelist.Items.Clear()
         Button1.Visible = True
+        Button5.Visible = True
         viewserver()
         statusserver()
         readfolderlist()
         loaddatabase()
-        taskservice()
+        ' taskservice()
         loadcounts()
     End Sub
     Private Sub statusserver()
@@ -241,6 +252,10 @@ Class Form1
                     Dim arr As New ArrayList
                     Dim arr1 As New ArrayList
                     Dim conex1 As SqlConnection
+                    Dim dat As SqlDataReader
+                    Dim dat1 As SqlDataReader
+                    Dim cmd As SqlCommand
+                    Dim cmd1 As SqlCommand
                     Dim t As Boolean = False
 
                     conex1 = New SqlConnection("Data Source=" & item.SubItems(2).Text & ";Database=TPCentralDB;" & cred & ";")
@@ -294,6 +309,7 @@ Class Form1
     Private Sub loaddatabase()
         operatorlist.Items.Clear()
         tilllist.Items.Clear()
+        Dim con As SqlConnection
         con = New SqlConnection("Data Source=" & label9.Text & ";Database=TPCentralDB;" & cred & ";")
         If Label11.Text = "ONLINE" Then
             Try
@@ -328,6 +344,9 @@ Class Form1
     End Sub
     Private Sub loadoperators(tokenoperators As CancellationToken)
         Dim i As Integer = 0
+        Dim con1 As SqlConnection
+        Dim cmd1 As SqlCommand
+        Dim dat1 As SqlDataReader
         Try
             con1 = New SqlConnection("Data Source=" & label9.Text & ";Database=TPCentralDB;" & cred & ";")
             cmd1 = con1.CreateCommand
@@ -345,14 +364,16 @@ Class Form1
             dat1.Close()
             con1.Close()
         Catch
-            dat1.Close()
-            con1.Close()
+
         End Try
     End Sub
     Private Sub loadtills(tokentills As CancellationToken)
         Dim ff As String
         Dim i As Integer = 0
         Dim arr As Array = {"-", "-", "-", "-", "-", "-", "-"}
+        Dim con As SqlConnection
+        Dim cmd As SqlCommand
+        Dim dat As SqlDataReader
         Try
             con = New SqlConnection("Data Source=" & label9.Text & ";Database=TPCentralDB;" & cred & ";")
             cmd = con.CreateCommand
@@ -385,21 +406,25 @@ Class Form1
                 Catch
                 End Try
                 Try
-                    ff = "\\" & arr(4) & "\e$\TpDotnet\cfg\Metro.MPOS.PrintProcessor." & Label10.Text & ".xml"
-                    If arr(4) <> "-" AndAlso arr(5) = "ON" AndAlso My.Computer.FileSystem.FileExists(ff) Then
-                        Dim readprinter As XmlTextReader = New XmlTextReader(ff)
-                        Do While (readprinter.Read())
-                            Select Case readprinter.NodeType
-                                Case XmlNodeType.Element
-                                    If readprinter.Name = "PrinterType" Then
-                                        readprinter.Read()
-                                        If readprinter.Value >= 0 And readprinter.Value <= 2 Then
-                                            arr(6) = readprinter.Value
+                    If qatill = True Then
+                        ff = "\\" & arr(4) & "\e$\TpDotnet\cfg\Metro.MPOS.PrintProcessor." & Label10.Text & ".xml"
+                        If arr(4) <> "-" AndAlso arr(5) = "ON" AndAlso My.Computer.FileSystem.FileExists(ff) Then
+                            Dim readprinter As XmlTextReader = New XmlTextReader(ff)
+                            Do While (readprinter.Read())
+                                Select Case readprinter.NodeType
+                                    Case XmlNodeType.Element
+                                        If readprinter.Name = "PrinterType" Then
+                                            readprinter.Read()
+                                            If readprinter.Value >= 0 And readprinter.Value <= 2 Then
+                                                arr(6) = readprinter.Value
+                                            End If
                                         End If
-                                    End If
-                            End Select
-                        Loop
-                        readprinter.Dispose()
+                                End Select
+                            Loop
+                            readprinter.Dispose()
+                        End If
+                    Else
+                        arr(6) = "n/a"
                     End If
                 Catch
                 End Try
@@ -501,8 +526,8 @@ Class Form1
     Private Sub loadping(tokenserver As CancellationToken)
         Dim i As Integer = 0
         Dim msg As String = ""
-        Dim MyReg As RegistryKey
-        Dim MyVal As Object
+        ' Dim MyReg As RegistryKey
+        ' Dim MyVal As Object
         sss.Visible = True
         For Each item As ListViewItem In serverlist.Items
             tokenserver.ThrowIfCancellationRequested()
@@ -513,6 +538,8 @@ Class Form1
                     Dim arr As New ArrayList
                     Dim arr1 As New ArrayList
                     Dim conex1 As SqlConnection
+                    Dim cmd, cmd1 As SqlCommand
+                    Dim dat, dat1 As SqlDataReader
                     Dim t As Boolean = False
 
                     conex1 = New SqlConnection("Data Source=" & item.SubItems(2).Text & ";Database=TPCentralDB;" & cred & ";")
@@ -969,44 +996,57 @@ Class Form1
             End If
             End If
     End Sub
-    Public Function ResourceExists(location As Uri) As Boolean
-        Dim WbReq As New Net.WebClient
-        WbReq.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials
-        WbReq.Dispose()
+    'Public Function ResourceExists(location As Uri) As Boolean
+    '        If (Not String.Equals(location.Scheme, Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase)) And (Not String.Equals(location.Scheme, Uri.UriSchemeHttps, StringComparison.InvariantCultureIgnoreCase)) Then
+    '            Throw New NotSupportedException("URI scheme is not supported")
+    '        End If
 
-        If (Not String.Equals(location.Scheme, Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase)) And (Not String.Equals(location.Scheme, Uri.UriSchemeHttps, StringComparison.InvariantCultureIgnoreCase)) Then
-            Throw New NotSupportedException("URI scheme is not supported")
-        End If
-        Dim request = Net.WebRequest.Create(location)
-        request.Method = "HEAD"
-        Try
-            Using response = request.GetResponse
-                Return DirectCast(response, Net.HttpWebResponse).StatusCode = Net.HttpStatusCode.OK
-            End Using
-        Catch ex As Net.WebException
-            Select Case DirectCast(ex.Response, Net.HttpWebResponse).StatusCode
-                Case Net.HttpStatusCode.NotFound
-                    Return False
-                Case Else
-                    Throw
-            End Select
-        End Try
-    End Function
+    '        Dim request = Net.WebRequest.Create(location)
+    '        request.Method = "HEAD"
+
+    '        Try
+    '            Using response = request.GetResponse
+    '                Return DirectCast(response, Net.HttpWebResponse).StatusCode = Net.HttpStatusCode.OK
+    '            End Using
+    '        Catch ex As Net.WebException
+    '            Select Case DirectCast(ex.Response, Net.HttpWebResponse).StatusCode
+    '                Case Net.HttpStatusCode.NotFound
+    '                    Return False
+    '                Case Else
+    '                    Throw
+    '            End Select
+    '        End Try
+    '    End Function
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
             DeleteOldVersion()
             Timer1.Stop()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        'Dim result As Integer = MessageBox.Show("Updating will close current session. Are you sure you want to continue ?", "MPOS Tool Updater", MessageBoxButtons.YesNo)
+        'If result = DialogResult.No Then
+        'ElseIf result = DialogResult.Yes Then
+        '    Dim sr As StreamReader
+        '    sr = New StreamReader("\\buk11fsr001\GRP_MSYS_MPOS_DELIVERY\pos\Users\public\Update.txt")
+        '    Dim newestversion As String = sr.ReadToEnd()
+        '    Dim currentversion As String = Application.ProductVersion
+        Dim WbReq As New Net.WebClient
+        WbReq.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials
+        WbReq.Dispose()
+
         Dim result As Integer = MessageBox.Show("Updating will close current session. Are you sure you want to continue ?", "MPOS Tool Updater", MessageBoxButtons.YesNo)
         If result = DialogResult.No Then
         ElseIf result = DialogResult.Yes Then
-            Dim sr As StreamReader
-            sr = New StreamReader("\\buk11fsr001\GRP_MSYS_MPOS_DELIVERY\pos\Users\public\Update.txt")
+            Dim request As System.Net.HttpWebRequest = System.Net.HttpWebRequest.Create("http://my-collaboration.metrogroup-networking.com/personal/r4_razvan_belcea/Shared%20Documents/Update.txt")
+            request.Credentials = System.Net.CredentialCache.DefaultCredentials
+            Dim response As System.Net.HttpWebResponse = request.GetResponse()
+            Dim sr As System.IO.StreamReader = New System.IO.StreamReader(response.GetResponseStream())
             Dim newestversion As String = sr.ReadToEnd()
             Dim currentversion As String = Application.ProductVersion
             Try
-                My.Computer.Network.DownloadFile("\\buk11fsr001\GRP_MSYS_MPOS_DELIVERY\pos\Users\public\MPOS Server Tool v1.0.exe", Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe")
+                Dim source As New Uri("http://my-collaboration.metrogroup-networking.com/personal/r4_razvan_belcea/Shared%20Documents/MPOS%20Server%20Tool%20v1")
+                Dim credentials As System.Net.NetworkCredential = System.Net.CredentialCache.DefaultNetworkCredentials
+                My.Computer.Network.DownloadFile(source, Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe", credentials, True, 60000I, False)
                 If My.Computer.FileSystem.FileExists(Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe") Then
                     Dim path As String = "oldversion.txt"
 
@@ -1035,15 +1075,19 @@ Class Form1
         If files = "server" Then
             ttr = Form1.svl
             link = "\\buk11fsr001\GRP_MSYS_MPOS_DELIVERY\pos\Users\public\serverlist.xml"
+            'Dim link As New Uri("http://my-collaboration.metrogroup-networking.com/personal/r4_razvan_belcea/Shared%20Documents/serverlist.xml")
         ElseIf files = "folder" Then
             ttr = Form1.ffl
             link = "\\buk11fsr001\GRP_MSYS_MPOS_DELIVERY\pos\Users\public\folderlist.xml"
+            'Dim link As New Uri("http://my-collaboration.metrogroup-networking.com/personal/r4_razvan_belcea/Shared%20Documents/folderlist.xml")
         ElseIf files = "service" Then
             ttr = Form1.srl
             link = "\\buk11fsr001\GRP_MSYS_MPOS_DELIVERY\pos\Users\public\servicelist.xml"
+            'Dim link As New Uri("http://my-collaboration.metrogroup-networking.com/personal/r4_razvan_belcea/Shared%20Documents/servicelist.xml")
         ElseIf files = "sqllist" Then
             ttr = "sqllist.xml"
             link = "\\buk11fsr001\GRP_MSYS_MPOS_DELIVERY\pos\Users\public\sqllist.xml"
+            'Dim link As New Uri("http://my-collaboration.metrogroup-networking.com/personal/r4_razvan_belcea/Shared%20Documents/sqllist.xml")
         End If
 
         Dim xmlread As XmlTextReader = New XmlTextReader(ttr)
@@ -1081,18 +1125,24 @@ Class Form1
             MsgBox("Invalid address at " + link)
         End If
         If myArr(0).ToString < myArr(1).ToString Then
+            Dim credentials As System.Net.NetworkCredential = System.Net.CredentialCache.DefaultNetworkCredentials
             Try
                 If My.Computer.FileSystem.FileExists(ttr) Then
                     My.Computer.FileSystem.DeleteFile(ttr)
                 End If
                 My.Computer.Network.DownloadFile(link, _
-                                           ttr, _
-                                            "", "", False, 500, True)
+                                                ttr, _
+                                                "", "", False, 500, True)
             Catch ex As Exception
                 MsgBox(ex.Message + " Error Downloading update.")
             End Try
             w = True
         End If
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        taskservice()
+        Button5.Hide()
     End Sub
 End Class
 
