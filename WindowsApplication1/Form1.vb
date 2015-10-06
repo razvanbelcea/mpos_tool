@@ -26,7 +26,6 @@ Class Form1
     Public Shared hff As String = "\c$\mgi\mposinstallstate.xml"
     Public Shared x As Boolean = False
     Public Shared w As Boolean = False
-    Public Shared qatill As Boolean = False
     Public Shared qafolder As String
     Public Shared uatfolder As String
     Dim anulareserver As CancellationTokenSource
@@ -129,7 +128,6 @@ Class Form1
                                 readserver.Read()
                                 If readserver.Value = "QA" Then
                                     serverlist.Items.Item(i).Group = serverlist.Groups(0)
-                                    qatill = True
                                 ElseIf readserver.Value = "UAT" Then
                                     serverlist.Items.Item(i).Group = serverlist.Groups(1)
                                 ElseIf readserver.Value = "PROD" Then
@@ -147,34 +145,55 @@ Class Form1
             Form7.balon(e.Message)
         End Try
     End Sub
-    Private Sub readfolderlist()
+    Private Sub readfolderlist(link)
         Dim readfolder As XmlTextReader = New XmlTextReader(ffl)
         Dim i As Integer = 0
+        If link = "QA" Then
+            Try
+                folderlist.Items.Clear()
+                Do While (readfolder.Read())
+                    Select Case readfolder.NodeType
+                        Case XmlNodeType.Element
+                            Select Case readfolder.Name
+                                Case "Name"
+                                    readfolder.Read()
+                                    folderlist.Items.Add(readfolder.Value)
+                                Case "Path"
+                                    readfolder.Read()
+                                    folderlist.Items(i).SubItems.Add("\\" + label9.Text + readfolder.Value)
+                                    i = i + 1
 
-        Try
-            folderlist.Items.Clear()
-            Do While (readfolder.Read())
-                Select Case readfolder.NodeType
-                    Case XmlNodeType.Element
-                        Select Case readfolder.Name
-                            Case "Name"
-                                readfolder.Read()
-                                folderlist.Items.Add(readfolder.Value)
-                            Case "Path"
-                                readfolder.Read()
-                                folderlist.Items(i).SubItems.Add("\\" + label9.Text + readfolder.Value)
-                                i = i + 1
-                                'Case "UATPath"
-                                '    readfolder.Read()
-                                '    folderlist.Items(i).SubItems.Add("\\" + label9.Text + readfolder.Value)
-                                '    i = i + 1
-                        End Select
-                End Select
-            Loop
-            readfolder.Dispose()
-        Catch e As Exception
-            Form7.balon(e.Message)
-        End Try
+                            End Select
+                    End Select
+                Loop
+                readfolder.Dispose()
+            Catch e As Exception
+                Form7.balon(e.Message)
+            End Try
+        ElseIf link = "UAT" Then
+            Try
+                folderlist.Items.Clear()
+                Do While (readfolder.Read())
+                    Select Case readfolder.NodeType
+                        Case XmlNodeType.Element
+                            Select Case readfolder.Name
+                                Case "Name"
+                                    readfolder.Read()
+                                    folderlist.Items.Add(readfolder.Value)
+                                Case "UATPath"
+                                    readfolder.Read()
+                                    folderlist.Items(i).SubItems.Add("\\" + label9.Text + readfolder.Value)
+                                    i = i + 1
+
+                            End Select
+                    End Select
+                Loop
+                readfolder.Dispose()
+            Catch e As Exception
+                Form7.balon(e.Message)
+            End Try
+        End If
+
     End Sub
     Private Sub readservicelist()
         Dim readservice As XmlTextReader = New XmlTextReader(srl)
@@ -212,7 +231,14 @@ Class Form1
         Button5.Visible = True
         viewserver()
         statusserver()
-        readfolderlist()
+        For Each item As ListViewItem In serverlist.SelectedItems
+            If item.Group.Name = "ListViewGroup1" Then
+                readfolderlist("QA")
+            Else
+                readfolderlist("UAT")
+            End If
+        Next
+        ' readfolderlist()
         loaddatabase()
         ' taskservice()
         loadcounts()
@@ -406,25 +432,21 @@ Class Form1
                 Catch
                 End Try
                 Try
-                    If qatill = True Then
-                        ff = "\\" & arr(4) & "\e$\TpDotnet\cfg\Metro.MPOS.PrintProcessor." & Label10.Text & ".xml"
-                        If arr(4) <> "-" AndAlso arr(5) = "ON" AndAlso My.Computer.FileSystem.FileExists(ff) Then
-                            Dim readprinter As XmlTextReader = New XmlTextReader(ff)
-                            Do While (readprinter.Read())
-                                Select Case readprinter.NodeType
-                                    Case XmlNodeType.Element
-                                        If readprinter.Name = "PrinterType" Then
-                                            readprinter.Read()
-                                            If readprinter.Value >= 0 And readprinter.Value <= 2 Then
-                                                arr(6) = readprinter.Value
-                                            End If
+                    ff = "\\" & arr(4) & "\e$\TpDotnet\cfg\Metro.MPOS.PrintProcessor." & Label10.Text & ".xml"
+                    If arr(4) <> "-" AndAlso arr(5) = "ON" AndAlso My.Computer.FileSystem.FileExists(ff) Then
+                        Dim readprinter As XmlTextReader = New XmlTextReader(ff)
+                        Do While (readprinter.Read())
+                            Select Case readprinter.NodeType
+                                Case XmlNodeType.Element
+                                    If readprinter.Name = "PrinterType" Then
+                                        readprinter.Read()
+                                        If readprinter.Value >= 0 And readprinter.Value <= 2 Then
+                                            arr(6) = readprinter.Value
                                         End If
-                                End Select
-                            Loop
-                            readprinter.Dispose()
-                        End If
-                    Else
-                        arr(6) = "n/a"
+                                    End If
+                            End Select
+                        Loop
+                        readprinter.Dispose()
                     End If
                 Catch
                 End Try
@@ -567,17 +589,17 @@ Class Form1
                     item.SubItems.Add(arr(0).ToString + " " + arr1(0).ToString)
                 Catch a As Exception
                     'Form7.balon(a.Message)
-            End Try
-            item.SubItems.Add("-")
-            item.SubItems.Add("-")
-            item.SubItems.Add("-")
+                End Try
+                item.SubItems.Add("-")
+                item.SubItems.Add("-")
+                item.SubItems.Add("-")
             Else
-            item.ForeColor = Color.Red
-            item.SubItems.Add("OFF")
-            item.SubItems.Add("-")
-            item.SubItems.Add("-")
-            item.SubItems.Add("-")
-            item.SubItems.Add("-")
+                item.ForeColor = Color.Red
+                item.SubItems.Add("OFF")
+                item.SubItems.Add("-")
+                item.SubItems.Add("-")
+                item.SubItems.Add("-")
+                item.SubItems.Add("-")
             End If
             i = i + 1
             ToolStripProgressBar1.Value = i
@@ -970,7 +992,7 @@ Class Form1
         System.Diagnostics.Process.Start("mstsc.exe", "/v " & label9.Text)
 
     End Sub
- '-----------------------------------------------------------------------------------------------------------
+    '-----------------------------------------------------------------------------------------------------------
     Public Sub ActualVersion()
         Dim cversion As String = Application.ProductVersion
         Label15.Text = cversion.ToString
@@ -981,7 +1003,7 @@ Class Form1
         Dim path As String = "oldversion.txt"
         Dim execurrentversion As String = Application.ProductVersion
         If My.Computer.FileSystem.FileExists("oldversion.txt") Then
-            Using sr As StreamReader = File.OpenText(Path)
+            Using sr As StreamReader = File.OpenText(path)
                 Do While sr.Peek() >= 0
                     smallArr.Add(sr.ReadLine())
                 Loop
@@ -994,7 +1016,7 @@ Class Form1
                     MsgBox("bad bad bad")
                 End If
             End If
-            End If
+        End If
     End Sub
     'Public Function ResourceExists(location As Uri) As Boolean
     '        If (Not String.Equals(location.Scheme, Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase)) And (Not String.Equals(location.Scheme, Uri.UriSchemeHttps, StringComparison.InvariantCultureIgnoreCase)) Then
@@ -1018,8 +1040,8 @@ Class Form1
     '        End Try
     '    End Function
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-            DeleteOldVersion()
-            Timer1.Stop()
+        DeleteOldVersion()
+        Timer1.Stop()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
