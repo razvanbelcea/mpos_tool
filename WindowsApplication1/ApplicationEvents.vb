@@ -42,6 +42,7 @@ Namespace My
             '   Form1.Button2.Hide()
             '   End If
             Form1.ShowInTaskbar = True
+            Form9.CheckSettings()
         End Sub
     End Class
 

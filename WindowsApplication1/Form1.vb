@@ -18,7 +18,7 @@ Class Form1
     Public Shared PSW As String = "Cawt6__56UBn_szF8_10"
     Public Shared cred1 As String = "Integrated Security=SSPI"
     Public Shared cred2 As String = "Uid=" & UID & "; Password=" & PSW
-    Public Shared cred As String = cred1
+    Public Shared cred As String '= cred1
     Public Shared svl As String = "serverlist.xml"
     Public Shared ffl As String = "folderlist.xml"
     Public Shared srl As String = "servicelist.xml"
