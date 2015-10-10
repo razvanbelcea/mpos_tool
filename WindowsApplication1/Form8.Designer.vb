@@ -130,6 +130,8 @@ Partial Class Form8
         Me.Button11 = New System.Windows.Forms.Button()
         Me.TextBox7 = New System.Windows.Forms.TextBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.Button10 = New System.Windows.Forms.Button()
         Me.TextBox9 = New System.Windows.Forms.TextBox()
@@ -163,6 +165,7 @@ Partial Class Form8
         Me.DiscCustQualifier = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DiscKeystroke = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Form8BindingSource = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
@@ -184,6 +187,8 @@ Partial Class Form8
         Me.ContextMenuStrip5.SuspendLayout()
         Me.Other.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -1203,11 +1208,31 @@ Partial Class Form8
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.LinkLabel1)
+        Me.GroupBox4.Controls.Add(Me.Label11)
+        Me.GroupBox4.Controls.Add(Me.PictureBox1)
         Me.GroupBox4.Location = New System.Drawing.Point(430, 6)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(536, 342)
         Me.GroupBox4.TabIndex = 2
         Me.GroupBox4.TabStop = False
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(140, 254)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(118, 16)
+        Me.Label11.TabIndex = 2
+        Me.Label11.Text = "Click to copy EAN:"
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Location = New System.Drawing.Point(6, 29)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(524, 186)
+        Me.PictureBox1.TabIndex = 0
+        Me.PictureBox1.TabStop = False
         '
         'GroupBox3
         '
@@ -1478,6 +1503,16 @@ Partial Class Form8
         Me.DiscKeystroke.HeaderText = "DiscKeystroke"
         Me.DiscKeystroke.Name = "DiscKeystroke"
         '
+        'LinkLabel1
+        '
+        Me.LinkLabel1.AutoSize = True
+        Me.LinkLabel1.Location = New System.Drawing.Point(264, 254)
+        Me.LinkLabel1.Name = "LinkLabel1"
+        Me.LinkLabel1.Size = New System.Drawing.Size(73, 16)
+        Me.LinkLabel1.TabIndex = 3
+        Me.LinkLabel1.TabStop = True
+        Me.LinkLabel1.Text = "LinkLabel1"
+        '
         'Form8BindingSource
         '
         Me.Form8BindingSource.DataSource = GetType(MPOS.Form8)
@@ -1523,6 +1558,9 @@ Partial Class Form8
         Me.Other.ResumeLayout(False)
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
@@ -1668,4 +1706,7 @@ Partial Class Form8
     Friend WithEvents Button13 As System.Windows.Forms.Button
     Friend WithEvents Button12 As System.Windows.Forms.Button
     Friend WithEvents Form8BindingSource As System.Windows.Forms.BindingSource
+    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents LinkLabel1 As System.Windows.Forms.LinkLabel
 End Class

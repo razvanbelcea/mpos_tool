@@ -28,6 +28,8 @@ Partial Class Form9
         Me.Button1 = New System.Windows.Forms.Button()
         Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.CheckBox4 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox5 = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'CheckBox1
@@ -52,11 +54,13 @@ Partial Class Form9
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(350, 273)
+        Me.Button1.FlatAppearance.BorderColor = System.Drawing.Color.White
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Location = New System.Drawing.Point(109, 270)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(96, 25)
+        Me.Button1.Size = New System.Drawing.Size(91, 23)
         Me.Button1.TabIndex = 2
-        Me.Button1.Text = "OK"
+        Me.Button1.Text = "Cancel"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'CheckBox3
@@ -71,12 +75,35 @@ Partial Class Form9
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(12, 273)
+        Me.Button2.FlatAppearance.BorderColor = System.Drawing.Color.White
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Location = New System.Drawing.Point(12, 270)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(91, 23)
+        Me.Button2.Size = New System.Drawing.Size(92, 23)
         Me.Button2.TabIndex = 4
-        Me.Button2.Text = "Save settings"
+        Me.Button2.Text = "Save and Close"
+        Me.Button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button2.UseVisualStyleBackColor = True
+        '
+        'CheckBox4
+        '
+        Me.CheckBox4.AutoSize = True
+        Me.CheckBox4.Location = New System.Drawing.Point(13, 95)
+        Me.CheckBox4.Name = "CheckBox4"
+        Me.CheckBox4.Size = New System.Drawing.Size(148, 17)
+        Me.CheckBox4.TabIndex = 5
+        Me.CheckBox4.Text = "Always check for updates"
+        Me.CheckBox4.UseVisualStyleBackColor = True
+        '
+        'CheckBox5
+        '
+        Me.CheckBox5.AutoSize = True
+        Me.CheckBox5.Location = New System.Drawing.Point(13, 118)
+        Me.CheckBox5.Name = "CheckBox5"
+        Me.CheckBox5.Size = New System.Drawing.Size(115, 17)
+        Me.CheckBox5.TabIndex = 5
+        Me.CheckBox5.Text = "Run tool at Startup"
+        Me.CheckBox5.UseVisualStyleBackColor = True
         '
         'Form9
         '
@@ -84,6 +111,9 @@ Partial Class Form9
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(458, 310)
+        Me.ControlBox = False
+        Me.Controls.Add(Me.CheckBox5)
+        Me.Controls.Add(Me.CheckBox4)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.CheckBox3)
         Me.Controls.Add(Me.Button1)
@@ -94,6 +124,8 @@ Partial Class Form9
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "Form9"
+        Me.ShowIcon = False
+        Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Settings"
         Me.TopMost = True
@@ -105,4 +137,6 @@ Partial Class Form9
     Friend WithEvents CheckBox2 As System.Windows.Forms.CheckBox
     Friend WithEvents CheckBox3 As System.Windows.Forms.CheckBox
     Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents CheckBox4 As System.Windows.Forms.CheckBox
+    Friend WithEvents CheckBox5 As System.Windows.Forms.CheckBox
 End Class

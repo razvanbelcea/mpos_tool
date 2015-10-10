@@ -6,22 +6,27 @@ Imports System.IO
 Public Class Form9
     Public Shared servicedisabled As Boolean = False
     Private Sub Form9_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Button2.Enabled = False
         CheckSettings()
     End Sub
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
         If CheckBox1.Checked = True Then
             Form1.TopMost = True
+            Button2.Enabled = True
         Else
             Form1.TopMost = False
+            Button2.Enabled = True
         End If
     End Sub
 
     Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox2.CheckedChanged
         If CheckBox2.Checked = True Then
             Form1.cred = Form1.cred1
+            Button2.Enabled = True
         Else
             Form1.cred = Form1.cred2
+            Button2.Enabled = True
         End If
     End Sub
     Friend WithEvents Button1 As System.Windows.Forms.Button
@@ -32,17 +37,20 @@ Public Class Form9
     Private Sub CheckBox3_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox3.CheckedChanged
         If CheckBox3.Checked = True Then
             ServiceModuleDisable()
+            Button2.Enabled = True
         ElseIf CheckBox3.Checked = False Then
             ServiceModuleEnable()
+            Button2.Enabled = True
         End If
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-
         If My.Computer.FileSystem.FileExists("config.ini") Then
             ConfigIniUpdate()
+            Me.Close()
         Else
             ConfigIniCreate()
+            Me.Close()
         End If
     End Sub
     Public Sub ServiceModuleDisable()
@@ -142,6 +150,10 @@ Public Class Form9
         Catch ex As Exception
 
         End Try
-        
     End Sub
+
+    Private Sub CheckBox4_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox4.CheckedChanged
+
+    End Sub
+
 End Class

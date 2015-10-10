@@ -1006,6 +1006,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(1113, 569)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Label16)
@@ -1030,7 +1031,7 @@ Partial Class Form1
         Me.Name = "Form1"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "MPOS Server Tool v1.0"
+        Me.Text = "MPOS Server Tool"
         Me.status.ResumeLayout(False)
         Me.status.PerformLayout()
         Me.ContextMenuStrip3.ResumeLayout(False)
@@ -1153,6 +1154,7 @@ Partial Class Form1
     Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
+    Friend WithEvents Timer2 As System.Windows.Forms.Timer
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents UATPath As System.Windows.Forms.ColumnHeader

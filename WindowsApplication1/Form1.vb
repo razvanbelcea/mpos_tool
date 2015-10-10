@@ -1018,27 +1018,27 @@ Class Form1
             End If
         End If
     End Sub
-    'Public Function ResourceExists(location As Uri) As Boolean
-    '        If (Not String.Equals(location.Scheme, Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase)) And (Not String.Equals(location.Scheme, Uri.UriSchemeHttps, StringComparison.InvariantCultureIgnoreCase)) Then
-    '            Throw New NotSupportedException("URI scheme is not supported")
-    '        End If
+    Public Function ResourceExists(location As Uri) As Boolean
+        If (Not String.Equals(location.Scheme, Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase)) And (Not String.Equals(location.Scheme, Uri.UriSchemeHttps, StringComparison.InvariantCultureIgnoreCase)) Then
+            Throw New NotSupportedException("URI scheme is not supported")
+        End If
 
-    '        Dim request = Net.WebRequest.Create(location)
-    '        request.Method = "HEAD"
+        Dim request = Net.WebRequest.Create(location)
+        request.Method = "HEAD"
 
-    '        Try
-    '            Using response = request.GetResponse
-    '                Return DirectCast(response, Net.HttpWebResponse).StatusCode = Net.HttpStatusCode.OK
-    '            End Using
-    '        Catch ex As Net.WebException
-    '            Select Case DirectCast(ex.Response, Net.HttpWebResponse).StatusCode
-    '                Case Net.HttpStatusCode.NotFound
-    '                    Return False
-    '                Case Else
-    '                    Throw
-    '            End Select
-    '        End Try
-    '    End Function
+        Try
+            Using response = request.GetResponse
+                Return DirectCast(response, Net.HttpWebResponse).StatusCode = Net.HttpStatusCode.OK
+            End Using
+        Catch ex As Net.WebException
+            Select Case DirectCast(ex.Response, Net.HttpWebResponse).StatusCode
+                Case Net.HttpStatusCode.NotFound
+                    Return False
+                Case Else
+                    Throw
+            End Select
+        End Try
+    End Function
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         DeleteOldVersion()
         Timer1.Stop()
