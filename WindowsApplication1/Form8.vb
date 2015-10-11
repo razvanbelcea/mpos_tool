@@ -12,6 +12,7 @@ Imports System.IO
 Imports System.Threading
 
 Public Class Form8
+
     Public tempda As String = "temp\ART"
     Public tempdc As String = "temp\CUS"
     Public tempdh As String = "temp\CHN"
@@ -27,8 +28,6 @@ Public Class Form8
     Public itemlook As New ArrayList
     Private Sub Form8_Leave(sender As Object, e As EventArgs) Handles Me.Leave
         Me.Dispose()
-        PictureBox1.Dispose()
-
     End Sub
     Private Sub Form8_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         DataGridView1.Rows.Clear()
@@ -54,12 +53,6 @@ Public Class Form8
         readlist()
         settemp()
         chnrefresh()
-        loadcombo()
-        LinkLabel1.Hide()
-        Label11.Hide()
-        Button10.Enabled = False
-        TextBox9.Text = ""
-        PictureBox1.Image = Nothing
     End Sub
 
     Private Sub cuslist_MouseClick(sender As Object, e As MouseEventArgs) Handles cuslist.MouseClick
@@ -216,7 +209,7 @@ Public Class Form8
         My.Computer.FileSystem.CreateDirectory(tempdc)
         My.Computer.FileSystem.CreateDirectory(tempdh)
     End Sub
-    Private Function setbarart(barcode)
+    Public Function setbarart(barcode)
         Dim WbReq As New Net.WebClient
         WbReq.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials
         WbReq.Dispose()
@@ -232,7 +225,7 @@ Public Class Form8
             Return 0
         End Try
     End Function
-    Private Function setbarcus(barcode)
+    Public Function setbarcus(barcode)
         Dim WbReq As New Net.WebClient
         WbReq.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials
         WbReq.Dispose()
@@ -859,153 +852,6 @@ Public Class Form8
     '    mbarcode = ComboBox2.Text & TextBox3.Text & TextBox1.Text & TextBox2.Text & TextBox4.Text & TextBox5.Text
     '    MsgBox(mbarcode.ToString)
     'End Function
-    Public Sub loadcombo2()
-        Dim newArr As New ArrayList()
-
-        Dim reader As XmlTextReader = New XmlTextReader(Form1.svl)
-        Do While reader.Read()
-            Select Case reader.NodeType
-                Case XmlNodeType.Element
-                    Select Case reader.Name
-                        Case "Country"
-                            reader.Read()
-                            newArr.Add(reader.Value)
-                    End Select
-            End Select
-        Loop
-
-        ComboBox2.DataSource = newArr
-    End Sub
-    Function loadcombo()
-        'Dim i As Integer = 0
-        Dim con1 As SqlConnection
-        Dim cmd1 As SqlCommand
-        Dim myStructures As New ArrayList
-        Try
-            con1 = New SqlConnection("Data Source=" & "10.23.90.11" & ";Database=TPCentralDB;" & Form1.cred & ";")
-            cmd1 = con1.CreateCommand
-            con1.Open()
-            cmd1.CommandText = "select szCountryCode,szNumericCountryCode from MGICountryCode where szCountryCode in ('BGR','CHN','DEU','ESP','FRA','GRC','HRV','HUN','IND','ITA','JPN','KAZ','MLD','NLD','POL','PRT','ROU','RUS','SRB','SVK','TUR','UKR','VNM')"
-            dat1 = cmd1.ExecuteReader()
-            While dat1.Read()
-                myStructures.Add(dat1(0))
-                myStructures.Add(dat1(1))
-            End While
-            dat1.Close()
-            con1.Close()
-        Catch ev As Exception
-            MsgBox(ev.Message)
-        End Try
-        Dim i As Integer
-        For Each item In myStructures
-            MsgBox(myStructures(i).ToString)
-            i = i + 2
-        Next
-        'ComboBox2.DataSource = country.ToString
-    End Function
-
-    Public Structure MyStructure
-        Private _country As String
-        Private _numeric As String
-
-
-        Public Property country() As String
-            Get
-                Return _country
-            End Get
-            Set(ByVal value As String)
-                _country = value
-            End Set
-        End Property
-
-
-        Public Property numeric() As String
-            Get
-                Return _numeric
-            End Get
-            Set(ByVal value As String)
-                _numeric = value
-            End Set
-        End Property
-
-
-        Public Sub New(ByRef country As String, ByRef numeric As String)
-            _country = country
-            _numeric = numeric
-        End Sub
-
-
-    End Structure
-    Private Sub TextBox9_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox9.KeyPress
-        If Asc(e.KeyChar) <> 13 AndAlso Asc(e.KeyChar) <> 8 AndAlso Not IsNumeric(e.KeyChar) Then
-            MessageBox.Show("Please enter numbers only")
-            e.Handled = True
-        End If
-    End Sub
-
-    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
-        itemlook.Clear()
-        PictureBox1.Refresh()
-        LinkLabel1.Text = ""
-        Dim pic As System.IO.FileStream
-        If TextBox9.Text.Length <= 6 Then
-            'select din baza lookupcode
-            Dim con1 As SqlConnection
-            Dim cmd1 As SqlCommand
-            Try
-                con1 = New SqlConnection("Data Source=" & Form1.label9.Text & ";Database=TPCentralDB;" & Form1.cred & ";")
-                cmd1 = con1.CreateCommand
-                con1.Open()
-                cmd1.CommandText = "select top 1 szitemlookupcode from ItemLookupCode where szpositemid =" & "'" & TextBox9.Text & "'"
-                dat1 = cmd1.ExecuteReader()
-                While dat1.Read()
-                    itemlook.Add(dat1(0))
-                End While
-                dat1.Close()
-                con1.Close()
-                If setbarart(itemlook(0).ToString) Then
-                    pic = New System.IO.FileStream(tempda & "\" & itemlook(0).ToString & ".png", System.IO.FileMode.Open, System.IO.FileAccess.Read)
-                    PictureBox1.Image = System.Drawing.Image.FromStream(pic)
-                    PictureBox1.SizeMode = PictureBoxSizeMode.CenterImage
-                    LinkLabel1.Text = itemlook(0).ToString
-                    LinkLabel1.Show()
-                    Label11.Show()
-                    pic.Dispose()
-                    pic.Close()
-                End If
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
-        Else
-            'create barcode
-            If setbarart(TextBox9.Text) Then
-                pic = New System.IO.FileStream(tempda & "\" & TextBox9.Text & ".png", System.IO.FileMode.Open, System.IO.FileAccess.Read)
-                PictureBox1.Image = System.Drawing.Image.FromStream(pic)
-                PictureBox1.SizeMode = PictureBoxSizeMode.CenterImage
-                ' LinkLabel1.Show()
-                ' Label11.Show()
-                pic.Dispose()
-                pic.Close()
-            End If
-
-        End If
-
-    End Sub
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
-        My.Computer.Clipboard.SetImage(PictureBox1.Image)
-    End Sub
-
-    Private Sub TextBox9_TextChanged(sender As Object, e As EventArgs) Handles TextBox9.TextChanged
-        If TextBox9.Text.Length < 1 Then
-            Button10.Enabled = False
-        ElseIf TextBox9.Text.Length >= 1 Then
-            Button10.Enabled = True
-        End If
-    End Sub
-
-    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
-        My.Computer.Clipboard.SetText(itemlook(0).ToString)
-    End Sub
 End Class
 
 

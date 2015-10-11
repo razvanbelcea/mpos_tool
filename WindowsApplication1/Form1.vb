@@ -228,6 +228,7 @@ Class Form1
     Private Sub serverlist_SelectedIndexChanged(sender As Object, e As EventArgs) Handles serverlist.SelectedIndexChanged
         servicelist.Items.Clear()
         Button1.Visible = True
+        Button6.Visible = True
         Button5.Visible = True
         viewserver()
         statusserver()
@@ -1165,6 +1166,10 @@ Class Form1
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         taskservice()
         Button5.Hide()
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Form11.ShowDialog()
     End Sub
 End Class
 

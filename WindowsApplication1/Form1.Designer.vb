@@ -23,14 +23,14 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
-        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
-        Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim ListViewItem8 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim ListViewGroup1 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("QA", System.Windows.Forms.HorizontalAlignment.Center)
-        Dim ListViewGroup2 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("UAT", System.Windows.Forms.HorizontalAlignment.Center)
-        Dim ListViewGroup3 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("PROD", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup4 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("QA", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup5 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("UAT", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup6 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("PROD", System.Windows.Forms.HorizontalAlignment.Center)
         Me.status = New System.Windows.Forms.GroupBox()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.label9 = New System.Windows.Forms.LinkLabel()
@@ -129,6 +129,7 @@ Partial Class Form1
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
         Me.status.SuspendLayout()
         Me.ContextMenuStrip3.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -291,7 +292,7 @@ Partial Class Form1
         Me.servicelist.ContextMenuStrip = Me.ContextMenuStrip3
         Me.servicelist.Cursor = System.Windows.Forms.Cursors.Hand
         Me.servicelist.FullRowSelect = True
-        Me.servicelist.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4})
+        Me.servicelist.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem5, ListViewItem6, ListViewItem7, ListViewItem8})
         Me.servicelist.Location = New System.Drawing.Point(6, 129)
         Me.servicelist.MultiSelect = False
         Me.servicelist.Name = "servicelist"
@@ -730,16 +731,16 @@ Partial Class Form1
         Me.serverlist.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.serverlist.FullRowSelect = True
         Me.serverlist.GridLines = True
-        ListViewGroup1.Header = "QA"
-        ListViewGroup1.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup1.Name = "ListViewGroup1"
-        ListViewGroup2.Header = "UAT"
-        ListViewGroup2.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup2.Name = "ListViewGroup2"
-        ListViewGroup3.Header = "PROD"
-        ListViewGroup3.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup3.Name = "ListViewGroup3"
-        Me.serverlist.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2, ListViewGroup3})
+        ListViewGroup4.Header = "QA"
+        ListViewGroup4.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup4.Name = "ListViewGroup1"
+        ListViewGroup5.Header = "UAT"
+        ListViewGroup5.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup5.Name = "ListViewGroup2"
+        ListViewGroup6.Header = "PROD"
+        ListViewGroup6.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup6.Name = "ListViewGroup3"
+        Me.serverlist.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup4, ListViewGroup5, ListViewGroup6})
         Me.serverlist.HideSelection = False
         Me.serverlist.LabelWrap = False
         Me.serverlist.Location = New System.Drawing.Point(19, 12)
@@ -1002,6 +1003,16 @@ Partial Class Form1
         Me.Button2.Text = "Update Available"
         Me.Button2.UseVisualStyleBackColor = False
         '
+        'Button6
+        '
+        Me.Button6.Location = New System.Drawing.Point(502, 539)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(165, 29)
+        Me.Button6.TabIndex = 18
+        Me.Button6.Text = "Barcode Generator"
+        Me.Button6.UseVisualStyleBackColor = True
+        Me.Button6.Visible = False
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1011,6 +1022,7 @@ Partial Class Form1
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Label15)
+        Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.sss)
@@ -1158,4 +1170,5 @@ Partial Class Form1
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents UATPath As System.Windows.Forms.ColumnHeader
+    Friend WithEvents Button6 As System.Windows.Forms.Button
 End Class

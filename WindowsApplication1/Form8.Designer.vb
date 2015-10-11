@@ -125,33 +125,6 @@ Partial Class Form8
         Me.Column8 = New System.Windows.Forms.DataGridViewLinkColumn()
         Me.ContextMenuStrip5 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.RefreshToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Other = New System.Windows.Forms.TabPage()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.Button11 = New System.Windows.Forms.Button()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.Button10 = New System.Windows.Forms.Button()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
-        Me.Button9 = New System.Windows.Forms.Button()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.Button13 = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
@@ -165,7 +138,6 @@ Partial Class Form8
         Me.DiscCustQualifier = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DiscKeystroke = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Form8BindingSource = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
@@ -185,12 +157,6 @@ Partial Class Form8
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridView5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip5.SuspendLayout()
-        Me.Other.SuspendLayout()
-        Me.GroupBox5.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox3.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.DataGridView6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Form8BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -684,7 +650,6 @@ Partial Class Form8
         Me.tab.Controls.Add(Me.COD)
         Me.tab.Controls.Add(Me.TX)
         Me.tab.Controls.Add(Me.CHN)
-        Me.tab.Controls.Add(Me.Other)
         Me.tab.Controls.Add(Me.TabPage1)
         Me.tab.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tab.ItemSize = New System.Drawing.Size(42, 18)
@@ -1165,261 +1130,6 @@ Partial Class Form8
         Me.RefreshToolStripMenuItem.Size = New System.Drawing.Size(113, 22)
         Me.RefreshToolStripMenuItem.Text = "Refresh"
         '
-        'Other
-        '
-        Me.Other.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.Other.Controls.Add(Me.GroupBox5)
-        Me.Other.Controls.Add(Me.GroupBox4)
-        Me.Other.Controls.Add(Me.GroupBox3)
-        Me.Other.Controls.Add(Me.GroupBox2)
-        Me.Other.Location = New System.Drawing.Point(4, 22)
-        Me.Other.Name = "Other"
-        Me.Other.Padding = New System.Windows.Forms.Padding(3)
-        Me.Other.Size = New System.Drawing.Size(984, 363)
-        Me.Other.TabIndex = 5
-        Me.Other.Text = "Other"
-        '
-        'GroupBox5
-        '
-        Me.GroupBox5.Controls.Add(Me.Button11)
-        Me.GroupBox5.Controls.Add(Me.TextBox7)
-        Me.GroupBox5.Location = New System.Drawing.Point(219, 177)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(187, 170)
-        Me.GroupBox5.TabIndex = 3
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "CHN Barcode"
-        '
-        'Button11
-        '
-        Me.Button11.Location = New System.Drawing.Point(11, 53)
-        Me.Button11.Name = "Button11"
-        Me.Button11.Size = New System.Drawing.Size(168, 24)
-        Me.Button11.TabIndex = 18
-        Me.Button11.Text = "Load Barcode"
-        Me.Button11.UseVisualStyleBackColor = True
-        '
-        'TextBox7
-        '
-        Me.TextBox7.Location = New System.Drawing.Point(11, 25)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(168, 22)
-        Me.TextBox7.TabIndex = 17
-        '
-        'GroupBox4
-        '
-        Me.GroupBox4.Controls.Add(Me.LinkLabel1)
-        Me.GroupBox4.Controls.Add(Me.Label11)
-        Me.GroupBox4.Controls.Add(Me.PictureBox1)
-        Me.GroupBox4.Location = New System.Drawing.Point(430, 6)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(536, 342)
-        Me.GroupBox4.TabIndex = 2
-        Me.GroupBox4.TabStop = False
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(140, 254)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(118, 16)
-        Me.Label11.TabIndex = 2
-        Me.Label11.Text = "Click to copy EAN:"
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Location = New System.Drawing.Point(6, 29)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(524, 186)
-        Me.PictureBox1.TabIndex = 0
-        Me.PictureBox1.TabStop = False
-        '
-        'GroupBox3
-        '
-        Me.GroupBox3.Controls.Add(Me.Button10)
-        Me.GroupBox3.Controls.Add(Me.TextBox9)
-        Me.GroupBox3.Location = New System.Drawing.Point(219, 6)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(187, 165)
-        Me.GroupBox3.TabIndex = 1
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Article"
-        '
-        'Button10
-        '
-        Me.Button10.Location = New System.Drawing.Point(11, 55)
-        Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(168, 24)
-        Me.Button10.TabIndex = 18
-        Me.Button10.Text = "Load Barcode"
-        Me.Button10.UseVisualStyleBackColor = True
-        '
-        'TextBox9
-        '
-        Me.TextBox9.Location = New System.Drawing.Point(11, 26)
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(168, 22)
-        Me.TextBox9.TabIndex = 17
-        Me.ToolTip1.SetToolTip(Me.TextBox9, "EAN 13" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "12 digits - without check digit")
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.TextBox8)
-        Me.GroupBox2.Controls.Add(Me.Button9)
-        Me.GroupBox2.Controls.Add(Me.Label9)
-        Me.GroupBox2.Controls.Add(Me.TextBox6)
-        Me.GroupBox2.Controls.Add(Me.Label8)
-        Me.GroupBox2.Controls.Add(Me.TextBox5)
-        Me.GroupBox2.Controls.Add(Me.Label7)
-        Me.GroupBox2.Controls.Add(Me.TextBox4)
-        Me.GroupBox2.Controls.Add(Me.Label6)
-        Me.GroupBox2.Controls.Add(Me.TextBox2)
-        Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Controls.Add(Me.TextBox1)
-        Me.GroupBox2.Controls.Add(Me.Label4)
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.ComboBox2)
-        Me.GroupBox2.Controls.Add(Me.TextBox3)
-        Me.GroupBox2.Location = New System.Drawing.Point(16, 6)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(187, 342)
-        Me.GroupBox2.TabIndex = 0
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Customer"
-        '
-        'TextBox8
-        '
-        Me.TextBox8.Location = New System.Drawing.Point(9, 254)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(168, 22)
-        Me.TextBox8.TabIndex = 16
-        Me.ToolTip1.SetToolTip(Me.TextBox8, "ITF 22" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "20 digits - without check digits")
-        '
-        'Button9
-        '
-        Me.Button9.Location = New System.Drawing.Point(9, 224)
-        Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(168, 24)
-        Me.Button9.TabIndex = 3
-        Me.Button9.Text = "Load Barcode"
-        Me.Button9.UseVisualStyleBackColor = True
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(6, 199)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(50, 16)
-        Me.Label9.TabIndex = 16
-        Me.Label9.Text = "Branch"
-        '
-        'TextBox6
-        '
-        Me.TextBox6.Location = New System.Drawing.Point(88, 196)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(89, 22)
-        Me.TextBox6.TabIndex = 15
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(6, 171)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(81, 16)
-        Me.Label8.TabIndex = 14
-        Me.Label8.Text = "Cardversion"
-        '
-        'TextBox5
-        '
-        Me.TextBox5.Location = New System.Drawing.Point(88, 168)
-        Me.TextBox5.MaxLength = 1
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(89, 22)
-        Me.TextBox5.TabIndex = 13
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(6, 143)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(75, 16)
-        Me.Label7.TabIndex = 12
-        Me.Label7.Text = "Cardholder"
-        '
-        'TextBox4
-        '
-        Me.TextBox4.Location = New System.Drawing.Point(88, 140)
-        Me.TextBox4.MaxLength = 2
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(89, 22)
-        Me.TextBox4.TabIndex = 11
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(6, 115)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(65, 16)
-        Me.Label6.TabIndex = 10
-        Me.Label6.Text = "Customer"
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(88, 112)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(89, 22)
-        Me.TextBox2.TabIndex = 9
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(6, 87)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(49, 16)
-        Me.Label5.TabIndex = 8
-        Me.Label5.Text = "D. Line"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(88, 84)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(89, 22)
-        Me.TextBox1.TabIndex = 7
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 59)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(40, 16)
-        Me.Label4.TabIndex = 6
-        Me.Label4.Text = "Store"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 29)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(53, 16)
-        Me.Label3.TabIndex = 4
-        Me.Label3.Text = "Country"
-        '
-        'ComboBox2
-        '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(88, 26)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(89, 24)
-        Me.ComboBox2.TabIndex = 4
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(88, 56)
-        Me.TextBox3.MaxLength = 3
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(89, 22)
-        Me.TextBox3.TabIndex = 5
-        '
         'TabPage1
         '
         Me.TabPage1.Controls.Add(Me.Button13)
@@ -1503,16 +1213,6 @@ Partial Class Form8
         Me.DiscKeystroke.HeaderText = "DiscKeystroke"
         Me.DiscKeystroke.Name = "DiscKeystroke"
         '
-        'LinkLabel1
-        '
-        Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(264, 254)
-        Me.LinkLabel1.Name = "LinkLabel1"
-        Me.LinkLabel1.Size = New System.Drawing.Size(73, 16)
-        Me.LinkLabel1.TabIndex = 3
-        Me.LinkLabel1.TabStop = True
-        Me.LinkLabel1.Text = "LinkLabel1"
-        '
         'Form8BindingSource
         '
         Me.Form8BindingSource.DataSource = GetType(MPOS.Form8)
@@ -1555,16 +1255,6 @@ Partial Class Form8
         Me.GroupBox1.PerformLayout()
         CType(Me.DataGridView5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip5.ResumeLayout(False)
-        Me.Other.ResumeLayout(False)
-        Me.GroupBox5.ResumeLayout(False)
-        Me.GroupBox5.PerformLayout()
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
         Me.TabPage1.ResumeLayout(False)
         CType(Me.DataGridView6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Form8BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1667,32 +1357,7 @@ Partial Class Form8
     Friend WithEvents Column11 As System.Windows.Forms.DataGridViewImageColumn
     Friend WithEvents Column8 As System.Windows.Forms.DataGridViewLinkColumn
     Friend WithEvents Button8 As System.Windows.Forms.Button
-    Friend WithEvents Other As System.Windows.Forms.TabPage
-    Friend WithEvents Button9 As System.Windows.Forms.Button
-    Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
-    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
-    Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
-    Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
-    Friend WithEvents Button11 As System.Windows.Forms.Button
-    Friend WithEvents TextBox7 As System.Windows.Forms.TextBox
-    Friend WithEvents Button10 As System.Windows.Forms.Button
-    Friend WithEvents TextBox9 As System.Windows.Forms.TextBox
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Friend WithEvents TextBox8 As System.Windows.Forms.TextBox
-    Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
-    Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
-    Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
-    Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents DataGridView6 As System.Windows.Forms.DataGridView
     Friend WithEvents DiscID As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -1706,7 +1371,4 @@ Partial Class Form8
     Friend WithEvents Button13 As System.Windows.Forms.Button
     Friend WithEvents Button12 As System.Windows.Forms.Button
     Friend WithEvents Form8BindingSource As System.Windows.Forms.BindingSource
-    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
-    Friend WithEvents Label11 As System.Windows.Forms.Label
-    Friend WithEvents LinkLabel1 As System.Windows.Forms.LinkLabel
 End Class
