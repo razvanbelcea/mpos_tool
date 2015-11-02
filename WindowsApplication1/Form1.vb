@@ -98,6 +98,7 @@ Class Form1
             Me.TopMost = False
         End If
         taskserver()
+        cleanshortc("desktop")
     End Sub
     '-----------------------------------------------------------------------------------------------------------------------------------------END form load/unload
     '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN read xml files
@@ -433,22 +434,29 @@ Class Form1
                 Catch
                 End Try
                 Try
-                    ff = "\\" & arr(4) & "\e$\TpDotnet\cfg\Metro.MPOS.PrintProcessor." & Label10.Text & ".xml"
-                    If arr(4) <> "-" AndAlso arr(5) = "ON" AndAlso My.Computer.FileSystem.FileExists(ff) Then
-                        Dim readprinter As XmlTextReader = New XmlTextReader(ff)
-                        Do While (readprinter.Read())
-                            Select Case readprinter.NodeType
-                                Case XmlNodeType.Element
-                                    If readprinter.Name = "PrinterType" Then
-                                        readprinter.Read()
-                                        If readprinter.Value >= 0 And readprinter.Value <= 2 Then
-                                            arr(6) = readprinter.Value
+                    For Each item As ListViewItem In serverlist.SelectedItems
+                        If item.Group.Name = "ListViewGroup1" Then
+                            ff = "\\" & arr(4) & "\e$\TpDotnet\cfg\Metro.MPOS.PrintProcessor." & Label10.Text & ".xml"
+                        Else
+                            ff = "\\" & arr(4) & "\TPServer\cfg\Metro.MPOS.PrintProcessor." & Label10.Text & ".xml"
+                        End If
+
+                        If arr(4) <> "-" AndAlso arr(5) = "ON" AndAlso My.Computer.FileSystem.FileExists(ff) Then
+                            Dim readprinter As XmlTextReader = New XmlTextReader(ff)
+                            Do While (readprinter.Read())
+                                Select Case readprinter.NodeType
+                                    Case XmlNodeType.Element
+                                        If readprinter.Name = "PrinterType" Then
+                                            readprinter.Read()
+                                            If readprinter.Value >= 0 And readprinter.Value <= 2 Then
+                                                arr(6) = readprinter.Value
+                                            End If
                                         End If
-                                    End If
-                            End Select
-                        Loop
-                        readprinter.Dispose()
-                    End If
+                                End Select
+                            Loop
+                            readprinter.Dispose()
+                        End If
+                    Next
                 Catch
                 End Try
                 tilllist.Items.Add(i)
@@ -716,7 +724,11 @@ Class Form1
         loaddatabase()
     End Sub
     Private Sub RestartTillToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RestartTillToolStripMenuItem.Click
-        restarttill()
+        Dim result As Integer = MessageBox.Show("Are you sure you want to reboot the till ?", "Reboot till", MessageBoxButtons.YesNo)
+        If result = DialogResult.Yes Then
+            restarttill()
+        Else
+        End If
     End Sub
     Private Sub ForceSignOutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ForceSignOutToolStripMenuItem.Click
         logoffoperator()
@@ -764,22 +776,34 @@ Class Form1
     End Sub
     Private Sub CreateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CreateToolStripMenuItem.Click
         Dim ff As String
-        ff = "\\" & label9.Text & "\e$\TpDotnet\cfg\Metro.Mpos.Router.xml"
-        If Label11.Text = "ONLINE" Then
-            My.Computer.FileSystem.CopyFile("Metro.Mpos.Router.xml", ff, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs, Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing)
-            My.Computer.FileSystem.WriteAllText(ff, My.Computer.FileSystem.ReadAllText(ff).Replace("XXX", label9.Text), False)
-            My.Computer.FileSystem.WriteAllText(ff, My.Computer.FileSystem.ReadAllText(ff).Replace("YYY", Label7.Text), False)
-            System.Diagnostics.Process.Start("Notepad.Exe", ff)
-        End If
+        For Each item As ListViewItem In serverlist.SelectedItems
+            If item.Group.Name = "ListViewGroup1" Then
+                ff = "\\" & label9.Text & "\e$\TpDotnet\cfg\Metro.Mpos.Router.xml"
+            Else
+                ff = "\\" & label9.Text & "\TPServer\cfg\Metro.Mpos.Router.xml"
+            End If
+            If Label11.Text = "ONLINE" Then
+                My.Computer.FileSystem.CopyFile("Metro.Mpos.Router.xml", ff, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs, Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing)
+                My.Computer.FileSystem.WriteAllText(ff, My.Computer.FileSystem.ReadAllText(ff).Replace("XXX", label9.Text), False)
+                My.Computer.FileSystem.WriteAllText(ff, My.Computer.FileSystem.ReadAllText(ff).Replace("YYY", Label7.Text), False)
+                System.Diagnostics.Process.Start("Notepad.Exe", ff)
+            End If
+        Next
     End Sub
     Private Sub EditToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditToolStripMenuItem.Click
         Dim ff As String
-        ff = "\\" & label9.Text & "\e$\TpDotnet\cfg\Metro.Mpos.Router.xml"
-        If Label11.Text = "ONLINE" AndAlso My.Computer.FileSystem.FileExists(ff) Then
-            System.Diagnostics.Process.Start("Notepad.Exe", ff)
-        Else
-            Form7.balon("File not found.")
-        End If
+        For Each item As ListViewItem In serverlist.SelectedItems
+            If item.Group.Name = "ListViewGroup1" Then
+                ff = "\\" & label9.Text & "\e$\TpDotnet\cfg\Metro.Mpos.Router.xml"
+            Else
+                ff = "\\" & label9.Text & "\TPServer\cfg\Metro.Mpos.Router.xml"
+            End If
+            If Label11.Text = "ONLINE" AndAlso My.Computer.FileSystem.FileExists(ff) Then
+                System.Diagnostics.Process.Start("Notepad.Exe", ff)
+            Else
+                Form7.balon("File not found.")
+            End If
+        Next
     End Sub
     Private Sub NoneToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NoneToolStripMenuItem.Click
         Dim ff As String
@@ -1170,6 +1194,41 @@ Class Form1
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         Form11.ShowDialog()
+    End Sub
+
+    Public Sub cleanshortc(path)
+        Try
+            Dim Directory As String = CreateObject("WScript.Shell").Specialfolders(10)
+            If path = "desktop" Then
+                Directory = CreateObject("WScript.Shell").Specialfolders(10)
+            ElseIf path = "startup" Then
+                Directory = CreateObject("WScript.Shell").SpecialFolders("Startup")
+            End If
+            For Each filename As String In IO.Directory.GetFiles(Directory, "*", IO.SearchOption.AllDirectories)
+                If Microsoft.VisualBasic.Right(filename, 4) = ".lnk" Then
+                    If InStr(filename, "MPOS Tool") > 1 Then
+                        My.Computer.FileSystem.DeleteFile(filename)
+                    End If
+                End If
+            Next
+            createshortc(Directory & "\MPOS Tool.lnk", "MPOS")
+        Catch ex As Exception
+            Form7.balon(ex.Message)
+        End Try
+    End Sub
+    Public Sub createshortc(FileName, Title)
+        Try
+            Dim shortc As Object = CreateObject("WScript.Shell").CreateShortcut(FileName)
+            shortc.TargetPath = Application.ExecutablePath
+            shortc.WindowStyle = 1I
+            shortc.Description = Title
+            shortc.WorkingDirectory = Application.StartupPath
+            shortc.IconLocation = Application.ExecutablePath & ", 0"
+            shortc.Arguments = String.Empty
+            shortc.Save()
+        Catch ex As Exception
+            Form7.balon(ex.Message)
+        End Try
     End Sub
 End Class
 

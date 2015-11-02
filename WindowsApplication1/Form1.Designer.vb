@@ -23,14 +23,14 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
-        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
-        Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
-        Dim ListViewItem8 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim ListViewGroup4 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("QA", System.Windows.Forms.HorizontalAlignment.Center)
-        Dim ListViewGroup5 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("UAT", System.Windows.Forms.HorizontalAlignment.Center)
-        Dim ListViewGroup6 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("PROD", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup1 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("QA", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup2 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("UAT", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup3 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("PROD", System.Windows.Forms.HorizontalAlignment.Center)
         Me.status = New System.Windows.Forms.GroupBox()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.label9 = New System.Windows.Forms.LinkLabel()
@@ -292,7 +292,7 @@ Partial Class Form1
         Me.servicelist.ContextMenuStrip = Me.ContextMenuStrip3
         Me.servicelist.Cursor = System.Windows.Forms.Cursors.Hand
         Me.servicelist.FullRowSelect = True
-        Me.servicelist.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem5, ListViewItem6, ListViewItem7, ListViewItem8})
+        Me.servicelist.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4})
         Me.servicelist.Location = New System.Drawing.Point(6, 129)
         Me.servicelist.MultiSelect = False
         Me.servicelist.Name = "servicelist"
@@ -731,16 +731,16 @@ Partial Class Form1
         Me.serverlist.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.serverlist.FullRowSelect = True
         Me.serverlist.GridLines = True
-        ListViewGroup4.Header = "QA"
-        ListViewGroup4.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup4.Name = "ListViewGroup1"
-        ListViewGroup5.Header = "UAT"
-        ListViewGroup5.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup5.Name = "ListViewGroup2"
-        ListViewGroup6.Header = "PROD"
-        ListViewGroup6.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup6.Name = "ListViewGroup3"
-        Me.serverlist.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup4, ListViewGroup5, ListViewGroup6})
+        ListViewGroup1.Header = "QA"
+        ListViewGroup1.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup1.Name = "ListViewGroup1"
+        ListViewGroup2.Header = "UAT"
+        ListViewGroup2.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup2.Name = "ListViewGroup2"
+        ListViewGroup3.Header = "PROD"
+        ListViewGroup3.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup3.Name = "ListViewGroup3"
+        Me.serverlist.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2, ListViewGroup3})
         Me.serverlist.HideSelection = False
         Me.serverlist.LabelWrap = False
         Me.serverlist.Location = New System.Drawing.Point(19, 12)

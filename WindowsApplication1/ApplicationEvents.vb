@@ -39,7 +39,7 @@ Namespace My
             'Else
             'MsgBox("Network not available!")
             Form1.ActualVersion()
-            Form1.Button2.Hide()
+            'Form1.Button2.Hide()
             'End If
             Form1.ShowInTaskbar = True
             Form9.CheckSettings()

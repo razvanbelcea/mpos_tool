@@ -46,6 +46,7 @@ Partial Class Form11
         Me.Button8 = New System.Windows.Forms.Button()
         Me.TextBox14 = New System.Windows.Forms.TextBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -64,7 +65,6 @@ Partial Class Form11
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -235,7 +235,7 @@ Partial Class Form11
         Me.Button5.Location = New System.Drawing.Point(6, 59)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(188, 23)
-        Me.Button5.TabIndex = 3
+        Me.Button5.TabIndex = 10
         Me.Button5.Text = "Load barcode"
         Me.Button5.UseVisualStyleBackColor = True
         '
@@ -244,7 +244,7 @@ Partial Class Form11
         Me.TextBox13.Location = New System.Drawing.Point(6, 34)
         Me.TextBox13.Name = "TextBox13"
         Me.TextBox13.Size = New System.Drawing.Size(188, 20)
-        Me.TextBox13.TabIndex = 2
+        Me.TextBox13.TabIndex = 9
         '
         'GroupBox3
         '
@@ -259,19 +259,19 @@ Partial Class Form11
         '
         'Button8
         '
-        Me.Button8.Location = New System.Drawing.Point(6, 55)
+        Me.Button8.Location = New System.Drawing.Point(6, 31)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(188, 23)
-        Me.Button8.TabIndex = 3
+        Me.Button8.TabIndex = 12
         Me.Button8.Text = "Load barcode"
         Me.Button8.UseVisualStyleBackColor = True
         '
         'TextBox14
         '
-        Me.TextBox14.Location = New System.Drawing.Point(6, 31)
+        Me.TextBox14.Location = New System.Drawing.Point(6, 59)
         Me.TextBox14.Name = "TextBox14"
         Me.TextBox14.Size = New System.Drawing.Size(188, 20)
-        Me.TextBox14.TabIndex = 2
+        Me.TextBox14.TabIndex = 11
         '
         'GroupBox4
         '
@@ -285,6 +285,16 @@ Partial Class Form11
         Me.GroupBox4.TabIndex = 0
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Workspace"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(7, 258)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(117, 13)
+        Me.Label14.TabIndex = 3
+        Me.Label14.Text = "Click on image to copy!"
         '
         'LinkLabel1
         '
@@ -341,7 +351,7 @@ Partial Class Form11
         Me.Button4.Location = New System.Drawing.Point(9, 224)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(199, 23)
-        Me.Button4.TabIndex = 3
+        Me.Button4.TabIndex = 7
         Me.Button4.Text = "Load barcode"
         Me.Button4.UseVisualStyleBackColor = True
         '
@@ -351,7 +361,7 @@ Partial Class Form11
         Me.TextBox7.Name = "TextBox7"
         Me.TextBox7.ReadOnly = True
         Me.TextBox7.Size = New System.Drawing.Size(199, 20)
-        Me.TextBox7.TabIndex = 2
+        Me.TextBox7.TabIndex = 8
         Me.TextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'TextBox8
@@ -360,7 +370,7 @@ Partial Class Form11
         Me.TextBox8.MaxLength = 1
         Me.TextBox8.Name = "TextBox8"
         Me.TextBox8.Size = New System.Drawing.Size(121, 20)
-        Me.TextBox8.TabIndex = 2
+        Me.TextBox8.TabIndex = 6
         '
         'TextBox9
         '
@@ -368,7 +378,7 @@ Partial Class Form11
         Me.TextBox9.MaxLength = 2
         Me.TextBox9.Name = "TextBox9"
         Me.TextBox9.Size = New System.Drawing.Size(121, 20)
-        Me.TextBox9.TabIndex = 2
+        Me.TextBox9.TabIndex = 5
         '
         'TextBox10
         '
@@ -376,7 +386,7 @@ Partial Class Form11
         Me.TextBox10.MaxLength = 8
         Me.TextBox10.Name = "TextBox10"
         Me.TextBox10.Size = New System.Drawing.Size(121, 20)
-        Me.TextBox10.TabIndex = 2
+        Me.TextBox10.TabIndex = 4
         '
         'TextBox11
         '
@@ -384,7 +394,7 @@ Partial Class Form11
         Me.TextBox11.MaxLength = 2
         Me.TextBox11.Name = "TextBox11"
         Me.TextBox11.Size = New System.Drawing.Size(121, 20)
-        Me.TextBox11.TabIndex = 2
+        Me.TextBox11.TabIndex = 3
         '
         'TextBox12
         '
@@ -401,6 +411,7 @@ Partial Class Form11
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(121, 21)
         Me.ComboBox2.TabIndex = 1
+        Me.ComboBox2.TabStop = False
         '
         'Label7
         '
@@ -455,16 +466,6 @@ Partial Class Form11
         Me.Label12.Size = New System.Drawing.Size(43, 13)
         Me.Label12.TabIndex = 0
         Me.Label12.Text = "Country"
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(7, 258)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(117, 13)
-        Me.Label14.TabIndex = 3
-        Me.Label14.Text = "Click on image to copy!"
         '
         'Form11
         '

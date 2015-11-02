@@ -94,6 +94,11 @@ Public Class Form9
         ElseIf CheckBox3.Checked = False Then
             config.AddSection("Settings").AddKey("ServiceModule").Value = "0"
         End If
+        If CheckBox5.Checked = True Then
+            config.AddSection("Settings").AddKey("Startup").Value = "1"
+        ElseIf CheckBox5.Checked = False Then
+            config.AddSection("Settings").AddKey("Startup").Value = "0"
+        End If
         config.Save("config.ini")
         Form7.balon("Settings saved!")
     End Sub
@@ -115,6 +120,11 @@ Public Class Form9
             config.SetKeyValue("Settings", "ServiceModule", "1")
         ElseIf CheckBox3.Checked = False Then
             config.SetKeyValue("Settings", "ServiceModule", "0")
+        End If
+        If CheckBox5.Checked = True Then
+            config.SetKeyValue("Settings", "Startup", "1")
+        ElseIf CheckBox5.Checked = False Then
+            config.SetKeyValue("Settings", "Startup", "0")
         End If
         config.Save("config.ini")
         Form7.balon("Settings saved!")
@@ -142,6 +152,11 @@ Public Class Form9
                 Else
                     CheckBox3.Checked = False
                 End If
+                If config.GetKeyValue("Settings", "Startup") = "1" Then
+                    CheckBox5.Checked = True
+                Else
+                    CheckBox5.Checked = False
+                End If
             Else
                 CheckBox2.Checked = True
                 Form7.balon("Missing settings file!")
@@ -156,4 +171,20 @@ Public Class Form9
 
     End Sub
 
+    Private Sub CheckBox5_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox5.CheckedChanged
+        Dim Directory As String = CreateObject("WScript.Shell").SpecialFolders("Startup")
+        If CheckBox5.Checked = True Then
+            Form1.cleanshortc("startup")
+            Button2.Enabled = True
+        Else
+            For Each filename As String In IO.Directory.GetFiles(Directory, "*", IO.SearchOption.AllDirectories)
+                If Microsoft.VisualBasic.Right(filename, 4) = ".lnk" Then
+                    If My.Computer.FileSystem.FileExists(filename) Then
+                        My.Computer.FileSystem.DeleteFile(filename)
+                    End If
+                    Button2.Enabled = True
+                End If
+            Next
+        End If
+    End Sub
 End Class
