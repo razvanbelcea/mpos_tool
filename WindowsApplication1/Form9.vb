@@ -6,6 +6,7 @@ Imports System.IO
 Public Class Form9
     Public Shared servicedisabled As Boolean = False
     Private Sub Form9_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ToolTip1.SetToolTip(CheckBox6, "Leave this unchecked to improve the till loading time!")
         Button2.Enabled = False
         CheckSettings()
     End Sub
@@ -99,6 +100,11 @@ Public Class Form9
         ElseIf CheckBox5.Checked = False Then
             config.AddSection("Settings").AddKey("Startup").Value = "0"
         End If
+        If CheckBox6.Checked = True Then
+            config.AddSection("Settings").AddKey("printeron").Value = "1"
+        ElseIf CheckBox6.Checked = False Then
+            config.AddSection("Settings").AddKey("printeron").Value = "0"
+        End If
         config.Save("config.ini")
         Form7.balon("Settings saved!")
     End Sub
@@ -125,6 +131,11 @@ Public Class Form9
             config.SetKeyValue("Settings", "Startup", "1")
         ElseIf CheckBox5.Checked = False Then
             config.SetKeyValue("Settings", "Startup", "0")
+        End If
+        If CheckBox6.Checked = True Then
+            config.SetKeyValue("Settings", "printeron", "1")
+        ElseIf CheckBox6.Checked = False Then
+            config.SetKeyValue("Settings", "printeron", "0")
         End If
         config.Save("config.ini")
         Form7.balon("Settings saved!")
@@ -157,6 +168,11 @@ Public Class Form9
                 Else
                     CheckBox5.Checked = False
                 End If
+                If config.GetKeyValue("Settings", "printeron") = "1" Then
+                    CheckBox6.Checked = True
+                Else
+                    CheckBox6.Checked = False
+                End If
             Else
                 CheckBox2.Checked = True
                 Form7.balon("Missing settings file!")
@@ -185,6 +201,16 @@ Public Class Form9
                     Button2.Enabled = True
                 End If
             Next
+        End If
+    End Sub
+
+    Private Sub CheckBox6_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox6.CheckedChanged
+        If CheckBox6.Checked = True Then
+            Form1.printeron = True
+            Button2.Enabled = True
+        Else
+            Form1.printeron = False
+            Button2.Enabled = True
         End If
     End Sub
 End Class

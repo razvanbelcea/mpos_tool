@@ -108,11 +108,14 @@ Public Class Form7
     End Sub
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Try
-            If Label3.Text = "ON" Then
-                Process.Start("cmd.exe", "/c shutdown -r -t 0 -m \\" & ComboBox2.Tag)
-                balon("Restart command has been sent for Till : " & i2())
-            Else
-                balon("Restart command failed ... " & i2())
+            Dim result As Integer = MessageBox.Show("Are you sure you want to reboot the till ?", "Reboot till", MessageBoxButtons.YesNo)
+            If result = DialogResult.Yes Then
+                If Label3.Text = "ON" Then
+                    Process.Start("cmd.exe", "/c shutdown -r -t 0 -m \\" & ComboBox2.Tag)
+                    balon("Restart command has been sent for Till : " & i2())
+                Else
+                    balon("Restart command failed ... " & i2())
+                End If
             End If
         Catch ed As Exception
             MsgBox(ed.Message & ComboBox2.Text)

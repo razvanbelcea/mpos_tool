@@ -26,6 +26,7 @@ Class Form1
     Public Shared hff As String = "\c$\mgi\mposinstallstate.xml"
     Public Shared x As Boolean = False
     Public Shared w As Boolean = False
+    Public Shared printeron As Boolean
     Public Shared qafolder As String
     Public Shared uatfolder As String
     Dim anulareserver As CancellationTokenSource
@@ -433,32 +434,36 @@ Class Form1
                     End If
                 Catch
                 End Try
-                Try
-                    For Each item As ListViewItem In serverlist.SelectedItems
-                        If item.Group.Name = "ListViewGroup1" Then
-                            ff = "\\" & arr(4) & "\e$\TpDotnet\cfg\Metro.MPOS.PrintProcessor." & Label10.Text & ".xml"
-                        Else
-                            ff = "\\" & arr(4) & "\TPServer\cfg\Metro.MPOS.PrintProcessor." & Label10.Text & ".xml"
-                        End If
+                If printeron = True Then
+                    Try
+                        For Each item As ListViewItem In serverlist.SelectedItems
+                            If item.Group.Name = "ListViewGroup1" Then
+                                ff = "\\" & arr(4) & "\e$\TpDotnet\cfg\Metro.MPOS.PrintProcessor." & Label10.Text & ".xml"
+                            Else
+                                ff = "\\" & arr(4) & "\TPServer\cfg\Metro.MPOS.PrintProcessor." & Label10.Text & ".xml"
+                            End If
 
-                        If arr(4) <> "-" AndAlso arr(5) = "ON" AndAlso My.Computer.FileSystem.FileExists(ff) Then
-                            Dim readprinter As XmlTextReader = New XmlTextReader(ff)
-                            Do While (readprinter.Read())
-                                Select Case readprinter.NodeType
-                                    Case XmlNodeType.Element
-                                        If readprinter.Name = "PrinterType" Then
-                                            readprinter.Read()
-                                            If readprinter.Value >= 0 And readprinter.Value <= 2 Then
-                                                arr(6) = readprinter.Value
+                            If arr(4) <> "-" AndAlso arr(5) = "ON" AndAlso My.Computer.FileSystem.FileExists(ff) Then
+                                Dim readprinter As XmlTextReader = New XmlTextReader(ff)
+                                Do While (readprinter.Read())
+                                    Select Case readprinter.NodeType
+                                        Case XmlNodeType.Element
+                                            If readprinter.Name = "PrinterType" Then
+                                                readprinter.Read()
+                                                If readprinter.Value >= 0 And readprinter.Value <= 2 Then
+                                                    arr(6) = readprinter.Value
+                                                End If
                                             End If
-                                        End If
-                                End Select
-                            Loop
-                            readprinter.Dispose()
-                        End If
-                    Next
-                Catch
-                End Try
+                                    End Select
+                                Loop
+                                readprinter.Dispose()
+                            End If
+                        Next
+                    Catch
+                    End Try
+                Else
+                    arr(6) = "?"
+                End If
                 tilllist.Items.Add(i)
                 If arr(5) = "ON" Then
                     tilllist.Items(i).ForeColor = Color.Green
@@ -855,11 +860,18 @@ Class Form1
                     If item.SubItems(5).Text <> "-" AndAlso item.SubItems(6).Text = "ON" Then
                         RestartTillToolStripMenuItem.Visible = True
                         OpenInSCCMToolStripMenuItem1.Visible = True
+                    ElseIf item.SubItems(5).Text <> "-" Then
+                        RestartTillToolStripMenuItem.Visible = True
+                        OpenInSCCMToolStripMenuItem1.Visible = True
                     End If
                     If item.SubItems(4).Text <> "-" Then
                         ForceSignOutToolStripMenuItem.Visible = True
                     End If
-                    If item.SubItems(7).Text <> "-" Then
+                    If item.SubItems(7).Text = "-" Then
+                        SetPrinterToolStripMenuItem.Visible = False
+                    ElseIf item.SubItems(7).Text = "?" Then
+                        SetPrinterToolStripMenuItem.Visible = False
+                    Else
                         SetPrinterToolStripMenuItem.Visible = True
                     End If
                     If item.SubItems(7).Text = "0" Then
