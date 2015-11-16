@@ -13,6 +13,7 @@ Public Class IniFile
         m_sections = New Hashtable(StringComparer.InvariantCultureIgnoreCase)
     End Sub
 
+
     ' Loads the Reads the data in the ini file into the IniFile object
     Public Sub Load(ByVal sFileName As String, Optional ByVal bMerge As Boolean = False)
         If Not bMerge Then
