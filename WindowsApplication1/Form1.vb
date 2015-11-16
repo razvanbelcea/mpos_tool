@@ -335,7 +335,7 @@ Class Form1
         operatorlist.Items.Clear()
         tilllist.Items.Clear()
         Dim con As SqlConnection
-        con = New SqlConnection("Data Source=" & label9.Text & ";Database=TPCentralDB;" & cred & ";" & "Connection Timeout=5")
+        con = New SqlConnection("Data Source=" & label9.Text & ";Database=TPCentralDB;" & cred & ";")
         If Label11.Text = "ONLINE" Then
             Try
                 con.Open()
@@ -483,7 +483,7 @@ Class Form1
     End Sub
     Private Sub loadcounts()
         Dim readcounts As XmlTextReader = New XmlTextReader(cfl)
-        Dim con3 As New SqlConnection("Data Source=" & label9.Text & ";Database=TPCentralDB;" & cred & ";" & "Connection Timeout=5")
+        Dim con3 As New SqlConnection("Data Source=" & label9.Text & ";Database=TPCentralDB;" & cred & ";")
         Dim cmd3 As New SqlCommand
         Dim dat3 As SqlDataReader
         cnt = vbTab & vbTab & vbTab & vbTab & vbTab & vbCrLf
