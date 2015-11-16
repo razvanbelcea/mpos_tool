@@ -51,6 +51,7 @@ Class Form1
         End If
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         Control.CheckForIllegalCrossThreadCalls = False
         Timer1.Interval = 5000
         Timer1.Enabled = True
@@ -232,6 +233,7 @@ Class Form1
         Button1.Visible = True
         Button6.Visible = True
         Button5.Visible = True
+        Button7.Visible = True
         viewserver()
         statusserver()
         For Each item As ListViewItem In serverlist.SelectedItems
@@ -241,6 +243,12 @@ Class Form1
                 readfolderlist("UAT")
             End If
         Next
+        ' Set the initial sorting type for the ListView. 
+        Me.tilllist.Sorting = System.Windows.Forms.SortOrder.None
+        ' Disable automatic sorting to enable manual sorting. 
+        Me.tilllist.View = View.Details
+        'Me.tilllist.ListViewItemSorter = New ListViewItemComparer(0, System.Windows.Forms.SortOrder.Ascending)
+        AddHandler tilllist.ColumnClick, AddressOf Me.tilllist_ColumnClick
         ' readfolderlist()
         loaddatabase()
         ' taskservice()
@@ -990,7 +998,7 @@ Class Form1
     End Sub
     '-----------------------------------------------------------------------------------------------------------------------------------------END minimize
     '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN hover
-    Private Sub Button1_MouseHover(sender As Object, e As EventArgs) Handles Button1.MouseHover
+    Private Sub Button1_MouseHover(sender As Object, e As EventArgs) Handles Button1.MouseHover, Button7.MouseHover
         ToolTip1.Show(cnt, Button1)
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -1242,6 +1250,101 @@ Class Form1
             Form7.balon(ex.Message)
         End Try
     End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        xmlTools1.ShowDialog()
+    End Sub
+
+
+    ' TILL LIST COMPARER
+    Dim sortColumn As Integer = -1
+    Private Sub tilllist_ColumnClick(sender As Object, e As System.Windows.Forms.ColumnClickEventArgs)
+
+        ' Determine whether the column is the same as the last column clicked.
+        If e.Column <> sortColumn Then
+            ' Set the sort column to the new column.
+            sortColumn = e.Column
+            ' Set the sort order to ascending by default.
+            tilllist.Sorting = System.Windows.Forms.SortOrder.Ascending
+        Else
+            ' Determine what the last sort order was and change it.
+            If tilllist.Sorting = System.Windows.Forms.SortOrder.Ascending Then
+                tilllist.Sorting = System.Windows.Forms.SortOrder.Descending
+            Else
+                tilllist.Sorting = System.Windows.Forms.SortOrder.Ascending
+            End If
+        End If
+        ' Call the sort method to manually sort.
+        tilllist.Sort()
+        ' Set the ListViewItemSorter property to a new ListViewItemComparer
+        ' object.
+        tilllist.ListViewItemSorter = New ListViewItemComparer(e.Column, _
+                                                         tilllist.Sorting)
+    End Sub
+
+    ' Implements the manual sorting of items by column.
+    Class ListViewItemComparer
+        Implements IComparer
+        Private col As Integer
+        Private order As System.Windows.Forms.SortOrder
+
+        Public Sub New()
+            col = 0
+            order = System.Windows.Forms.SortOrder.Ascending
+        End Sub
+
+        Public Sub New(column As Integer, order As System.Windows.Forms.SortOrder)
+            col = column
+            Me.order = order
+        End Sub
+
+        Public Function Compare(x As Object, y As Object) As Integer _
+                            Implements System.Collections.IComparer.Compare
+            Dim returnVal As Integer = -1
+            returnVal = [String].Compare(CType(x,  _
+                            ListViewItem).SubItems(col).Text, _
+                            CType(y, ListViewItem).SubItems(col).Text)
+            ' Determine whether the sort order is descending.
+            If order = System.Windows.Forms.SortOrder.Descending Then
+                ' Invert the value returned by String.Compare.
+                returnVal *= -1
+            End If
+
+            Return returnVal
+        End Function
+    End Class
+
+    'Private Sub tilllist_ColumnClick(sender As Object, e As System.Windows.Forms.ColumnClickEventArgs)
+    '    AddHandler tilllist.ColumnClick, AddressOf Me.tilllist_ColumnClick
+
+    '    ' Set the ListViewItemSorter property to a new ListViewItemComparer
+    '    ' object.
+    '    Me.tilllist.ListViewItemSorter = New ListViewItemComparer(e.Column)
+    '    ' Call the sort method to manually sort.
+    '    tilllist.Sort()
+    'End Sub
+
+    'Class ListViewItemComparer
+    '    Implements IComparer
+    '    Private col As Integer
+
+    '    Public Sub New()
+    '        col = 0
+    '    End Sub
+
+    '    Public Sub New(column As Integer)
+    '        col = column
+    '    End Sub
+
+    '    Public Function Compare(x As Object, y As Object) As Integer _
+    '                            Implements System.Collections.IComparer.Compare
+    '        Dim returnVal As Integer = -1
+    '        returnVal = [String].Compare(CType(x,  _
+    '                        ListViewItem).SubItems(col).Text, _
+    '                        CType(y, ListViewItem).SubItems(col).Text)
+    '        Return returnVal
+    '    End Function
+    'End Class
 End Class
 
 

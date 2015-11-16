@@ -77,6 +77,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Windows.Forms" />
@@ -157,6 +159,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="xmlTools1.Designer.vb">
+      <DependentUpon>xmlTools1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="xmlTools1.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
@@ -185,6 +193,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="xmlTools1.resx">
+      <DependentUpon>xmlTools1.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
