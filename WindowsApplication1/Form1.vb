@@ -51,7 +51,6 @@ Class Form1
         End If
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         Control.CheckForIllegalCrossThreadCalls = False
         Timer1.Interval = 5000
         Timer1.Enabled = True
@@ -135,6 +134,8 @@ Class Form1
                                     serverlist.Items.Item(i).Group = serverlist.Groups(1)
                                 ElseIf readserver.Value = "PROD" Then
                                     serverlist.Items.Item(i).Group = serverlist.Groups(2)
+                                ElseIf readserver.Value = "DEV" Then
+                                    serverlist.Items.Item(i).Group = serverlist.Groups(3)
                                 End If
                                 s = readserver.Value & " " & s
                                 Form7.ComboBox1.Items.Add(s)
@@ -151,29 +152,17 @@ Class Form1
     Private Sub readfolderlist(link)
         Dim readfolder As XmlTextReader = New XmlTextReader(ffl)
         Dim i As Integer = 0
+        Dim env As String = ""
+
         If link = "QA" Then
-            Try
-                folderlist.Items.Clear()
-                Do While (readfolder.Read())
-                    Select Case readfolder.NodeType
-                        Case XmlNodeType.Element
-                            Select Case readfolder.Name
-                                Case "Name"
-                                    readfolder.Read()
-                                    folderlist.Items.Add(readfolder.Value)
-                                Case "Path"
-                                    readfolder.Read()
-                                    folderlist.Items(i).SubItems.Add("\\" + label9.Text + readfolder.Value)
-                                    i = i + 1
-
-                            End Select
-                    End Select
-                Loop
-                readfolder.Dispose()
-            Catch e As Exception
-                Form7.balon(e.Message)
-            End Try
+            env = "Path"
         ElseIf link = "UAT" Then
+            env = "UATPath"
+        ElseIf link = "PROD" Then
+            env = "UATPath"
+        ElseIf link = "DEV" Then
+            env = "Path"
+        End If
             Try
                 folderlist.Items.Clear()
                 Do While (readfolder.Read())
@@ -183,20 +172,18 @@ Class Form1
                                 Case "Name"
                                     readfolder.Read()
                                     folderlist.Items.Add(readfolder.Value)
-                                Case "UATPath"
-                                    readfolder.Read()
-                                    folderlist.Items(i).SubItems.Add("\\" + label9.Text + readfolder.Value)
-                                    i = i + 1
+                            Case env
+                                readfolder.Read()
+                                folderlist.Items(i).SubItems.Add("\\" + label9.Text + readfolder.Value)
+                                i = i + 1
 
-                            End Select
+                        End Select
                     End Select
                 Loop
                 readfolder.Dispose()
             Catch e As Exception
                 Form7.balon(e.Message)
             End Try
-        End If
-
     End Sub
     Private Sub readservicelist()
         Dim readservice As XmlTextReader = New XmlTextReader(srl)
@@ -233,12 +220,13 @@ Class Form1
         Button1.Visible = True
         Button6.Visible = True
         Button5.Visible = True
-        Button7.Visible = True
         viewserver()
         statusserver()
         For Each item As ListViewItem In serverlist.SelectedItems
             If item.Group.Name = "ListViewGroup1" Then
                 readfolderlist("QA")
+            ElseIf item.Group.Name = "ListViewGroup4" Then
+                readfolderlist("DEV")
             Else
                 readfolderlist("UAT")
             End If
@@ -246,7 +234,7 @@ Class Form1
         ' Set the initial sorting type for the ListView. 
         Me.tilllist.Sorting = System.Windows.Forms.SortOrder.None
         ' Disable automatic sorting to enable manual sorting. 
-        Me.tilllist.View = View.Details
+        'Me.tilllist.View = View.Details
         'Me.tilllist.ListViewItemSorter = New ListViewItemComparer(0, System.Windows.Forms.SortOrder.Ascending)
         AddHandler tilllist.ColumnClick, AddressOf Me.tilllist_ColumnClick
         ' readfolderlist()
@@ -294,7 +282,6 @@ Class Form1
                     Dim cmd As SqlCommand
                     Dim cmd1 As SqlCommand
                     Dim t As Boolean = False
-
                     conex1 = New SqlConnection("Data Source=" & item.SubItems(2).Text & ";Database=TPCentralDB;" & cred & ";")
                     cmd = conex1.CreateCommand
                     cmd1 = conex1.CreateCommand
@@ -332,6 +319,7 @@ Class Form1
             For Each item As ListViewItem In folderlist.Items
                 If item.Selected = True AndAlso My.Computer.FileSystem.DirectoryExists(item.SubItems(1).Text) Then
                     Process.Start("explorer.exe", item.SubItems(1).Text)
+                    folderlist.Refresh()
                     Exit For
                 ElseIf item.Selected = True AndAlso Not My.Computer.FileSystem.DirectoryExists(item.SubItems(1).Text) Then
                     Form7.balon("Location not found ...")
@@ -347,7 +335,7 @@ Class Form1
         operatorlist.Items.Clear()
         tilllist.Items.Clear()
         Dim con As SqlConnection
-        con = New SqlConnection("Data Source=" & label9.Text & ";Database=TPCentralDB;" & cred & ";")
+        con = New SqlConnection("Data Source=" & label9.Text & ";Database=TPCentralDB;" & cred & ";" & "Connection Timeout=5")
         If Label11.Text = "ONLINE" Then
             Try
                 con.Open()
@@ -412,6 +400,7 @@ Class Form1
         Dim cmd As SqlCommand
         Dim dat As SqlDataReader
         Try
+            tilllist.HeaderStyle = ColumnHeaderStyle.None
             con = New SqlConnection("Data Source=" & label9.Text & ";Database=TPCentralDB;" & cred & ";")
             cmd = con.CreateCommand
             cmd.CommandText = "select szWorkstationID,lWorkstationNmbr, szWorkstationGroupID,lOperatorID from workstation left join operator on lLoggedOnWorkstationNmbr=lWorkstationNmbr where bisthickpos<>0"
@@ -485,6 +474,7 @@ Class Form1
             End While
             dat.Dispose()
             con.Dispose()
+            tilllist.HeaderStyle = ColumnHeaderStyle.Clickable
         Catch e As Exception
             'Form7.balon(e.Message)
         End Try
@@ -493,7 +483,7 @@ Class Form1
     End Sub
     Private Sub loadcounts()
         Dim readcounts As XmlTextReader = New XmlTextReader(cfl)
-        Dim con3 As New SqlConnection("Data Source=" & label9.Text & ";Database=TPCentralDB;" & cred & ";")
+        Dim con3 As New SqlConnection("Data Source=" & label9.Text & ";Database=TPCentralDB;" & cred & ";" & "Connection Timeout=5")
         Dim cmd3 As New SqlCommand
         Dim dat3 As SqlDataReader
         cnt = vbTab & vbTab & vbTab & vbTab & vbTab & vbCrLf
@@ -998,7 +988,7 @@ Class Form1
     End Sub
     '-----------------------------------------------------------------------------------------------------------------------------------------END minimize
     '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN hover
-    Private Sub Button1_MouseHover(sender As Object, e As EventArgs) Handles Button1.MouseHover, Button7.MouseHover
+    Private Sub Button1_MouseHover(sender As Object, e As EventArgs) Handles Button1.MouseHover
         ToolTip1.Show(cnt, Button1)
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -1251,11 +1241,6 @@ Class Form1
         End Try
     End Sub
 
-    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        xmlTools1.ShowDialog()
-    End Sub
-
-
     ' TILL LIST COMPARER
     Dim sortColumn As Integer = -1
     Private Sub tilllist_ColumnClick(sender As Object, e As System.Windows.Forms.ColumnClickEventArgs)
@@ -1313,38 +1298,6 @@ Class Form1
             Return returnVal
         End Function
     End Class
-
-    'Private Sub tilllist_ColumnClick(sender As Object, e As System.Windows.Forms.ColumnClickEventArgs)
-    '    AddHandler tilllist.ColumnClick, AddressOf Me.tilllist_ColumnClick
-
-    '    ' Set the ListViewItemSorter property to a new ListViewItemComparer
-    '    ' object.
-    '    Me.tilllist.ListViewItemSorter = New ListViewItemComparer(e.Column)
-    '    ' Call the sort method to manually sort.
-    '    tilllist.Sort()
-    'End Sub
-
-    'Class ListViewItemComparer
-    '    Implements IComparer
-    '    Private col As Integer
-
-    '    Public Sub New()
-    '        col = 0
-    '    End Sub
-
-    '    Public Sub New(column As Integer)
-    '        col = column
-    '    End Sub
-
-    '    Public Function Compare(x As Object, y As Object) As Integer _
-    '                            Implements System.Collections.IComparer.Compare
-    '        Dim returnVal As Integer = -1
-    '        returnVal = [String].Compare(CType(x,  _
-    '                        ListViewItem).SubItems(col).Text, _
-    '                        CType(y, ListViewItem).SubItems(col).Text)
-    '        Return returnVal
-    '    End Function
-    'End Class
 End Class
 
 

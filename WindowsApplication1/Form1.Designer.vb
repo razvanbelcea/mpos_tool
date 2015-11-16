@@ -28,9 +28,10 @@ Partial Class Form1
         Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
         Dim ListViewItem8 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim ListViewGroup4 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("QA", System.Windows.Forms.HorizontalAlignment.Center)
-        Dim ListViewGroup5 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("UAT", System.Windows.Forms.HorizontalAlignment.Center)
-        Dim ListViewGroup6 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("PROD", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup5 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("QA", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup6 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("UAT", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup7 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("PROD", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup8 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("DEV", System.Windows.Forms.HorizontalAlignment.Center)
         Me.status = New System.Windows.Forms.GroupBox()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.label9 = New System.Windows.Forms.LinkLabel()
@@ -130,7 +131,6 @@ Partial Class Form1
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.metro = New System.Windows.Forms.PictureBox()
-        Me.Button7 = New System.Windows.Forms.Button()
         Me.status.SuspendLayout()
         Me.ContextMenuStrip3.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -732,16 +732,19 @@ Partial Class Form1
         Me.serverlist.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.serverlist.FullRowSelect = True
         Me.serverlist.GridLines = True
-        ListViewGroup4.Header = "QA"
-        ListViewGroup4.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup4.Name = "ListViewGroup1"
-        ListViewGroup5.Header = "UAT"
+        ListViewGroup5.Header = "QA"
         ListViewGroup5.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup5.Name = "ListViewGroup2"
-        ListViewGroup6.Header = "PROD"
+        ListViewGroup5.Name = "ListViewGroup1"
+        ListViewGroup6.Header = "UAT"
         ListViewGroup6.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup6.Name = "ListViewGroup3"
-        Me.serverlist.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup4, ListViewGroup5, ListViewGroup6})
+        ListViewGroup6.Name = "ListViewGroup2"
+        ListViewGroup7.Header = "PROD"
+        ListViewGroup7.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup7.Name = "ListViewGroup3"
+        ListViewGroup8.Header = "DEV"
+        ListViewGroup8.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup8.Name = "ListViewGroup4"
+        Me.serverlist.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup5, ListViewGroup6, ListViewGroup7, ListViewGroup8})
         Me.serverlist.HideSelection = False
         Me.serverlist.LabelWrap = False
         Me.serverlist.Location = New System.Drawing.Point(19, 12)
@@ -1014,16 +1017,6 @@ Partial Class Form1
         Me.metro.TabIndex = 3
         Me.metro.TabStop = False
         '
-        'Button7
-        '
-        Me.Button7.Location = New System.Drawing.Point(673, 539)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(165, 29)
-        Me.Button7.TabIndex = 18
-        Me.Button7.Text = "xmlTools"
-        Me.Button7.UseVisualStyleBackColor = True
-        Me.Button7.Visible = False
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1034,7 +1027,6 @@ Partial Class Form1
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Button6)
-        Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.sss)
@@ -1183,5 +1175,4 @@ Partial Class Form1
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents UATPath As System.Windows.Forms.ColumnHeader
     Friend WithEvents Button6 As System.Windows.Forms.Button
-    Friend WithEvents Button7 As System.Windows.Forms.Button
 End Class
