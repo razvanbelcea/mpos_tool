@@ -147,6 +147,7 @@ Class Form1
             ToolStripProgressBar1.Maximum = i
         Catch e As Exception
             Form7.balon(e.Message)
+            Logger.LogInfo(e)
         End Try
     End Sub
     Private Sub readfolderlist(link)
@@ -322,6 +323,7 @@ Class Form1
                     folderlist.Refresh()
                     Exit For
                 ElseIf item.Selected = True AndAlso Not My.Computer.FileSystem.DirectoryExists(item.SubItems(1).Text) Then
+                    MsgBox(item.SubItems(1).Text)
                     Form7.balon("Location not found ...")
                 End If
             Next
