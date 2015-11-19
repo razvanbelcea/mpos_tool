@@ -194,7 +194,7 @@ Public Class Form11
         Dim i As Integer = 0
         Dim sql As String = Nothing
         connetionString = "Data Source=" & "10.23.90.11" & ";Database=TPCentralDB;" & Form1.cred & ";"
-        sql = "select szCountryCode,szNumericCountryCode from MGICountryCode where szCountryCode in ('BGR','CHN','DEU','ESP','FRA','GRC','HRV','HUN','IND','ITA','JPN','KAZ','MLD','NLD','POL','PRT','ROU','RUS','SRB','SVK','TUR','UKR','VNM')"
+        sql = "select szCountryCode,szNumericCountryCode from MGICountryCode where szCountryCode in ('MDA','BGR','CHN','DEU','ESP','FRA','GRC','HRV','HUN','IND','ITA','JPN','KAZ','MLD','NLD','POL','PRT','ROU','RUS','SRB','SVK','TUR','UKR','VNM')"
         connection = New SqlConnection(connetionString)
         Try
             connection.Open()
