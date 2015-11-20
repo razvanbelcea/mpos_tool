@@ -131,6 +131,7 @@ Partial Class Form1
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.metro = New System.Windows.Forms.PictureBox()
+        Me.Button7 = New System.Windows.Forms.Button()
         Me.status.SuspendLayout()
         Me.ContextMenuStrip3.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -747,10 +748,10 @@ Partial Class Form1
         Me.serverlist.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2, ListViewGroup3, ListViewGroup4})
         Me.serverlist.HideSelection = False
         Me.serverlist.LabelWrap = False
-        Me.serverlist.Location = New System.Drawing.Point(19, 12)
+        Me.serverlist.Location = New System.Drawing.Point(12, 12)
         Me.serverlist.MultiSelect = False
         Me.serverlist.Name = "serverlist"
-        Me.serverlist.Size = New System.Drawing.Size(458, 509)
+        Me.serverlist.Size = New System.Drawing.Size(465, 509)
         Me.serverlist.TabIndex = 0
         Me.serverlist.TileSize = New System.Drawing.Size(100, 100)
         Me.serverlist.UseCompatibleStateImageBehavior = False
@@ -868,7 +869,7 @@ Partial Class Form1
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripProgressBar1})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 533)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 563)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(1113, 36)
         Me.StatusStrip1.SizingGrip = False
@@ -909,9 +910,9 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(329, 539)
+        Me.Button1.Location = New System.Drawing.Point(12, 527)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(165, 29)
+        Me.Button1.Size = New System.Drawing.Size(153, 29)
         Me.Button1.TabIndex = 18
         Me.Button1.Text = "DB Queries"
         Me.Button1.UseVisualStyleBackColor = True
@@ -929,7 +930,7 @@ Partial Class Form1
         '
         Me.Button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Location = New System.Drawing.Point(973, 540)
+        Me.Button3.Location = New System.Drawing.Point(946, 570)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(60, 26)
         Me.Button3.TabIndex = 19
@@ -944,9 +945,9 @@ Partial Class Form1
         Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button4.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Button4.Location = New System.Drawing.Point(1039, 540)
+        Me.Button4.Location = New System.Drawing.Point(1012, 570)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(60, 26)
+        Me.Button4.Size = New System.Drawing.Size(87, 26)
         Me.Button4.TabIndex = 26
         Me.Button4.Text = "EXIT"
         Me.Button4.UseVisualStyleBackColor = False
@@ -955,7 +956,7 @@ Partial Class Form1
         '
         Me.sss.AutoSize = True
         Me.sss.BackColor = System.Drawing.Color.Transparent
-        Me.sss.Location = New System.Drawing.Point(12, 537)
+        Me.sss.Location = New System.Drawing.Point(18, 568)
         Me.sss.Name = "sss"
         Me.sss.Size = New System.Drawing.Size(77, 13)
         Me.sss.TabIndex = 27
@@ -964,7 +965,7 @@ Partial Class Form1
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(922, 547)
+        Me.Label15.Location = New System.Drawing.Point(864, 577)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(45, 13)
         Me.Label15.TabIndex = 28
@@ -973,7 +974,7 @@ Partial Class Form1
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(878, 547)
+        Me.Label16.Location = New System.Drawing.Point(820, 577)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(45, 13)
         Me.Label16.TabIndex = 29
@@ -989,18 +990,18 @@ Partial Class Form1
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button2.ForeColor = System.Drawing.Color.Red
-        Me.Button2.Location = New System.Drawing.Point(852, 540)
+        Me.Button2.Location = New System.Drawing.Point(819, 570)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(115, 26)
+        Me.Button2.Size = New System.Drawing.Size(121, 26)
         Me.Button2.TabIndex = 30
         Me.Button2.Text = "Update Available"
         Me.Button2.UseVisualStyleBackColor = False
         '
         'Button6
         '
-        Me.Button6.Location = New System.Drawing.Point(502, 539)
+        Me.Button6.Location = New System.Drawing.Point(168, 527)
         Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(165, 29)
+        Me.Button6.Size = New System.Drawing.Size(153, 29)
         Me.Button6.TabIndex = 18
         Me.Button6.Text = "Barcode Generator"
         Me.Button6.UseVisualStyleBackColor = True
@@ -1017,12 +1018,23 @@ Partial Class Form1
         Me.metro.TabIndex = 3
         Me.metro.TabStop = False
         '
+        'Button7
+        '
+        Me.Button7.Location = New System.Drawing.Point(324, 527)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(153, 29)
+        Me.Button7.TabIndex = 31
+        Me.Button7.Text = "Barcode Generator"
+        Me.Button7.UseVisualStyleBackColor = True
+        Me.Button7.Visible = False
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(1113, 569)
+        Me.ClientSize = New System.Drawing.Size(1113, 599)
+        Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Label15)
@@ -1175,4 +1187,5 @@ Partial Class Form1
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents UATPath As System.Windows.Forms.ColumnHeader
     Friend WithEvents Button6 As System.Windows.Forms.Button
+    Friend WithEvents Button7 As System.Windows.Forms.Button
 End Class
