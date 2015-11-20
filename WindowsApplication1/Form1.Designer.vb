@@ -131,7 +131,6 @@ Partial Class Form1
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.metro = New System.Windows.Forms.PictureBox()
-        Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.status.SuspendLayout()
         Me.ContextMenuStrip3.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1018,23 +1017,12 @@ Partial Class Form1
         Me.metro.TabIndex = 3
         Me.metro.TabStop = False
         '
-        'LinkLabel2
-        '
-        Me.LinkLabel2.AutoSize = True
-        Me.LinkLabel2.Location = New System.Drawing.Point(737, 547)
-        Me.LinkLabel2.Name = "LinkLabel2"
-        Me.LinkLabel2.Size = New System.Drawing.Size(59, 13)
-        Me.LinkLabel2.TabIndex = 31
-        Me.LinkLabel2.TabStop = True
-        Me.LinkLabel2.Text = "LinkLabel2"
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(1113, 569)
-        Me.Controls.Add(Me.LinkLabel2)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Label15)
@@ -1187,5 +1175,4 @@ Partial Class Form1
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents UATPath As System.Windows.Forms.ColumnHeader
     Friend WithEvents Button6 As System.Windows.Forms.Button
-    Friend WithEvents LinkLabel2 As System.Windows.Forms.LinkLabel
 End Class
