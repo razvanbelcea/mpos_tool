@@ -221,6 +221,7 @@ Class Form1
         Button1.Visible = True
         Button6.Visible = True
         Button5.Visible = True
+        Button7.Visible = True
         viewserver()
         statusserver()
         For Each item As ListViewItem In serverlist.SelectedItems
@@ -1082,13 +1083,6 @@ Class Form1
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        'Dim result As Integer = MessageBox.Show("Updating will close current session. Are you sure you want to continue ?", "MPOS Tool Updater", MessageBoxButtons.YesNo)
-        'If result = DialogResult.No Then
-        'ElseIf result = DialogResult.Yes Then
-        '    Dim sr As StreamReader
-        '    sr = New StreamReader("\\buk11fsr001\GRP_MSYS_MPOS_DELIVERY\pos\Users\public\Update.txt")
-        '    Dim newestversion As String = sr.ReadToEnd()
-        '    Dim currentversion As String = Application.ProductVersion
         Dim WbReq As New Net.WebClient
         WbReq.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials
         WbReq.Dispose()
@@ -1300,6 +1294,10 @@ Class Form1
             Return returnVal
         End Function
     End Class
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        DiscountExtract.getem()
+    End Sub
 End Class
 
 

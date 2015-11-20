@@ -1024,7 +1024,7 @@ Partial Class Form1
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(153, 29)
         Me.Button7.TabIndex = 31
-        Me.Button7.Text = "Barcode Generator"
+        Me.Button7.Text = "Extract Discounts"
         Me.Button7.UseVisualStyleBackColor = True
         Me.Button7.Visible = False
         '
