@@ -1296,7 +1296,11 @@ Class Form1
     End Class
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        DiscountExtract.getem()
+        ' Try
+        'DiscountExtract.getem()
+        '    Catch ex As Exception
+        'Reporter.send()
+        '      End Try
     End Sub
 End Class
 
