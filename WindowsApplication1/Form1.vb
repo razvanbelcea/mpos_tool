@@ -841,6 +841,15 @@ Class Form1
             End If
         Next
     End Sub
+    Private Sub GetServerLogsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GetServerLogsToolStripMenuItem.Click
+        Form7.moveserverlog()
+    End Sub
+    Private Sub GetLogsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GetLogsToolStripMenuItem.Click
+        Form7.movetilllog()
+    End Sub
+    Private Sub MSTSCToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MSTSCToolStripMenuItem.Click
+        System.Diagnostics.Process.Start("mstsc.exe", "/v " & label9.Text)
+    End Sub
     Private Sub ContextMenuStrip1_Closing(sender As Object, e As ToolStripDropDownClosingEventArgs) Handles ContextMenuStrip1.Closing
         SetPrinterToolStripMenuItem.Visible = False
         ForceSignOutToolStripMenuItem.Visible = False
@@ -856,14 +865,17 @@ Class Form1
             ForceSignOutToolStripMenuItem.Visible = False
             RestartTillToolStripMenuItem.Visible = False
             OpenInSCCMToolStripMenuItem1.Visible = False
+            GetLogsToolStripMenuItem.Visible = False
             For Each item As ListViewItem In tilllist.Items
                 If item.Selected AndAlso Label11.Text = "ONLINE" Then
                     If item.SubItems(5).Text <> "-" AndAlso item.SubItems(6).Text = "ON" Then
                         RestartTillToolStripMenuItem.Visible = True
                         OpenInSCCMToolStripMenuItem1.Visible = True
+                        GetLogsToolStripMenuItem.Visible = True
                     ElseIf item.SubItems(5).Text <> "-" Then
                         RestartTillToolStripMenuItem.Visible = True
                         OpenInSCCMToolStripMenuItem1.Visible = True
+                        GetLogsToolStripMenuItem.Visible = True
                     End If
                     If item.SubItems(4).Text <> "-" Then
                         ForceSignOutToolStripMenuItem.Visible = True
@@ -934,10 +946,14 @@ Class Form1
     Private Sub ContextMenuStrip4_Opening(sender As Object, e As CancelEventArgs) Handles ContextMenuStrip4.Opening
         Try
             OpenInSCCMToolStripMenuItem.Visible = False
+            GetServerLogsToolStripMenuItem.Visible = False
+            MSTSCToolStripMenuItem.Visible = False
             For Each item As ListViewItem In serverlist.Items
                 If item.Selected = True And item.SubItems.Count > 3 Then
                     If item.SubItems(3).Text = "ON" Then
                         OpenInSCCMToolStripMenuItem.Visible = True
+                        GetServerLogsToolStripMenuItem.Visible = True
+                        MSTSCToolStripMenuItem.Visible = True
                         Exit For
                     End If
                 End If

@@ -172,21 +172,21 @@ Partial Class Form7
         'OnlyTillToolStripMenuItem
         '
         Me.OnlyTillToolStripMenuItem.Name = "OnlyTillToolStripMenuItem"
-        Me.OnlyTillToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
+        Me.OnlyTillToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.OnlyTillToolStripMenuItem.Text = "Only Till"
         Me.OnlyTillToolStripMenuItem.Visible = False
         '
         'OnlyServerToolStripMenuItem
         '
         Me.OnlyServerToolStripMenuItem.Name = "OnlyServerToolStripMenuItem"
-        Me.OnlyServerToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
+        Me.OnlyServerToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.OnlyServerToolStripMenuItem.Text = "Only Server"
         Me.OnlyServerToolStripMenuItem.Visible = False
         '
         'BothToolStripMenuItem
         '
         Me.BothToolStripMenuItem.Name = "BothToolStripMenuItem"
-        Me.BothToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
+        Me.BothToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.BothToolStripMenuItem.Text = "Both"
         Me.BothToolStripMenuItem.Visible = False
         '

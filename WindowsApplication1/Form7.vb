@@ -329,7 +329,7 @@ Public Class Form7
             End If
         End If
     End Sub
-    Private Sub moveserverlog()
+    Public Sub moveserverlog()
         Dim str = ComboBox1.Text.Replace(" ", "_").Replace("-", "_").Replace(".", "_")
         Dim tstamp = Format(Now, "yyyyMMdd_hhmmss")
         'Dim fname = "\\" & ComboBox1.Tag & "\e$\TpDotnet\Serverlog" & tstamp
@@ -356,7 +356,7 @@ Public Class Form7
             MsgBox(es.Message)
         End Try
     End Sub
-    Private Sub movetilllog()
+    Public Sub movetilllog()
         Dim str = ComboBox2.Text.Replace(" ", "_").Replace("-", "_").Replace(".", "_")
         Dim tstamp = Format(Now, "yyyyMMdd_hhmmss")
         Dim fname = "\TILL_" & tstamp & "_" & str
@@ -415,5 +415,4 @@ Public Class Form7
             End If
         End If
     End Sub
-
 End Class

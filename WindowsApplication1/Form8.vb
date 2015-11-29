@@ -95,7 +95,7 @@ Public Class Form8
                     j = j + 1
                 End If
             End While
-            readsql.Dispose()
+            ' readsql.Dispose()
         Catch ed As Exception
             MsgBox(ed.Message)
         End Try
