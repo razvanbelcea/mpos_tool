@@ -213,7 +213,7 @@ Partial Class Form1
         Me.label9.TabIndex = 31
         Me.label9.TabStop = True
         Me.label9.Text = "..."
-        Me.ToolTip2.SetToolTip(Me.label9, "Send to clipboard ...")
+        Me.ToolTip2.SetToolTip(Me.label9, "Open in Mstsc")
         '
         'label8
         '
@@ -669,7 +669,7 @@ Partial Class Form1
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenInSCCMToolStripMenuItem1, Me.RestartTillToolStripMenuItem, Me.ForceSignOutToolStripMenuItem, Me.SetPrinterToolStripMenuItem, Me.RefreshToolStripMenuItem, Me.GetLogsToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 136)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 158)
         '
         'OpenInSCCMToolStripMenuItem1
         '
@@ -795,7 +795,7 @@ Partial Class Form1
         '
         Me.ContextMenuStrip4.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenInSCCMToolStripMenuItem, Me.RefreshStatusToolStripMenuItem, Me.MSTSCToolStripMenuItem, Me.GetServerLogsToolStripMenuItem})
         Me.ContextMenuStrip4.Name = "ContextMenuStrip4"
-        Me.ContextMenuStrip4.Size = New System.Drawing.Size(156, 114)
+        Me.ContextMenuStrip4.Size = New System.Drawing.Size(156, 92)
         '
         'OpenInSCCMToolStripMenuItem
         '

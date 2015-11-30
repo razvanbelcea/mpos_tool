@@ -842,10 +842,10 @@ Class Form1
         Next
     End Sub
     Private Sub GetServerLogsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GetServerLogsToolStripMenuItem.Click
-        Form7.moveserverlog()
+        Form7.moveserverlog(0)
     End Sub
     Private Sub GetLogsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GetLogsToolStripMenuItem.Click
-        Form7.movetilllog()
+        Form7.movetilllog(0)
     End Sub
     Private Sub MSTSCToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MSTSCToolStripMenuItem.Click
         System.Diagnostics.Process.Start("mstsc.exe", "/v " & label9.Text)
@@ -1038,7 +1038,7 @@ Class Form1
     End Sub
 
     Private Sub label8_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles label8.LinkClicked
-        My.Computer.Clipboard.SetText(label8.Text)
+        My.Computer.Clipboard.SetText(Label10.Text & " : " & label8.Text & " : " & label9.Text)
     End Sub
 
     Private Sub label9_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles label9.LinkClicked

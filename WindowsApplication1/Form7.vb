@@ -329,52 +329,75 @@ Public Class Form7
             End If
         End If
     End Sub
-    Public Sub moveserverlog()
-        Dim str = ComboBox1.Text.Replace(" ", "_").Replace("-", "_").Replace(".", "_")
+    Public Sub moveserverlog(k)
+        Dim loc As String
+        Dim str As String
         Dim tstamp = Format(Now, "yyyyMMdd_hhmmss")
-        'Dim fname = "\\" & ComboBox1.Tag & "\e$\TpDotnet\Serverlog" & tstamp
-        Dim fname = "\SERVER_" & tstamp & "_" & str
-        Dim loc = "\\" & ComboBox1.Tag & "\e$\TpDotnet\Log"
+        Dim fname As String
+        Dim s As String
+
+        If k = 1 Then
+            str = ComboBox1.Text.Replace(" ", "_").Replace("-", "_").Replace(".", "_")
+            loc = "\\" & ComboBox1.Tag & "\e$\TpDotnet\Log"
+            s = i1()
+        Else
+            str = Form1.serverlist.SelectedItems(0).Group.ToString & "_" & Form1.serverlist.SelectedItems.Item(0).SubItems(0).Text & "_" & Form1.serverlist.SelectedItems.Item(0).SubItems(1).Text & "_IP_" & Form1.serverlist.SelectedItems.Item(0).SubItems(2).Text
+            loc = "\\" & Form1.serverlist.SelectedItems.Item(0).SubItems(2).Text & "\e$\TpDotnet\Log"
+            s = vbCrLf & str
+        End If
+        fname = "\SERVER_" & tstamp & "_" & str
+
         Try
             If FolderBrowserDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
-                If Label2.Text = "ON" Then
+                If (Label2.Text = "ON" And k = 1) Or (Form1.serverlist.SelectedItems.Item(0).SubItems(3).Text = "ON" And k = 0) Then
                     If My.Computer.FileSystem.DirectoryExists(loc) Then
-                        'Process.Start("C:\Program Files\7-Zip\7z.exe", "a " & fname & " " & loc)
-                        'My.Computer.FileSystem.MoveFile(fname, FolderBrowserDialog1.SelectedPath & tstamp)
                         Process.Start("C:\Program Files\7-Zip\7z.exe", "a " & quote & FolderBrowserDialog1.SelectedPath & fname & quote & " " & loc)
-                        balon("Retrieving server logs ... " & i1())
+                        balon("Retrieving server logs ... " & s)
                     Else
-                        balon("Location not available ... " & i1())
+                        balon("Location not available ... " & s)
                     End If
                 Else
-                    balon("Server is offline ... " & i1())
+                    balon("Server is offline ... " & s)
                 End If
             Else
-                balon("Operation aborted ... " & i1())
+                balon("Operation aborted ... " & s)
             End If
         Catch es As Exception
             MsgBox(es.Message)
         End Try
     End Sub
-    Public Sub movetilllog()
-        Dim str = ComboBox2.Text.Replace(" ", "_").Replace("-", "_").Replace(".", "_")
+    Public Sub movetilllog(k)
+        Dim loc As String
+        Dim str As String
         Dim tstamp = Format(Now, "yyyyMMdd_hhmmss")
-        Dim fname = "\TILL_" & tstamp & "_" & str
-        Dim loc = "\\" & ComboBox2.Tag & "\e$\TpDotnet\Log"
+        Dim fname As String
+        Dim s As String
+
+        If k = 1 Then
+            Str = ComboBox2.Text.Replace(" ", "_").Replace("-", "_").Replace(".", "_")
+            loc = "\\" & ComboBox2.Tag & "\e$\TpDotnet\Log"
+            s = i2()
+        Else
+            str = Form1.serverlist.SelectedItems(0).Group.ToString & "_" & Form1.serverlist.SelectedItems.Item(0).SubItems(0).Text & "_" & Form1.tilllist.SelectedItems.Item(0).SubItems(2).Text & "_" & Form1.tilllist.SelectedItems.Item(0).SubItems(1).Text & "_" & Form1.tilllist.SelectedItems.Item(0).SubItems(3).Text & "_IP_" & Form1.tilllist.SelectedItems.Item(0).SubItems(5).Text
+            loc = "\\" & Form1.tilllist.SelectedItems.Item(0).SubItems(5).Text & "\e$\TpDotnet\Log"
+            s = vbCrLf & str
+        End If
+        fname = "\TILL_" & tstamp & "_" & str
+
         Try
             If FolderBrowserDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
-                If Label3.Text = "ON" Then
+                If (Label3.Text = "ON" And k = 1) Or (Form1.tilllist.SelectedItems.Item(0).SubItems(6).Text = "ON" And k = 0) Then
                     If My.Computer.FileSystem.DirectoryExists(loc) Then
                         Process.Start("C:\Program Files\7-Zip\7z.exe", "a " & quote & FolderBrowserDialog1.SelectedPath & fname & quote & " " & loc)
-                        balon("Retrieving till logs ... " & i2())
+                        balon("Retrieving till logs ... " & s)
                     Else
-                        balon("Location not available ... " & i2())
+                        balon("Location not available ... " & s)
                     End If
                 Else
-                    balon("Till is offline ... " & i2())
+                    balon("Till is offline ... " & s)
                 End If
             Else
-                balon("Operation aborted ... " & i2())
+                balon("Operation aborted ... " & s)
             End If
         Catch es As Exception
             MsgBox(es.Message)
@@ -387,14 +410,14 @@ Public Class Form7
         Return (vbCrLf & ComboBox2.Text)
     End Function
     Private Sub BothToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BothToolStripMenuItem.Click
-        moveserverlog()
-        movetilllog()
+        moveserverlog(1)
+        movetilllog(1)
     End Sub
     Private Sub OnlyTillToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OnlyTillToolStripMenuItem.Click
-        movetilllog()
+        movetilllog(1)
     End Sub
     Private Sub OnlyServerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OnlyServerToolStripMenuItem.Click
-        moveserverlog()
+        moveserverlog(1)
     End Sub
 
     Private Sub MaximizeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MaximizeToolStripMenuItem.Click
