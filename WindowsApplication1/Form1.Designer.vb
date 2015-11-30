@@ -96,6 +96,7 @@ Partial Class Form1
         Me.LaserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RefreshToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GetLogsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MSTSCToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.serverlist = New System.Windows.Forms.ListView()
         Me.country = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.servername = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -667,7 +668,7 @@ Partial Class Form1
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenInSCCMToolStripMenuItem1, Me.RestartTillToolStripMenuItem, Me.ForceSignOutToolStripMenuItem, Me.SetPrinterToolStripMenuItem, Me.RefreshToolStripMenuItem, Me.GetLogsToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenInSCCMToolStripMenuItem1, Me.MSTSCToolStripMenuItem1, Me.RestartTillToolStripMenuItem, Me.ForceSignOutToolStripMenuItem, Me.GetLogsToolStripMenuItem, Me.SetPrinterToolStripMenuItem, Me.RefreshToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 158)
         '
@@ -729,6 +730,12 @@ Partial Class Form1
         Me.GetLogsToolStripMenuItem.Name = "GetLogsToolStripMenuItem"
         Me.GetLogsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.GetLogsToolStripMenuItem.Text = "Get Till Logs"
+        '
+        'MSTSCToolStripMenuItem1
+        '
+        Me.MSTSCToolStripMenuItem1.Name = "MSTSCToolStripMenuItem1"
+        Me.MSTSCToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.MSTSCToolStripMenuItem1.Text = "MSTSC"
         '
         'serverlist
         '
@@ -793,7 +800,7 @@ Partial Class Form1
         '
         'ContextMenuStrip4
         '
-        Me.ContextMenuStrip4.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenInSCCMToolStripMenuItem, Me.RefreshStatusToolStripMenuItem, Me.MSTSCToolStripMenuItem, Me.GetServerLogsToolStripMenuItem})
+        Me.ContextMenuStrip4.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenInSCCMToolStripMenuItem, Me.MSTSCToolStripMenuItem, Me.GetServerLogsToolStripMenuItem, Me.RefreshStatusToolStripMenuItem})
         Me.ContextMenuStrip4.Name = "ContextMenuStrip4"
         Me.ContextMenuStrip4.Size = New System.Drawing.Size(156, 92)
         '
@@ -1212,4 +1219,5 @@ Partial Class Form1
     Friend WithEvents GetLogsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MSTSCToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents GetServerLogsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MSTSCToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
 End Class

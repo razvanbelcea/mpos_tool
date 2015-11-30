@@ -855,6 +855,8 @@ Class Form1
         ForceSignOutToolStripMenuItem.Visible = False
         RestartTillToolStripMenuItem.Visible = False
         OpenInSCCMToolStripMenuItem1.Visible = False
+        MSTSCToolStripMenuItem1.Visible = False
+        GetLogsToolStripMenuItem.Visible = False
     End Sub
     Private Sub ContextMenuStrip1_Opening(sender As Object, e As CancelEventArgs) Handles ContextMenuStrip1.Opening
         Try
@@ -865,16 +867,19 @@ Class Form1
             ForceSignOutToolStripMenuItem.Visible = False
             RestartTillToolStripMenuItem.Visible = False
             OpenInSCCMToolStripMenuItem1.Visible = False
+            MSTSCToolStripMenuItem1.Visible = False
             GetLogsToolStripMenuItem.Visible = False
             For Each item As ListViewItem In tilllist.Items
                 If item.Selected AndAlso Label11.Text = "ONLINE" Then
                     If item.SubItems(5).Text <> "-" AndAlso item.SubItems(6).Text = "ON" Then
                         RestartTillToolStripMenuItem.Visible = True
                         OpenInSCCMToolStripMenuItem1.Visible = True
+                        MSTSCToolStripMenuItem1.Visible = True
                         GetLogsToolStripMenuItem.Visible = True
                     ElseIf item.SubItems(5).Text <> "-" Then
                         RestartTillToolStripMenuItem.Visible = True
                         OpenInSCCMToolStripMenuItem1.Visible = True
+                        MSTSCToolStripMenuItem1.Visible = True
                         GetLogsToolStripMenuItem.Visible = True
                     End If
                     If item.SubItems(4).Text <> "-" Then
@@ -1317,6 +1322,10 @@ Class Form1
         '    Catch ex As Exception
         'Reporter.send()
         '      End Try
+    End Sub
+
+    Private Sub MSTSCToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles MSTSCToolStripMenuItem1.Click
+        System.Diagnostics.Process.Start("mstsc.exe", "/v " & tilllist.SelectedItems.Item(0).SubItems(5).Text)
     End Sub
 End Class
 
