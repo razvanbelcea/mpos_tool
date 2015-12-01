@@ -11,7 +11,7 @@ Public Class Reporter
                 Process.Start("C:\Program Files\7-Zip\7z.exe", "a " & "-xr!*.exe " & "-xr!*.png " & "-xr!*.dll " & "c:\temp\mpos " & Application.StartupPath)
             End If
 
-            Threading.Thread.Sleep(500)
+            Threading.Thread.Sleep(1000)
 
             'preapre email and display it
             Dim fileTosend As String = Application.ExecutablePath
@@ -20,7 +20,7 @@ Public Class Reporter
             oApp = New Outlook.Application
             oEmail = oApp.CreateItem(Outlook.OlItemType.olMailItem)
             With oEmail
-                .To = "razvan.belcea@metrosystems.net, gabriel.stanciu@metrosystems.net"
+                .To = "razvan.belcea@metrosystems.net; gabriel.stanciu@metrosystems.net"
                 .Subject = "MPOS tool - crash reporter"
                 .BodyFormat = Outlook.OlBodyFormat.olFormatPlain
                 .Body = "Description or pictures if needed..."
