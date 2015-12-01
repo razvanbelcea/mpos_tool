@@ -213,4 +213,8 @@ Public Class Form9
             Button2.Enabled = True
         End If
     End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Reporter.send()
+    End Sub
 End Class

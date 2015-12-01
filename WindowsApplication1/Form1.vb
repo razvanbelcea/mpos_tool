@@ -29,6 +29,7 @@ Class Form1
     Public Shared printeron As Boolean
     Public Shared qafolder As String
     Public Shared uatfolder As String
+    Public Shared Logger As New ErrorLogger
     Dim anulareserver As CancellationTokenSource
     Dim anulareservice As CancellationTokenSource
     Dim anularetills As CancellationTokenSource
@@ -146,8 +147,8 @@ Class Form1
             readserver.Dispose()
             ToolStripProgressBar1.Maximum = i
         Catch e As Exception
-            Form7.balon(e.Message)
-            Logger.LogInfo(e)
+            Form7.balon(e.Message)        
+            Logger.WriteToErrorLog(e.Message, e.StackTrace, "error")
         End Try
     End Sub
     Private Sub readfolderlist(link)
@@ -183,7 +184,8 @@ Class Form1
                 Loop
                 readfolder.Dispose()
             Catch e As Exception
-                Form7.balon(e.Message)
+            Form7.balon(e.Message)
+            Logger.WriteToErrorLog(e.Message, e.StackTrace, "error")
             End Try
     End Sub
     Private Sub readservicelist()
@@ -212,6 +214,7 @@ Class Form1
             readservice.Dispose()
         Catch e As Exception
             Form7.balon(e.Message)
+            Logger.WriteToErrorLog(e.Message, e.StackTrace, "error")
         End Try
     End Sub
     '-----------------------------------------------------------------------------------------------------------------------------------------END read xml files
@@ -261,6 +264,7 @@ Class Form1
             End If
         Catch e As Exception
             Form7.balon(e.Message)
+            Logger.WriteToErrorLog(e.Message, e.StackTrace, "error")
         End Try
     End Sub
     Private Sub viewserver()
@@ -309,6 +313,7 @@ Class Form1
                     Label13.Text = arr(0).ToString + " " + arr1(0).ToString
                 Catch a As Exception
                     'Form7.balon(a.Message)
+                    Logger.WriteToErrorLog(a.Message, a.StackTrace, "error")
                 End Try
                 Exit For
             End If
@@ -330,6 +335,7 @@ Class Form1
             Next
         Catch ey As Exception
             Form7.balon(ey.Message)
+            Logger.WriteToErrorLog(ey.Message, ey.StackTrace, "error")
         End Try
     End Sub
     '-----------------------------------------------------------------------------------------------------------------------------------------END folder selection
@@ -344,6 +350,7 @@ Class Form1
                 con.Open()
             Catch e As Exception
                 'Form7.balon(e.Message & " - " & Label9.Text)
+                Logger.WriteToErrorLog(e.Message, e.StackTrace, "error")
             End Try
             If con.State = ConnectionState.Open Then
                 con.Close()
@@ -391,8 +398,8 @@ Class Form1
             End While
             dat1.Close()
             con1.Close()
-        Catch
-
+        Catch e As Exception
+            Logger.WriteToErrorLog(e.Message, e.StackTrace, "error")
         End Try
     End Sub
     Private Sub loadtills(tokentills As CancellationToken)
@@ -424,7 +431,8 @@ Class Form1
                 End If
                 Try
                     arr(4) = System.Net.Dns.GetHostEntry(arr(0) & ".MPOS.MADM.NET").AddressList(0).ToString()
-                Catch
+                Catch e As Exception
+                    Logger.WriteToErrorLog(e.Message, e.StackTrace, "error")
                 End Try
                 Try
                     If arr(4) <> "-" AndAlso My.Computer.Network.Ping(arr(4)) Then
@@ -432,7 +440,8 @@ Class Form1
                     Else
                         arr(5) = "OFF"
                     End If
-                Catch
+                Catch e As Exception
+                    Logger.WriteToErrorLog(e.Message, e.StackTrace, "error")
                 End Try
                 If printeron = True Then
                     Try
@@ -459,7 +468,8 @@ Class Form1
                                 readprinter.Dispose()
                             End If
                         Next
-                    Catch
+                    Catch e As Exception
+                        Logger.WriteToErrorLog(e.Message, e.StackTrace, "error")
                     End Try
                 Else
                     arr(6) = "?"
@@ -480,6 +490,7 @@ Class Form1
             tilllist.HeaderStyle = ColumnHeaderStyle.Clickable
         Catch e As Exception
             'Form7.balon(e.Message)
+            Logger.WriteToErrorLog(e.Message, e.StackTrace, "error")
         End Try
         tpb.Visible = False
         tlb.Visible = False
@@ -533,6 +544,7 @@ Class Form1
             cnt = cnt & vbCrLf & vbTab & vbTab & vbTab & vbTab & vbTab
         Catch ex As Exception
             Form7.balon(ex.Message)
+            Logger.WriteToErrorLog(ex.Message, ex.StackTrace, "error")
             cmd3.Dispose()
             con3.Close()
         End Try
@@ -552,6 +564,7 @@ Class Form1
                     item.SubItems.Add(serv.Status.ToString)
                     serv.Dispose()
                 Catch a As Exception
+                    Logger.WriteToErrorLog(a.Message, a.StackTrace, "error")
                     item.SubItems.Add("-")
                     item.SubItems.Add("-")
                 End Try
@@ -604,6 +617,7 @@ Class Form1
                     item.SubItems.Add(arr(0).ToString + " " + arr1(0).ToString)
                 Catch a As Exception
                     'Form7.balon(a.Message)
+                    Logger.WriteToErrorLog(a.Message, a.StackTrace, "error")
                 End Try
                 item.SubItems.Add("-")
                 item.SubItems.Add("-")
@@ -673,6 +687,7 @@ Class Form1
                             Form7.balon("Operator has been forced logged off !" & vbCrLf & cmd.ExecuteNonQuery().ToString & " row/s have been updated")
                         Catch eg As Exception
                             Form7.balon(eg.Message)
+                            Logger.WriteToErrorLog(eg.Message, eg.StackTrace, "error")
                         End Try
                         cmd.Dispose()
                         Exit For
@@ -682,6 +697,7 @@ Class Form1
             con.Close()
         Catch ex As Exception
             Form7.balon(ex.Message)
+            Logger.WriteToErrorLog(ex.Message, ex.StackTrace, "error")
         End Try
     End Sub
     Private Sub restarttill()
@@ -692,6 +708,7 @@ Class Form1
                     Form7.balon("Restart command has been sent!")
                 Catch ed As Exception
                     Form7.balon(ed.Message)
+                    Logger.WriteToErrorLog(ed.Message, ed.StackTrace, "error")
                 End Try
                 Exit For
             End If
@@ -718,6 +735,7 @@ Class Form1
             End If
         Catch ew As Exception
             Form7.balon(ew.Message)
+            Logger.WriteToErrorLog(ew.Message, ew.StackTrace, "error")
         End Try
     End Sub
     Private Sub ResetOperatorPassword123ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResetOperatorPassword123ToolStripMenuItem.Click
@@ -761,6 +779,7 @@ Class Form1
             taskservice()
         Catch ed As Exception
             Form7.balon(ed.Message)
+            Logger.WriteToErrorLog(ed.Message, ed.StackTrace, "error")
         End Try
     End Sub
     Private Sub StartStopServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartStopServiceToolStripMenuItem.Click
@@ -778,6 +797,7 @@ Class Form1
             taskservice()
         Catch ed As Exception
             Form7.balon(ed.Message)
+            Logger.WriteToErrorLog(ed.Message, ed.StackTrace, "error")
         End Try
     End Sub
     Private Sub CreateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CreateToolStripMenuItem.Click
@@ -910,6 +930,7 @@ Class Form1
             Next
         Catch ex As Exception
             Form7.balon(ex.Message)
+            Logger.WriteToErrorLog(ex.Message, ex.StackTrace, "error")
         End Try
     End Sub
     Private Sub OpenMPOSToolAppToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenMPOSToolAppToolStripMenuItem.Click
@@ -930,6 +951,7 @@ Class Form1
             Next
         Catch ed As Exception
             Form7.balon(ed.Message)
+            Logger.WriteToErrorLog(ed.Message, ed.StackTrace, "error")
         End Try
     End Sub
     Private Sub ExitMPOSToolAppToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitMPOSToolAppToolStripMenuItem.Click
@@ -946,6 +968,7 @@ Class Form1
             Next
         Catch ed As Exception
             Form7.balon(ed.Message)
+            Logger.WriteToErrorLog(ed.Message, ed.StackTrace, "error")
         End Try
     End Sub
     Private Sub ContextMenuStrip4_Opening(sender As Object, e As CancelEventArgs) Handles ContextMenuStrip4.Opening
@@ -965,6 +988,7 @@ Class Form1
             Next
         Catch ed As Exception
             Form7.balon(ed.Message)
+            Logger.WriteToErrorLog(ed.Message, ed.StackTrace, "error")
         End Try
     End Sub
     Private Sub ContextMenuStrip2_Opening(sender As Object, e As CancelEventArgs) Handles ContextMenuStrip2.Opening
@@ -991,6 +1015,7 @@ Class Form1
             Next
         Catch ed As Exception
             Form7.balon(ed.Message)
+            Logger.WriteToErrorLog(ed.Message, ed.StackTrace, "error")
         End Try
     End Sub
     '-----------------------------------------------------------------------------------------------------------------------------------------END menus
@@ -1096,6 +1121,7 @@ Class Form1
                 Case Else
                     Throw
             End Select
+            Logger.WriteToErrorLog(ex.Message, ex.StackTrace, "error")
         End Try
     End Function
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
@@ -1136,7 +1162,8 @@ Class Form1
                     Process.Start(Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe")
                 End If
             Catch ex As Exception
-                MsgBox(ex.Message + " Error Downloading update.")
+                Form7.balon(ex.Message + " Error Downloading update.")
+                Logger.WriteToErrorLog(ex.Message, ex.StackTrace, "error")
             End Try
             sr.Close()
         End If
@@ -1180,6 +1207,7 @@ Class Form1
             xmlread.Close()
             xmlread.Dispose()
         Catch ex As Exception
+            Logger.WriteToErrorLog(ex.Message, ex.StackTrace, "error")
         End Try
 
         Dim reader As XmlTextReader = New XmlTextReader(link)
@@ -1208,7 +1236,8 @@ Class Form1
                                                 ttr, _
                                                 "", "", False, 500, True)
             Catch ex As Exception
-                MsgBox(ex.Message + " Error Downloading update.")
+                Form7.balon(ex.Message + " Error Downloading update.")
+                Logger.WriteToErrorLog(ex.Message, ex.StackTrace, "error")
             End Try
             w = True
         End If
@@ -1241,6 +1270,7 @@ Class Form1
             createshortc(Directory & "\MPOS Tool.lnk", "MPOS")
         Catch ex As Exception
             Form7.balon(ex.Message)
+            Logger.WriteToErrorLog(ex.Message, ex.StackTrace, "error")
         End Try
     End Sub
     Public Sub createshortc(FileName, Title)
@@ -1255,6 +1285,7 @@ Class Form1
             shortc.Save()
         Catch ex As Exception
             Form7.balon(ex.Message)
+            Logger.WriteToErrorLog(ex.Message, ex.StackTrace, "error")
         End Try
     End Sub
 
@@ -1317,11 +1348,11 @@ Class Form1
     End Class
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        ' Try
-        'DiscountExtract.getem()
-        '    Catch ex As Exception
-        'Reporter.send()
-        '      End Try
+        Try
+            DiscountExtract.getem()
+        Catch ex As Exception
+            Logger.WriteToErrorLog(ex.Message, ex.StackTrace, "error")
+        End Try
     End Sub
 
     Private Sub MSTSCToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles MSTSCToolStripMenuItem1.Click

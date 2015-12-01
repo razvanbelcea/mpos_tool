@@ -23,7 +23,7 @@ Public Class Reporter
                 .To = "razvan.belcea@metrosystems.net, gabriel.stanciu@metrosystems.net"
                 .Subject = "MPOS tool - crash reporter"
                 .BodyFormat = Outlook.OlBodyFormat.olFormatPlain
-                .Body = "blablabla"
+                .Body = "Description or pictures if needed..."
                 .Importance = Outlook.OlImportance.olImportanceHigh
                 .ReadReceiptRequested = True
                 .Attachments.Add(zipFile, Outlook.OlAttachmentType.olByValue)
@@ -33,7 +33,8 @@ Public Class Reporter
             oEmail = Nothing
             oApp = Nothing
         Catch ex As Exception
-            Logger.LogInfo(ex)
+            Dim el As New ErrorLogger
+            el.WriteToErrorLog(ex.Message, ex.StackTrace, "error")
         End Try
     End Sub
 End Class

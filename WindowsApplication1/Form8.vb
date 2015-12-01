@@ -21,7 +21,7 @@ Public Class Form8
     Public ssels As Double = 0
     Public Shared sfl As String = "sqllist.xml"
     Private con As SqlConnection
-    Private cmd As SqlCommand
+    Private cmd, cmd1 As SqlCommand
     Private dat As SqlDataReader
     Private dat1 As SqlDataReader
     Private con1 As SqlConnection
@@ -791,14 +791,14 @@ Public Class Form8
         srowsa = 0
         Button2.Enabled = False
         DataGridView6.Rows.Clear()
-        Dim row As String() = New String() {"-", "-", "-", "-", "-", "-", "-", "-", "-"}
+        Dim row As String() = New String() {"-", "-", "-", "-", "-", "-", "-", "-", "-", "-"}
         If Form1.Label11.Text = "ONLINE" Then
             Try
                 con = New SqlConnection("Data Source=" & Form1.label9.Text & ";Database=TPCentralDB;" & Form1.cred & ";")
                 cmd = con.CreateCommand
                 con.Open()
                 ssels = ssels + 1
-                cmd.CommandText = "select szDiscountID,szName,lTier,bActivated,szRuleIdentifierID,lPriority,'aha' from discountaffiliation"
+                cmd.CommandText = "select szDiscountID,szName,(ISNULL(szlinetypecodeid,'') + ISNULL(szmxmtypecodeid,'') + ISNULL(szqtytypecodeid,'')),bActivated,szRuleIdentifierID,lPriority,'aha' from discountaffiliation"
                 dat = cmd.ExecuteReader()
                 If dat.HasRows Then
                     While dat.Read()
@@ -809,7 +809,7 @@ Public Class Form8
                         row(4) = dat(4)
                         row(5) = dat(5)
                         row(6) = dat(6)
-                        row(7) = dat(7)
+                        ' row(7) = dat(7)
                         DataGridView6.Rows.Add(row)
                     End While
                     dat.Close()
@@ -826,32 +826,6 @@ Public Class Form8
             Form7.balon("No selection has been made ...")
         End If
     End Sub
-    '   Function DiscountType()
-    'Dim ssqll As String
-    'Dim dat3 As New DataSet()
-
-    '    Try
-    '       ssqll = "select ISNULL(szlinetypecodeid,'') + ISNULL(szmxmtypecodeid,'') + ISNULL(szqtytypecodeid,'') from DiscountAffiliation where szDiscountID = '" & DataGridView6.Item(1, 1).Value & "'"
-    'Dim runsql As New SqlDataAdapter(ssqll, con)
-    '       runsql.Fill(dat3)
-
-    '        dat3.Dispose()
-    '       con1.Close()
-    '  Catch ev As Exception
-    '     Form7.balon(ev.Message)
-    '    dat1.Dispose()
-    '   con1.Close()
-    'End Try
-    'End Function
-
-    'Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-    '    createmanualbarcode()
-    'End Sub
-    'Function createmanualbarcode()
-    '    Dim mbarcode As String
-    '    mbarcode = ComboBox2.Text & TextBox3.Text & TextBox1.Text & TextBox2.Text & TextBox4.Text & TextBox5.Text
-    '    MsgBox(mbarcode.ToString)
-    'End Function
 End Class
 
 
