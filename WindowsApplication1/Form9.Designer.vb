@@ -32,6 +32,7 @@ Partial Class Form9
         Me.CheckBox5 = New System.Windows.Forms.CheckBox()
         Me.CheckBox6 = New System.Windows.Forms.CheckBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'CheckBox1
@@ -110,13 +111,24 @@ Partial Class Form9
         Me.ToolTip1.BackColor = System.Drawing.Color.Blue
         Me.ToolTip1.ForeColor = System.Drawing.Color.Yellow
         '
+        'Button3
+        '
+        Me.Button3.FlatAppearance.BorderColor = System.Drawing.Color.White
+        Me.Button3.Location = New System.Drawing.Point(335, 270)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(91, 23)
+        Me.Button3.TabIndex = 7
+        Me.Button3.Text = "Send Logs"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'Form9
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(442, 294)
+        Me.ClientSize = New System.Drawing.Size(438, 290)
         Me.ControlBox = False
+        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.CheckBox6)
         Me.Controls.Add(Me.CheckBox5)
         Me.Controls.Add(Me.Button2)
@@ -145,4 +157,5 @@ Partial Class Form9
     Friend WithEvents CheckBox5 As System.Windows.Forms.CheckBox
     Friend WithEvents CheckBox6 As System.Windows.Forms.CheckBox
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents Button3 As System.Windows.Forms.Button
 End Class
