@@ -88,15 +88,15 @@ Partial Class Form1
         Me.printertype = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.OpenInSCCMToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MSTSCToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.RestartTillToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ForceSignOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GetLogsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SetPrinterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NoneToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MatrixToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LaserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RefreshToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GetLogsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MSTSCToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.serverlist = New System.Windows.Forms.ListView()
         Me.country = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.servername = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -105,9 +105,9 @@ Partial Class Form1
         Me.vers = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ContextMenuStrip4 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.OpenInSCCMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RefreshStatusToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MSTSCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GetServerLogsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RefreshStatusToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStrip5 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.operators = New System.Windows.Forms.GroupBox()
@@ -136,6 +136,15 @@ Partial Class Form1
         Me.Button6 = New System.Windows.Forms.Button()
         Me.metro = New System.Windows.Forms.PictureBox()
         Me.Button7 = New System.Windows.Forms.Button()
+        Me.ToolTip3 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DBQueriesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BarcodeGeneratorToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DiscountExtracterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SettingsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.DownloadNewVersionToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.status.SuspendLayout()
         Me.ContextMenuStrip3.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -154,6 +163,7 @@ Partial Class Form1
         Me.StatusStrip1.SuspendLayout()
         Me.ContextMenuStrip7.SuspendLayout()
         CType(Me.metro, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'status
@@ -180,7 +190,7 @@ Partial Class Form1
         Me.status.Controls.Add(Me.PictureBox3)
         Me.status.Controls.Add(Me.PictureBox4)
         Me.status.Cursor = System.Windows.Forms.Cursors.Default
-        Me.status.Location = New System.Drawing.Point(493, 12)
+        Me.status.Location = New System.Drawing.Point(493, 39)
         Me.status.Name = "status"
         Me.status.Size = New System.Drawing.Size(447, 294)
         Me.status.TabIndex = 4
@@ -458,7 +468,7 @@ Partial Class Form1
         '
         Me.folders.Controls.Add(Me.LinkLabel1)
         Me.folders.Controls.Add(Me.folderlist)
-        Me.folders.Location = New System.Drawing.Point(946, 12)
+        Me.folders.Location = New System.Drawing.Point(946, 39)
         Me.folders.Name = "folders"
         Me.folders.Size = New System.Drawing.Size(153, 294)
         Me.folders.TabIndex = 8
@@ -563,7 +573,7 @@ Partial Class Form1
         '
         Me.title.Controls.Add(Me.Label2)
         Me.title.Controls.Add(Me.Label1)
-        Me.title.Location = New System.Drawing.Point(575, 113)
+        Me.title.Location = New System.Drawing.Point(575, 140)
         Me.title.Name = "title"
         Me.title.Size = New System.Drawing.Size(456, 289)
         Me.title.TabIndex = 9
@@ -585,7 +595,7 @@ Partial Class Form1
         Me.tills.Controls.Add(Me.tlb)
         Me.tills.Controls.Add(Me.tpb)
         Me.tills.Controls.Add(Me.tilllist)
-        Me.tills.Location = New System.Drawing.Point(493, 312)
+        Me.tills.Location = New System.Drawing.Point(493, 339)
         Me.tills.Name = "tills"
         Me.tills.Size = New System.Drawing.Size(447, 209)
         Me.tills.TabIndex = 10
@@ -679,6 +689,12 @@ Partial Class Form1
         Me.OpenInSCCMToolStripMenuItem1.Text = "Open in SCCM"
         Me.OpenInSCCMToolStripMenuItem1.Visible = False
         '
+        'MSTSCToolStripMenuItem1
+        '
+        Me.MSTSCToolStripMenuItem1.Name = "MSTSCToolStripMenuItem1"
+        Me.MSTSCToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.MSTSCToolStripMenuItem1.Text = "MSTSC"
+        '
         'RestartTillToolStripMenuItem
         '
         Me.RestartTillToolStripMenuItem.Name = "RestartTillToolStripMenuItem"
@@ -692,6 +708,12 @@ Partial Class Form1
         Me.ForceSignOutToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ForceSignOutToolStripMenuItem.Text = "Force SignOff"
         Me.ForceSignOutToolStripMenuItem.Visible = False
+        '
+        'GetLogsToolStripMenuItem
+        '
+        Me.GetLogsToolStripMenuItem.Name = "GetLogsToolStripMenuItem"
+        Me.GetLogsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.GetLogsToolStripMenuItem.Text = "Get Till Logs"
         '
         'SetPrinterToolStripMenuItem
         '
@@ -725,18 +747,6 @@ Partial Class Form1
         Me.RefreshToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.RefreshToolStripMenuItem.Text = "Refresh DB"
         '
-        'GetLogsToolStripMenuItem
-        '
-        Me.GetLogsToolStripMenuItem.Name = "GetLogsToolStripMenuItem"
-        Me.GetLogsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.GetLogsToolStripMenuItem.Text = "Get Till Logs"
-        '
-        'MSTSCToolStripMenuItem1
-        '
-        Me.MSTSCToolStripMenuItem1.Name = "MSTSCToolStripMenuItem1"
-        Me.MSTSCToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
-        Me.MSTSCToolStripMenuItem1.Text = "MSTSC"
-        '
         'serverlist
         '
         Me.serverlist.Activation = System.Windows.Forms.ItemActivation.OneClick
@@ -764,7 +774,7 @@ Partial Class Form1
         Me.serverlist.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2, ListViewGroup3, ListViewGroup4})
         Me.serverlist.HideSelection = False
         Me.serverlist.LabelWrap = False
-        Me.serverlist.Location = New System.Drawing.Point(12, 12)
+        Me.serverlist.Location = New System.Drawing.Point(12, 39)
         Me.serverlist.MultiSelect = False
         Me.serverlist.Name = "serverlist"
         Me.serverlist.Size = New System.Drawing.Size(465, 509)
@@ -781,7 +791,7 @@ Partial Class Form1
         'servername
         '
         Me.servername.Text = "Server Name"
-        Me.servername.Width = 109
+        Me.servername.Width = 111
         '
         'ip
         '
@@ -811,12 +821,6 @@ Partial Class Form1
         Me.OpenInSCCMToolStripMenuItem.Text = "Open in SCCM"
         Me.OpenInSCCMToolStripMenuItem.Visible = False
         '
-        'RefreshStatusToolStripMenuItem
-        '
-        Me.RefreshStatusToolStripMenuItem.Name = "RefreshStatusToolStripMenuItem"
-        Me.RefreshStatusToolStripMenuItem.Size = New System.Drawing.Size(155, 22)
-        Me.RefreshStatusToolStripMenuItem.Text = "Refresh Servers"
-        '
         'MSTSCToolStripMenuItem
         '
         Me.MSTSCToolStripMenuItem.Name = "MSTSCToolStripMenuItem"
@@ -828,6 +832,12 @@ Partial Class Form1
         Me.GetServerLogsToolStripMenuItem.Name = "GetServerLogsToolStripMenuItem"
         Me.GetServerLogsToolStripMenuItem.Size = New System.Drawing.Size(155, 22)
         Me.GetServerLogsToolStripMenuItem.Text = "Get Server Logs"
+        '
+        'RefreshStatusToolStripMenuItem
+        '
+        Me.RefreshStatusToolStripMenuItem.Name = "RefreshStatusToolStripMenuItem"
+        Me.RefreshStatusToolStripMenuItem.Size = New System.Drawing.Size(155, 22)
+        Me.RefreshStatusToolStripMenuItem.Text = "Refresh Servers"
         '
         'ContextMenuStrip5
         '
@@ -844,7 +854,7 @@ Partial Class Form1
         'operators
         '
         Me.operators.Controls.Add(Me.operatorlist)
-        Me.operators.Location = New System.Drawing.Point(946, 312)
+        Me.operators.Location = New System.Drawing.Point(946, 339)
         Me.operators.Name = "operators"
         Me.operators.Size = New System.Drawing.Size(153, 209)
         Me.operators.TabIndex = 11
@@ -897,9 +907,9 @@ Partial Class Form1
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripProgressBar1})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 563)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 556)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(1113, 36)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1113, 40)
         Me.StatusStrip1.SizingGrip = False
         Me.StatusStrip1.TabIndex = 24
         Me.StatusStrip1.Text = "StatusStrip1"
@@ -907,9 +917,9 @@ Partial Class Form1
         'ToolStripProgressBar1
         '
         Me.ToolStripProgressBar1.AutoSize = False
-        Me.ToolStripProgressBar1.Margin = New System.Windows.Forms.Padding(11, 20, 1, 3)
+        Me.ToolStripProgressBar1.Margin = New System.Windows.Forms.Padding(11, 22, 1, 3)
         Me.ToolStripProgressBar1.Name = "ToolStripProgressBar1"
-        Me.ToolStripProgressBar1.Size = New System.Drawing.Size(300, 13)
+        Me.ToolStripProgressBar1.Size = New System.Drawing.Size(465, 15)
         '
         'NotifyIcon1
         '
@@ -938,9 +948,9 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(12, 527)
+        Me.Button1.Location = New System.Drawing.Point(47, 273)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(153, 29)
+        Me.Button1.Size = New System.Drawing.Size(106, 29)
         Me.Button1.TabIndex = 18
         Me.Button1.Text = "DB Queries"
         Me.Button1.UseVisualStyleBackColor = True
@@ -958,12 +968,13 @@ Partial Class Form1
         '
         Me.Button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Location = New System.Drawing.Point(946, 570)
+        Me.Button3.Location = New System.Drawing.Point(47, 343)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(60, 26)
+        Me.Button3.Size = New System.Drawing.Size(106, 30)
         Me.Button3.TabIndex = 19
         Me.Button3.Text = "Settings"
         Me.Button3.UseVisualStyleBackColor = True
+        Me.Button3.Visible = False
         '
         'Button4
         '
@@ -971,11 +982,11 @@ Partial Class Form1
         Me.Button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.Button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.OrangeRed
         Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button4.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Button4.Location = New System.Drawing.Point(1012, 570)
+        Me.Button4.Location = New System.Drawing.Point(946, 562)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(87, 26)
+        Me.Button4.Size = New System.Drawing.Size(153, 30)
         Me.Button4.TabIndex = 26
         Me.Button4.Text = "EXIT"
         Me.Button4.UseVisualStyleBackColor = False
@@ -984,7 +995,7 @@ Partial Class Form1
         '
         Me.sss.AutoSize = True
         Me.sss.BackColor = System.Drawing.Color.Transparent
-        Me.sss.Location = New System.Drawing.Point(18, 568)
+        Me.sss.Location = New System.Drawing.Point(12, 562)
         Me.sss.Name = "sss"
         Me.sss.Size = New System.Drawing.Size(77, 13)
         Me.sss.TabIndex = 27
@@ -993,7 +1004,7 @@ Partial Class Form1
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(864, 577)
+        Me.Label15.Location = New System.Drawing.Point(996, 9)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(45, 13)
         Me.Label15.TabIndex = 28
@@ -1002,7 +1013,7 @@ Partial Class Form1
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(820, 577)
+        Me.Label16.Location = New System.Drawing.Point(952, 9)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(45, 13)
         Me.Label16.TabIndex = 29
@@ -1015,21 +1026,23 @@ Partial Class Form1
         '
         Me.Button2.BackColor = System.Drawing.SystemColors.Control
         Me.Button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Button2.FlatAppearance.BorderSize = 0
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button2.ForeColor = System.Drawing.Color.Red
-        Me.Button2.Location = New System.Drawing.Point(819, 570)
+        Me.Button2.Location = New System.Drawing.Point(47, 379)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(121, 26)
+        Me.Button2.Size = New System.Drawing.Size(153, 30)
         Me.Button2.TabIndex = 30
         Me.Button2.Text = "Update Available"
         Me.Button2.UseVisualStyleBackColor = False
+        Me.Button2.Visible = False
         '
         'Button6
         '
-        Me.Button6.Location = New System.Drawing.Point(168, 527)
+        Me.Button6.Location = New System.Drawing.Point(47, 307)
         Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(153, 29)
+        Me.Button6.Size = New System.Drawing.Size(106, 30)
         Me.Button6.TabIndex = 18
         Me.Button6.Text = "Barcode Generator"
         Me.Button6.UseVisualStyleBackColor = True
@@ -1040,7 +1053,7 @@ Partial Class Form1
         Me.metro.BackgroundImage = CType(resources.GetObject("metro.BackgroundImage"), System.Drawing.Image)
         Me.metro.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.metro.ContextMenuStrip = Me.ContextMenuStrip5
-        Me.metro.Location = New System.Drawing.Point(828, 408)
+        Me.metro.Location = New System.Drawing.Point(828, 435)
         Me.metro.Name = "metro"
         Me.metro.Size = New System.Drawing.Size(203, 20)
         Me.metro.TabIndex = 3
@@ -1048,31 +1061,102 @@ Partial Class Form1
         '
         'Button7
         '
-        Me.Button7.Location = New System.Drawing.Point(324, 527)
+        Me.Button7.Location = New System.Drawing.Point(47, 240)
         Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(153, 29)
+        Me.Button7.Size = New System.Drawing.Size(106, 29)
         Me.Button7.TabIndex = 31
         Me.Button7.Text = "Extract Discounts"
         Me.Button7.UseVisualStyleBackColor = True
         Me.Button7.Visible = False
+        '
+        'ToolTip3
+        '
+        Me.ToolTip3.AutoPopDelay = 5000
+        Me.ToolTip3.InitialDelay = 5000
+        Me.ToolTip3.IsBalloon = True
+        Me.ToolTip3.ReshowDelay = 200
+        Me.ToolTip3.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Warning
+        Me.ToolTip3.ToolTipTitle = "New version available"
+        '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.BackColor = System.Drawing.Color.Transparent
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(1113, 38)
+        Me.MenuStrip1.TabIndex = 32
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'ToolsToolStripMenuItem
+        '
+        Me.ToolsToolStripMenuItem.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DBQueriesToolStripMenuItem1, Me.BarcodeGeneratorToolStripMenuItem1, Me.DiscountExtracterToolStripMenuItem, Me.SettingsToolStripMenuItem1, Me.ToolStripSeparator2, Me.DownloadNewVersionToolStripMenuItem1})
+        Me.ToolsToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ToolsToolStripMenuItem.Image = Global.MPOS.My.Resources.Resources.att1
+        Me.ToolsToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.White
+        Me.ToolsToolStripMenuItem.Margin = New System.Windows.Forms.Padding(6, 0, 0, 0)
+        Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
+        Me.ToolsToolStripMenuItem.Padding = New System.Windows.Forms.Padding(30, 5, 122, 5)
+        Me.ToolsToolStripMenuItem.ShortcutKeyDisplayString = ""
+        Me.ToolsToolStripMenuItem.ShowShortcutKeys = False
+        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(230, 34)
+        Me.ToolsToolStripMenuItem.Text = "Tools ..."
+        Me.ToolsToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'DBQueriesToolStripMenuItem1
+        '
+        Me.DBQueriesToolStripMenuItem1.Name = "DBQueriesToolStripMenuItem1"
+        Me.DBQueriesToolStripMenuItem1.Size = New System.Drawing.Size(229, 24)
+        Me.DBQueriesToolStripMenuItem1.Text = "DB Queries"
+        '
+        'BarcodeGeneratorToolStripMenuItem1
+        '
+        Me.BarcodeGeneratorToolStripMenuItem1.Name = "BarcodeGeneratorToolStripMenuItem1"
+        Me.BarcodeGeneratorToolStripMenuItem1.Size = New System.Drawing.Size(229, 24)
+        Me.BarcodeGeneratorToolStripMenuItem1.Text = "Barcode Generator"
+        '
+        'DiscountExtracterToolStripMenuItem
+        '
+        Me.DiscountExtracterToolStripMenuItem.Name = "DiscountExtracterToolStripMenuItem"
+        Me.DiscountExtracterToolStripMenuItem.Size = New System.Drawing.Size(229, 24)
+        Me.DiscountExtracterToolStripMenuItem.Text = "Discount Extracter"
+        '
+        'SettingsToolStripMenuItem1
+        '
+        Me.SettingsToolStripMenuItem1.Name = "SettingsToolStripMenuItem1"
+        Me.SettingsToolStripMenuItem1.Size = New System.Drawing.Size(229, 24)
+        Me.SettingsToolStripMenuItem1.Text = "Settings"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(226, 6)
+        '
+        'DownloadNewVersionToolStripMenuItem1
+        '
+        Me.DownloadNewVersionToolStripMenuItem1.Name = "DownloadNewVersionToolStripMenuItem1"
+        Me.DownloadNewVersionToolStripMenuItem1.Size = New System.Drawing.Size(229, 24)
+        Me.DownloadNewVersionToolStripMenuItem1.Text = "Download new version"
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(1113, 599)
+        Me.ClientSize = New System.Drawing.Size(1113, 596)
+        Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Label15)
-        Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.sss)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.operators)
         Me.Controls.Add(Me.StatusStrip1)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.serverlist)
         Me.Controls.Add(Me.folders)
         Me.Controls.Add(Me.tills)
@@ -1080,9 +1164,10 @@ Partial Class Form1
         Me.Controls.Add(Me.title)
         Me.Controls.Add(Me.metro)
         Me.Cursor = System.Windows.Forms.Cursors.Default
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.MaximizeBox = False
         Me.Name = "Form1"
         Me.ShowInTaskbar = False
@@ -1111,6 +1196,8 @@ Partial Class Form1
         Me.StatusStrip1.PerformLayout()
         Me.ContextMenuStrip7.ResumeLayout(False)
         CType(Me.metro, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1220,4 +1307,13 @@ Partial Class Form1
     Friend WithEvents MSTSCToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents GetServerLogsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MSTSCToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolTip3 As System.Windows.Forms.ToolTip
+    Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
+    Friend WithEvents ToolsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DBQueriesToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents BarcodeGeneratorToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DiscountExtracterToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents DownloadNewVersionToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SettingsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
 End Class

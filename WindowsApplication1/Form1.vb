@@ -218,10 +218,10 @@ Class Form1
     '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN server selection
     Private Sub serverlist_SelectedIndexChanged(sender As Object, e As EventArgs) Handles serverlist.SelectedIndexChanged
         servicelist.Items.Clear()
-        Button1.Visible = True
-        Button6.Visible = True
+        'Button1.Visible = True
+        'Button6.Visible = True
         Button5.Visible = True
-        Button7.Visible = True
+        'Button7.Visible = True
         viewserver()
         statusserver()
         For Each item As ListViewItem In serverlist.SelectedItems
@@ -1323,9 +1323,66 @@ Class Form1
         'Reporter.send()
         '      End Try
     End Sub
-
     Private Sub MSTSCToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles MSTSCToolStripMenuItem1.Click
         System.Diagnostics.Process.Start("mstsc.exe", "/v " & tilllist.SelectedItems.Item(0).SubItems(5).Text)
+    End Sub
+    Private Sub BarcodeGeneratorToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles BarcodeGeneratorToolStripMenuItem1.Click
+        Form11.ShowDialog()
+    End Sub
+    Private Sub DBQueriesToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles DBQueriesToolStripMenuItem1.Click
+        If Label11.Text = "ONLINE" Then
+            Form8.ShowDialog()
+        Else
+            Form7.balon("Server is Offline ...")
+        End If
+    End Sub
+    Private Sub DiscountExtracterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DiscountExtracterToolStripMenuItem.Click
+        ' Try
+        'DiscountExtract.getem()
+        '    Catch ex As Exception
+        'Reporter.send()
+        '      End Try
+    End Sub
+    Private Sub SettingsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem1.Click
+        Form9.ShowDialog()
+    End Sub
+    Private Sub DownloadNewVersionToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles DownloadNewVersionToolStripMenuItem1.Click
+        Dim WbReq As New Net.WebClient
+        WbReq.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials
+        WbReq.Dispose()
+
+        Dim result As Integer = MessageBox.Show("Updating will close current session. Are you sure you want to continue ?", "MPOS Tool Updater", MessageBoxButtons.YesNo)
+        If result = DialogResult.No Then
+        ElseIf result = DialogResult.Yes Then
+            Dim request As System.Net.HttpWebRequest = System.Net.HttpWebRequest.Create("http://my-collaboration.metrogroup-networking.com/personal/r4_razvan_belcea/Shared%20Documents/Update.txt")
+            request.Credentials = System.Net.CredentialCache.DefaultCredentials
+            Dim response As System.Net.HttpWebResponse = request.GetResponse()
+            Dim sr As System.IO.StreamReader = New System.IO.StreamReader(response.GetResponseStream())
+            Dim newestversion As String = sr.ReadToEnd()
+            Dim currentversion As String = Application.ProductVersion
+            Try
+                Dim source As New Uri("http://my-collaboration.metrogroup-networking.com/personal/r4_razvan_belcea/Shared%20Documents/MPOS%20Server%20Tool%20v1")
+                Dim credentials As System.Net.NetworkCredential = System.Net.CredentialCache.DefaultNetworkCredentials
+                My.Computer.Network.DownloadFile(source, Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe", credentials, True, 60000I, False)
+                If My.Computer.FileSystem.FileExists(Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe") Then
+                    Dim path As String = "oldversion.txt"
+
+                    If Not File.Exists(path) Then
+                        Using sw As StreamWriter = File.CreateText(path)
+                            sw.WriteLine(currentversion)
+                        End Using
+                    End If
+
+                    Form1.x = True
+                    Me.Close()
+                    System.Threading.Thread.Sleep(3000)
+                    Process.Start(Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe")
+                End If
+            Catch ex As Exception
+                MsgBox(ex.Message + " Error Downloading update.")
+            End Try
+            sr.Close()
+        End If
     End Sub
 End Class
 
