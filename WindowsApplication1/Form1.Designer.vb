@@ -23,15 +23,15 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
-        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
-        Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim ListViewItem8 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim ListViewGroup1 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("QA", System.Windows.Forms.HorizontalAlignment.Center)
-        Dim ListViewGroup2 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("UAT", System.Windows.Forms.HorizontalAlignment.Center)
-        Dim ListViewGroup3 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("PROD", System.Windows.Forms.HorizontalAlignment.Center)
-        Dim ListViewGroup4 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("DEV", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup5 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("QA", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup6 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("UAT", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup7 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("PROD", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup8 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("DEV", System.Windows.Forms.HorizontalAlignment.Center)
         Me.status = New System.Windows.Forms.GroupBox()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.label9 = New System.Windows.Forms.LinkLabel()
@@ -145,6 +145,11 @@ Partial Class Form1
         Me.SettingsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.DownloadNewVersionToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.RadioButton4 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.status.SuspendLayout()
         Me.ContextMenuStrip3.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -164,6 +169,7 @@ Partial Class Form1
         Me.ContextMenuStrip7.SuspendLayout()
         CType(Me.metro, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'status
@@ -308,7 +314,7 @@ Partial Class Form1
         Me.servicelist.ContextMenuStrip = Me.ContextMenuStrip3
         Me.servicelist.Cursor = System.Windows.Forms.Cursors.Hand
         Me.servicelist.FullRowSelect = True
-        Me.servicelist.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4})
+        Me.servicelist.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem5, ListViewItem6, ListViewItem7, ListViewItem8})
         Me.servicelist.Location = New System.Drawing.Point(6, 129)
         Me.servicelist.MultiSelect = False
         Me.servicelist.Name = "servicelist"
@@ -759,25 +765,25 @@ Partial Class Form1
         Me.serverlist.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.serverlist.FullRowSelect = True
         Me.serverlist.GridLines = True
-        ListViewGroup1.Header = "QA"
-        ListViewGroup1.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup1.Name = "ListViewGroup1"
-        ListViewGroup2.Header = "UAT"
-        ListViewGroup2.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup2.Name = "ListViewGroup2"
-        ListViewGroup3.Header = "PROD"
-        ListViewGroup3.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup3.Name = "ListViewGroup3"
-        ListViewGroup4.Header = "DEV"
-        ListViewGroup4.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup4.Name = "ListViewGroup4"
-        Me.serverlist.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2, ListViewGroup3, ListViewGroup4})
+        ListViewGroup5.Header = "QA"
+        ListViewGroup5.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup5.Name = "ListViewGroup1"
+        ListViewGroup6.Header = "UAT"
+        ListViewGroup6.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup6.Name = "ListViewGroup2"
+        ListViewGroup7.Header = "PROD"
+        ListViewGroup7.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup7.Name = "ListViewGroup3"
+        ListViewGroup8.Header = "DEV"
+        ListViewGroup8.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup8.Name = "ListViewGroup4"
+        Me.serverlist.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup5, ListViewGroup6, ListViewGroup7, ListViewGroup8})
         Me.serverlist.HideSelection = False
         Me.serverlist.LabelWrap = False
-        Me.serverlist.Location = New System.Drawing.Point(12, 39)
+        Me.serverlist.Location = New System.Drawing.Point(12, 86)
         Me.serverlist.MultiSelect = False
         Me.serverlist.Name = "serverlist"
-        Me.serverlist.Size = New System.Drawing.Size(465, 509)
+        Me.serverlist.Size = New System.Drawing.Size(465, 462)
         Me.serverlist.TabIndex = 0
         Me.serverlist.TileSize = New System.Drawing.Size(100, 100)
         Me.serverlist.UseCompatibleStateImageBehavior = False
@@ -1093,15 +1099,15 @@ Partial Class Form1
         Me.ToolsToolStripMenuItem.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DBQueriesToolStripMenuItem1, Me.BarcodeGeneratorToolStripMenuItem1, Me.DiscountExtracterToolStripMenuItem, Me.SettingsToolStripMenuItem1, Me.ToolStripSeparator2, Me.DownloadNewVersionToolStripMenuItem1})
         Me.ToolsToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ToolsToolStripMenuItem.Image = Global.MPOS.My.Resources.Resources.att1
+        Me.ToolsToolStripMenuItem.Image = CType(resources.GetObject("ToolsToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ToolsToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.White
         Me.ToolsToolStripMenuItem.Margin = New System.Windows.Forms.Padding(6, 0, 0, 0)
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Padding = New System.Windows.Forms.Padding(30, 5, 122, 5)
         Me.ToolsToolStripMenuItem.ShortcutKeyDisplayString = ""
         Me.ToolsToolStripMenuItem.ShowShortcutKeys = False
-        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(230, 34)
-        Me.ToolsToolStripMenuItem.Text = "Tools ..."
+        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(255, 34)
+        Me.ToolsToolStripMenuItem.Text = "Main Menu"
         Me.ToolsToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'DBQueriesToolStripMenuItem1
@@ -1135,9 +1141,67 @@ Partial Class Form1
         '
         'DownloadNewVersionToolStripMenuItem1
         '
+        Me.DownloadNewVersionToolStripMenuItem1.Enabled = False
         Me.DownloadNewVersionToolStripMenuItem1.Name = "DownloadNewVersionToolStripMenuItem1"
         Me.DownloadNewVersionToolStripMenuItem1.Size = New System.Drawing.Size(229, 24)
         Me.DownloadNewVersionToolStripMenuItem1.Text = "Download new version"
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.RadioButton4)
+        Me.GroupBox1.Controls.Add(Me.RadioButton3)
+        Me.GroupBox1.Controls.Add(Me.RadioButton2)
+        Me.GroupBox1.Controls.Add(Me.RadioButton1)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 39)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(465, 41)
+        Me.GroupBox1.TabIndex = 33
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "GroupBox1"
+        '
+        'RadioButton4
+        '
+        Me.RadioButton4.AutoSize = True
+        Me.RadioButton4.Location = New System.Drawing.Point(389, 18)
+        Me.RadioButton4.Name = "RadioButton4"
+        Me.RadioButton4.Size = New System.Drawing.Size(56, 17)
+        Me.RadioButton4.TabIndex = 3
+        Me.RadioButton4.TabStop = True
+        Me.RadioButton4.Text = "PROD"
+        Me.RadioButton4.UseVisualStyleBackColor = True
+        '
+        'RadioButton3
+        '
+        Me.RadioButton3.AutoSize = True
+        Me.RadioButton3.Location = New System.Drawing.Point(257, 18)
+        Me.RadioButton3.Name = "RadioButton3"
+        Me.RadioButton3.Size = New System.Drawing.Size(47, 17)
+        Me.RadioButton3.TabIndex = 2
+        Me.RadioButton3.TabStop = True
+        Me.RadioButton3.Text = "DEV"
+        Me.RadioButton3.UseVisualStyleBackColor = True
+        '
+        'RadioButton2
+        '
+        Me.RadioButton2.AutoSize = True
+        Me.RadioButton2.Location = New System.Drawing.Point(132, 18)
+        Me.RadioButton2.Name = "RadioButton2"
+        Me.RadioButton2.Size = New System.Drawing.Size(47, 17)
+        Me.RadioButton2.TabIndex = 1
+        Me.RadioButton2.TabStop = True
+        Me.RadioButton2.Text = "UAT"
+        Me.RadioButton2.UseVisualStyleBackColor = True
+        '
+        'RadioButton1
+        '
+        Me.RadioButton1.AutoSize = True
+        Me.RadioButton1.Location = New System.Drawing.Point(6, 18)
+        Me.RadioButton1.Name = "RadioButton1"
+        Me.RadioButton1.Size = New System.Drawing.Size(40, 17)
+        Me.RadioButton1.TabIndex = 0
+        Me.RadioButton1.TabStop = True
+        Me.RadioButton1.Text = "QA"
+        Me.RadioButton1.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -1145,6 +1209,7 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(1113, 596)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.Button2)
@@ -1198,6 +1263,8 @@ Partial Class Form1
         CType(Me.metro, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1316,4 +1383,9 @@ Partial Class Form1
     Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents DownloadNewVersionToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SettingsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents RadioButton4 As System.Windows.Forms.RadioButton
+    Friend WithEvents RadioButton3 As System.Windows.Forms.RadioButton
+    Friend WithEvents RadioButton2 As System.Windows.Forms.RadioButton
+    Friend WithEvents RadioButton1 As System.Windows.Forms.RadioButton
 End Class

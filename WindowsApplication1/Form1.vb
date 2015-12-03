@@ -99,6 +99,7 @@ Class Form1
             Me.TopMost = True
             Me.TopMost = False
         End If
+
         taskserver()
         cleanshortc("desktop")
     End Sub
@@ -147,7 +148,7 @@ Class Form1
             readserver.Dispose()
             ToolStripProgressBar1.Maximum = i
         Catch e As Exception
-            Form7.balon(e.Message)        
+            Form7.balon(e.Message)
             Logger.WriteToErrorLog(e.Message, e.StackTrace, "error")
         End Try
     End Sub
@@ -1358,21 +1359,29 @@ Class Form1
         System.Diagnostics.Process.Start("mstsc.exe", "/v " & tilllist.SelectedItems.Item(0).SubItems(5).Text)
     End Sub
     Private Sub BarcodeGeneratorToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles BarcodeGeneratorToolStripMenuItem1.Click
-        Form11.ShowDialog()
+        If Label11.Text = "ONLINE" Then
+            Form11.ShowDialog()
+        Else
+            Form7.balon("Please select a server!")
+        End If
     End Sub
     Private Sub DBQueriesToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles DBQueriesToolStripMenuItem1.Click
         If Label11.Text = "ONLINE" Then
             Form8.ShowDialog()
         Else
-            Form7.balon("Server is Offline ...")
+            Form7.balon("Please select a server!")
         End If
     End Sub
     Private Sub DiscountExtracterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DiscountExtracterToolStripMenuItem.Click
-        ' Try
-        'DiscountExtract.getem()
-        '    Catch ex As Exception
-        'Reporter.send()
-        '      End Try
+        Try
+            If Label11.Text = "ONLINE" Then
+                DiscountExtract.getem()
+            Else
+                Form7.balon("Please select a server!")
+            End If
+        Catch ex As Exception
+            Logger.WriteToErrorLog(ex.Message, ex.StackTrace, "error")
+        End Try
     End Sub
     Private Sub SettingsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem1.Click
         Form9.ShowDialog()
