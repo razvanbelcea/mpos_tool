@@ -25,6 +25,8 @@ Public Class Form7
         ascundere()
     End Sub
     Private Sub afisare()
+        posx1 = Screen.PrimaryScreen.WorkingArea.Width - 30
+        posy1 = Screen.PrimaryScreen.WorkingArea.Height - 160
         Do Until posx1 <= Screen.PrimaryScreen.WorkingArea.Width - 335
             posx1 = posx1 - 1
             Me.Width = Me.Width + 1

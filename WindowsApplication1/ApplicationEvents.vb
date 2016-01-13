@@ -34,7 +34,7 @@ Namespace My
                     Form1.Label16.Hide()
                 Else
                     Form1.ActualVersion()
-                    Form1.Button2.Hide()
+                    Form1.DownloadNewVersionToolStripMenuItem1.Enabled = False
                 End If
                 sr.Close()
                 'Else
