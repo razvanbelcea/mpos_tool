@@ -410,7 +410,7 @@ Partial Class Form7
         Me.Panel3.Size = New System.Drawing.Size(3, 104)
         Me.Panel3.TabIndex = 4
         '
-        'Panel1
+        '
         '
         Me.Panel1.BackColor = System.Drawing.Color.SteelBlue
         Me.Panel1.BackgroundImage = CType(resources.GetObject("Panel1.BackgroundImage"), System.Drawing.Image)

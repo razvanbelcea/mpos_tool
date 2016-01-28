@@ -1,5 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class Form1
+    ' Inherits System.Windows.Forms.Form
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,15 +24,15 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
-        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
-        Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
-        Dim ListViewItem8 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim ListViewGroup5 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("QA", System.Windows.Forms.HorizontalAlignment.Center)
-        Dim ListViewGroup6 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("UAT", System.Windows.Forms.HorizontalAlignment.Center)
-        Dim ListViewGroup7 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("PROD", System.Windows.Forms.HorizontalAlignment.Center)
-        Dim ListViewGroup8 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("DEV", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup1 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("QA", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup2 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("UAT", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup3 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("PROD", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup4 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("DEV", System.Windows.Forms.HorizontalAlignment.Center)
         Me.status = New System.Windows.Forms.GroupBox()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.label9 = New System.Windows.Forms.LinkLabel()
@@ -314,7 +315,7 @@ Partial Class Form1
         Me.servicelist.ContextMenuStrip = Me.ContextMenuStrip3
         Me.servicelist.Cursor = System.Windows.Forms.Cursors.Hand
         Me.servicelist.FullRowSelect = True
-        Me.servicelist.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem5, ListViewItem6, ListViewItem7, ListViewItem8})
+        Me.servicelist.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4})
         Me.servicelist.Location = New System.Drawing.Point(6, 129)
         Me.servicelist.MultiSelect = False
         Me.servicelist.Name = "servicelist"
@@ -732,19 +733,19 @@ Partial Class Form1
         'NoneToolStripMenuItem
         '
         Me.NoneToolStripMenuItem.Name = "NoneToolStripMenuItem"
-        Me.NoneToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.NoneToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.NoneToolStripMenuItem.Text = "0 : None"
         '
         'MatrixToolStripMenuItem
         '
         Me.MatrixToolStripMenuItem.Name = "MatrixToolStripMenuItem"
-        Me.MatrixToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.MatrixToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.MatrixToolStripMenuItem.Text = "1 : Matrix"
         '
         'LaserToolStripMenuItem
         '
         Me.LaserToolStripMenuItem.Name = "LaserToolStripMenuItem"
-        Me.LaserToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.LaserToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.LaserToolStripMenuItem.Text = "2 : Laser"
         '
         'RefreshToolStripMenuItem
@@ -765,19 +766,19 @@ Partial Class Form1
         Me.serverlist.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.serverlist.FullRowSelect = True
         Me.serverlist.GridLines = True
-        ListViewGroup5.Header = "QA"
-        ListViewGroup5.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup5.Name = "ListViewGroup1"
-        ListViewGroup6.Header = "UAT"
-        ListViewGroup6.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup6.Name = "ListViewGroup2"
-        ListViewGroup7.Header = "PROD"
-        ListViewGroup7.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup7.Name = "ListViewGroup3"
-        ListViewGroup8.Header = "DEV"
-        ListViewGroup8.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup8.Name = "ListViewGroup4"
-        Me.serverlist.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup5, ListViewGroup6, ListViewGroup7, ListViewGroup8})
+        ListViewGroup1.Header = "QA"
+        ListViewGroup1.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup1.Name = "ListViewGroup1"
+        ListViewGroup2.Header = "UAT"
+        ListViewGroup2.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup2.Name = "ListViewGroup2"
+        ListViewGroup3.Header = "PROD"
+        ListViewGroup3.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup3.Name = "ListViewGroup3"
+        ListViewGroup4.Header = "DEV"
+        ListViewGroup4.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup4.Name = "ListViewGroup4"
+        Me.serverlist.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2, ListViewGroup3, ListViewGroup4})
         Me.serverlist.HideSelection = False
         Me.serverlist.LabelWrap = False
         Me.serverlist.Location = New System.Drawing.Point(12, 86)
@@ -818,7 +819,7 @@ Partial Class Form1
         '
         Me.ContextMenuStrip4.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenInSCCMToolStripMenuItem, Me.MSTSCToolStripMenuItem, Me.GetServerLogsToolStripMenuItem, Me.RefreshStatusToolStripMenuItem})
         Me.ContextMenuStrip4.Name = "ContextMenuStrip4"
-        Me.ContextMenuStrip4.Size = New System.Drawing.Size(156, 92)
+        Me.ContextMenuStrip4.Size = New System.Drawing.Size(156, 114)
         '
         'OpenInSCCMToolStripMenuItem
         '
@@ -1088,8 +1089,10 @@ Partial Class Form1
         '
         Me.MenuStrip1.BackColor = System.Drawing.Color.Transparent
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem})
+        Me.MenuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.MenuStrip1.Size = New System.Drawing.Size(1113, 38)
         Me.MenuStrip1.TabIndex = 32
         Me.MenuStrip1.Text = "MenuStrip1"

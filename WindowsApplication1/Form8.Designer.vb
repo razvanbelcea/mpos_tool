@@ -30,13 +30,6 @@ Partial Class Form8
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form8))
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Column6 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewLinkColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column7 = New System.Windows.Forms.DataGridViewImageColumn()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ARTIdToClipboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BarcodeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -139,6 +132,13 @@ Partial Class Form8
         Me.DiscKeystroke = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Form8BindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.Column6 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewLinkColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column7 = New System.Windows.Forms.DataGridViewImageColumn()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -191,67 +191,6 @@ Partial Class Form8
         Me.DataGridView1.ShowRowErrors = False
         Me.DataGridView1.Size = New System.Drawing.Size(780, 330)
         Me.DataGridView1.TabIndex = 2
-        '
-        'Column6
-        '
-        Me.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column6.FalseValue = "0"
-        Me.Column6.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Column6.HeaderText = ""
-        Me.Column6.Name = "Column6"
-        Me.Column6.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Column6.TrueValue = "1"
-        Me.Column6.Width = 19
-        '
-        'Column1
-        '
-        Me.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column1.HeaderText = "ART id"
-        Me.Column1.Name = "Column1"
-        Me.Column1.Width = 75
-        '
-        'Column5
-        '
-        Me.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column5.HeaderText = "Barcode"
-        Me.Column5.Name = "Column5"
-        Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Column5.Width = 85
-        '
-        'Column2
-        '
-        Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column2.HeaderText = "Type"
-        Me.Column2.Name = "Column2"
-        Me.Column2.Width = 65
-        '
-        'Column3
-        '
-        Me.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column3.HeaderText = "Store"
-        Me.Column3.Name = "Column3"
-        Me.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.Column3.Width = 65
-        '
-        'Column4
-        '
-        Me.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column4.HeaderText = "Country"
-        Me.Column4.Name = "Column4"
-        Me.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.Column4.Width = 78
-        '
-        'Column7
-        '
-        Me.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column7.FillWeight = 10.0!
-        Me.Column7.HeaderText = "Scan"
-        Me.Column7.Image = Global.MPOS.My.Resources.Resources.att1
-        Me.Column7.Name = "Column7"
-        Me.Column7.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.Column7.Width = 45
         '
         'ContextMenuStrip1
         '
@@ -1217,6 +1156,67 @@ Partial Class Form8
         '
         Me.Form8BindingSource.DataSource = GetType(MPOS.Form8)
         '
+        'Column6
+        '
+        Me.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Column6.FalseValue = "0"
+        Me.Column6.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Column6.HeaderText = ""
+        Me.Column6.Name = "Column6"
+        Me.Column6.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.Column6.TrueValue = "1"
+        Me.Column6.Width = 19
+        '
+        'Column1
+        '
+        Me.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Column1.HeaderText = "ART id"
+        Me.Column1.Name = "Column1"
+        Me.Column1.Width = 75
+        '
+        'Column5
+        '
+        Me.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Column5.HeaderText = "Barcode"
+        Me.Column5.Name = "Column5"
+        Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.Column5.Width = 85
+        '
+        'Column2
+        '
+        Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Column2.HeaderText = "Type"
+        Me.Column2.Name = "Column2"
+        Me.Column2.Width = 65
+        '
+        'Column3
+        '
+        Me.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Column3.HeaderText = "Store"
+        Me.Column3.Name = "Column3"
+        Me.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.Column3.Width = 65
+        '
+        'Column4
+        '
+        Me.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Column4.HeaderText = "Country"
+        Me.Column4.Name = "Column4"
+        Me.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.Column4.Width = 78
+        '
+        'Column7
+        '
+        Me.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Column7.FillWeight = 10.0!
+        Me.Column7.HeaderText = "Scan"
+        Me.Column7.Image = Global.MPOS.My.Resources.Resources.att1
+        Me.Column7.Name = "Column7"
+        Me.Column7.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.Column7.Width = 45
+        '
         'Form8
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1322,13 +1322,6 @@ Partial Class Form8
     Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn5 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewImageColumn2 As System.Windows.Forms.DataGridViewImageColumn
-    Friend WithEvents Column6 As System.Windows.Forms.DataGridViewCheckBoxColumn
-    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As System.Windows.Forms.DataGridViewLinkColumn
-    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column7 As System.Windows.Forms.DataGridViewImageColumn
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents CHN As System.Windows.Forms.TabPage
@@ -1371,4 +1364,11 @@ Partial Class Form8
     Friend WithEvents Button13 As System.Windows.Forms.Button
     Friend WithEvents Button12 As System.Windows.Forms.Button
     Friend WithEvents Form8BindingSource As System.Windows.Forms.BindingSource
+    Friend WithEvents Column6 As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As System.Windows.Forms.DataGridViewLinkColumn
+    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column7 As System.Windows.Forms.DataGridViewImageColumn
 End Class
