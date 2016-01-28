@@ -92,11 +92,17 @@ Partial Class Form1
         Me.MSTSCToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.RestartTillToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ForceSignOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GetLogsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PDFToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TXToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LOGToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BINToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CFGToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SetPrinterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NoneToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MatrixToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LaserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GetLogsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RefreshToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.serverlist = New System.Windows.Forms.ListView()
         Me.country = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -124,19 +130,14 @@ Partial Class Form1
         Me.ContextMenuStrip7 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.OpenMPOSToolAppToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitMPOSToolAppToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.sss = New System.Windows.Forms.Label()
         Me.ToolTip2 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
         Me.metro = New System.Windows.Forms.PictureBox()
-        Me.Button7 = New System.Windows.Forms.Button()
         Me.ToolTip3 = New System.Windows.Forms.ToolTip(Me.components)
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -569,11 +570,11 @@ Partial Class Form1
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.HotTrack
-        Me.Label1.Location = New System.Drawing.Point(72, 98)
+        Me.Label1.Location = New System.Drawing.Point(34, 98)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(320, 31)
+        Me.Label1.Size = New System.Drawing.Size(370, 31)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "MPOS Server Tool v1.0"
+        Me.Label1.Text = "MPOS Server Tool v1.0.1.3"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'title
@@ -685,9 +686,9 @@ Partial Class Form1
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenInSCCMToolStripMenuItem1, Me.MSTSCToolStripMenuItem1, Me.RestartTillToolStripMenuItem, Me.ForceSignOutToolStripMenuItem, Me.GetLogsToolStripMenuItem, Me.SetPrinterToolStripMenuItem, Me.RefreshToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenInSCCMToolStripMenuItem1, Me.MSTSCToolStripMenuItem1, Me.RestartTillToolStripMenuItem, Me.ForceSignOutToolStripMenuItem, Me.OpenFolderToolStripMenuItem, Me.SetPrinterToolStripMenuItem, Me.GetLogsToolStripMenuItem, Me.RefreshToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 158)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 180)
         '
         'OpenInSCCMToolStripMenuItem1
         '
@@ -716,11 +717,48 @@ Partial Class Form1
         Me.ForceSignOutToolStripMenuItem.Text = "Force SignOff"
         Me.ForceSignOutToolStripMenuItem.Visible = False
         '
-        'GetLogsToolStripMenuItem
+        'OpenFolderToolStripMenuItem
         '
-        Me.GetLogsToolStripMenuItem.Name = "GetLogsToolStripMenuItem"
-        Me.GetLogsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.GetLogsToolStripMenuItem.Text = "Get Till Logs"
+        Me.OpenFolderToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PDFToolStripMenuItem, Me.TXToolStripMenuItem, Me.LOGToolStripMenuItem, Me.BINToolStripMenuItem, Me.CFGToolStripMenuItem})
+        Me.OpenFolderToolStripMenuItem.Name = "OpenFolderToolStripMenuItem"
+        Me.OpenFolderToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.OpenFolderToolStripMenuItem.Text = "Open folder"
+        Me.OpenFolderToolStripMenuItem.Visible = False
+        '
+        'PDFToolStripMenuItem
+        '
+        Me.PDFToolStripMenuItem.Name = "PDFToolStripMenuItem"
+        Me.PDFToolStripMenuItem.Size = New System.Drawing.Size(97, 22)
+        Me.PDFToolStripMenuItem.Tag = "\e$\TpDotnet\Pos\Reports"
+        Me.PDFToolStripMenuItem.Text = "PDF"
+        '
+        'TXToolStripMenuItem
+        '
+        Me.TXToolStripMenuItem.Name = "TXToolStripMenuItem"
+        Me.TXToolStripMenuItem.Size = New System.Drawing.Size(97, 22)
+        Me.TXToolStripMenuItem.Tag = "\e$\TpDotnet\Pos\Transactions"
+        Me.TXToolStripMenuItem.Text = "TX"
+        '
+        'LOGToolStripMenuItem
+        '
+        Me.LOGToolStripMenuItem.Name = "LOGToolStripMenuItem"
+        Me.LOGToolStripMenuItem.Size = New System.Drawing.Size(97, 22)
+        Me.LOGToolStripMenuItem.Tag = "\e$\TpDotnet\Log"
+        Me.LOGToolStripMenuItem.Text = "LOG"
+        '
+        'BINToolStripMenuItem
+        '
+        Me.BINToolStripMenuItem.Name = "BINToolStripMenuItem"
+        Me.BINToolStripMenuItem.Size = New System.Drawing.Size(97, 22)
+        Me.BINToolStripMenuItem.Tag = "\e$\TpDotnet\Bin"
+        Me.BINToolStripMenuItem.Text = "BIN"
+        '
+        'CFGToolStripMenuItem
+        '
+        Me.CFGToolStripMenuItem.Name = "CFGToolStripMenuItem"
+        Me.CFGToolStripMenuItem.Size = New System.Drawing.Size(97, 22)
+        Me.CFGToolStripMenuItem.Tag = "\e$\TpDotnet\Cfg"
+        Me.CFGToolStripMenuItem.Text = "CFG"
         '
         'SetPrinterToolStripMenuItem
         '
@@ -747,6 +785,12 @@ Partial Class Form1
         Me.LaserToolStripMenuItem.Name = "LaserToolStripMenuItem"
         Me.LaserToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.LaserToolStripMenuItem.Text = "2 : Laser"
+        '
+        'GetLogsToolStripMenuItem
+        '
+        Me.GetLogsToolStripMenuItem.Name = "GetLogsToolStripMenuItem"
+        Me.GetLogsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.GetLogsToolStripMenuItem.Text = "Get Till Logs"
         '
         'RefreshToolStripMenuItem
         '
@@ -953,16 +997,6 @@ Partial Class Form1
         Me.ExitMPOSToolAppToolStripMenuItem.Size = New System.Drawing.Size(124, 22)
         Me.ExitMPOSToolAppToolStripMenuItem.Text = "Exit"
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(47, 273)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(106, 29)
-        Me.Button1.TabIndex = 18
-        Me.Button1.Text = "DB Queries"
-        Me.Button1.UseVisualStyleBackColor = True
-        Me.Button1.Visible = False
-        '
         'ToolTip1
         '
         Me.ToolTip1.AutoPopDelay = 5000
@@ -970,18 +1004,6 @@ Partial Class Form1
         Me.ToolTip1.ReshowDelay = 100
         Me.ToolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTip1.ToolTipTitle = "Bootstrap Info"
-        '
-        'Button3
-        '
-        Me.Button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Location = New System.Drawing.Point(47, 343)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(106, 30)
-        Me.Button3.TabIndex = 19
-        Me.Button3.Text = "Settings"
-        Me.Button3.UseVisualStyleBackColor = True
-        Me.Button3.Visible = False
         '
         'Button4
         '
@@ -1029,32 +1051,6 @@ Partial Class Form1
         'Timer1
         '
         '
-        'Button2
-        '
-        Me.Button2.BackColor = System.Drawing.SystemColors.Control
-        Me.Button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Button2.FlatAppearance.BorderSize = 0
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.ForeColor = System.Drawing.Color.Red
-        Me.Button2.Location = New System.Drawing.Point(47, 379)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(153, 30)
-        Me.Button2.TabIndex = 30
-        Me.Button2.Text = "Update Available"
-        Me.Button2.UseVisualStyleBackColor = False
-        Me.Button2.Visible = False
-        '
-        'Button6
-        '
-        Me.Button6.Location = New System.Drawing.Point(47, 307)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(106, 30)
-        Me.Button6.TabIndex = 18
-        Me.Button6.Text = "Barcode Generator"
-        Me.Button6.UseVisualStyleBackColor = True
-        Me.Button6.Visible = False
-        '
         'metro
         '
         Me.metro.BackgroundImage = CType(resources.GetObject("metro.BackgroundImage"), System.Drawing.Image)
@@ -1065,16 +1061,6 @@ Partial Class Form1
         Me.metro.Size = New System.Drawing.Size(203, 20)
         Me.metro.TabIndex = 3
         Me.metro.TabStop = False
-        '
-        'Button7
-        '
-        Me.Button7.Location = New System.Drawing.Point(47, 240)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(106, 29)
-        Me.Button7.TabIndex = 31
-        Me.Button7.Text = "Extract Discounts"
-        Me.Button7.UseVisualStyleBackColor = True
-        Me.Button7.Visible = False
         '
         'ToolTip3
         '
@@ -1099,7 +1085,7 @@ Partial Class Form1
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.ToolsToolStripMenuItem.BackColor = System.Drawing.SystemColors.InactiveBorder
         Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DBQueriesToolStripMenuItem1, Me.BarcodeGeneratorToolStripMenuItem1, Me.DiscountExtracterToolStripMenuItem, Me.SettingsToolStripMenuItem1, Me.ToolStripSeparator2, Me.DownloadNewVersionToolStripMenuItem1})
         Me.ToolsToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ToolsToolStripMenuItem.Image = CType(resources.GetObject("ToolsToolStripMenuItem.Image"), System.Drawing.Image)
@@ -1118,18 +1104,21 @@ Partial Class Form1
         Me.DBQueriesToolStripMenuItem1.Name = "DBQueriesToolStripMenuItem1"
         Me.DBQueriesToolStripMenuItem1.Size = New System.Drawing.Size(229, 24)
         Me.DBQueriesToolStripMenuItem1.Text = "DB Queries"
+        Me.DBQueriesToolStripMenuItem1.Visible = False
         '
         'BarcodeGeneratorToolStripMenuItem1
         '
         Me.BarcodeGeneratorToolStripMenuItem1.Name = "BarcodeGeneratorToolStripMenuItem1"
         Me.BarcodeGeneratorToolStripMenuItem1.Size = New System.Drawing.Size(229, 24)
         Me.BarcodeGeneratorToolStripMenuItem1.Text = "Barcode Generator"
+        Me.BarcodeGeneratorToolStripMenuItem1.Visible = False
         '
         'DiscountExtracterToolStripMenuItem
         '
         Me.DiscountExtracterToolStripMenuItem.Name = "DiscountExtracterToolStripMenuItem"
         Me.DiscountExtracterToolStripMenuItem.Size = New System.Drawing.Size(229, 24)
         Me.DiscountExtracterToolStripMenuItem.Text = "Discount Extracter"
+        Me.DiscountExtracterToolStripMenuItem.Visible = False
         '
         'SettingsToolStripMenuItem1
         '
@@ -1212,14 +1201,8 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(1113, 596)
-        Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.Button6)
-        Me.Controls.Add(Me.Button7)
-        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Label15)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.sss)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.operators)
@@ -1229,10 +1212,10 @@ Partial Class Form1
         Me.Controls.Add(Me.folders)
         Me.Controls.Add(Me.tills)
         Me.Controls.Add(Me.status)
-        Me.Controls.Add(Me.title)
         Me.Controls.Add(Me.metro)
+        Me.Controls.Add(Me.title)
         Me.Cursor = System.Windows.Forms.Cursors.Default
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
         Me.MainMenuStrip = Me.MenuStrip1
@@ -1347,7 +1330,6 @@ Partial Class Form1
     Friend WithEvents ContextMenuStrip7 As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents OpenMPOSToolAppToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExitMPOSToolAppToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents vers As System.Windows.Forms.ColumnHeader
     Friend WithEvents Label13 As System.Windows.Forms.Label
@@ -1357,7 +1339,6 @@ Partial Class Form1
     Friend WithEvents nr As System.Windows.Forms.ColumnHeader
     Friend WithEvents tlb As System.Windows.Forms.Label
     Friend WithEvents tpb As System.Windows.Forms.ProgressBar
-    Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents Button4 As System.Windows.Forms.Button
     Friend WithEvents sss As System.Windows.Forms.Label
     Friend WithEvents LinkLabel1 As System.Windows.Forms.LinkLabel
@@ -1368,11 +1349,8 @@ Partial Class Form1
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents Timer2 As System.Windows.Forms.Timer
-    Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents UATPath As System.Windows.Forms.ColumnHeader
-    Friend WithEvents Button6 As System.Windows.Forms.Button
-    Friend WithEvents Button7 As System.Windows.Forms.Button
     Friend WithEvents GetLogsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MSTSCToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents GetServerLogsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -1386,9 +1364,4 @@ Partial Class Form1
     Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents DownloadNewVersionToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SettingsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents RadioButton4 As System.Windows.Forms.RadioButton
-    Friend WithEvents RadioButton3 As System.Windows.Forms.RadioButton
-    Friend WithEvents RadioButton2 As System.Windows.Forms.RadioButton
-    Friend WithEvents RadioButton1 As System.Windows.Forms.RadioButton
 End Class

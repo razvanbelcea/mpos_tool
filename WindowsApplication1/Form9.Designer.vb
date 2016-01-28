@@ -33,6 +33,7 @@ Partial Class Form9
         Me.CheckBox6 = New System.Windows.Forms.CheckBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.CheckBox4 = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'CheckBox1
@@ -68,7 +69,7 @@ Partial Class Form9
         'CheckBox3
         '
         Me.CheckBox3.AutoSize = True
-        Me.CheckBox3.Location = New System.Drawing.Point(13, 72)
+        Me.CheckBox3.Location = New System.Drawing.Point(12, 72)
         Me.CheckBox3.Name = "CheckBox3"
         Me.CheckBox3.Size = New System.Drawing.Size(135, 17)
         Me.CheckBox3.TabIndex = 3
@@ -89,7 +90,7 @@ Partial Class Form9
         'CheckBox5
         '
         Me.CheckBox5.AutoSize = True
-        Me.CheckBox5.Location = New System.Drawing.Point(13, 95)
+        Me.CheckBox5.Location = New System.Drawing.Point(12, 95)
         Me.CheckBox5.Name = "CheckBox5"
         Me.CheckBox5.Size = New System.Drawing.Size(115, 17)
         Me.CheckBox5.TabIndex = 5
@@ -121,13 +122,26 @@ Partial Class Form9
         Me.Button3.Text = "Send Logs"
         Me.Button3.UseVisualStyleBackColor = True
         '
+        'CheckBox4
+        '
+        Me.CheckBox4.AutoSize = True
+        Me.CheckBox4.Checked = True
+        Me.CheckBox4.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox4.Location = New System.Drawing.Point(13, 141)
+        Me.CheckBox4.Name = "CheckBox4"
+        Me.CheckBox4.Size = New System.Drawing.Size(76, 17)
+        Me.CheckBox4.TabIndex = 8
+        Me.CheckBox4.Text = "Side menu"
+        Me.CheckBox4.UseVisualStyleBackColor = True
+        '
         'Form9
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(438, 290)
+        Me.ClientSize = New System.Drawing.Size(434, 286)
         Me.ControlBox = False
+        Me.Controls.Add(Me.CheckBox4)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.CheckBox6)
         Me.Controls.Add(Me.CheckBox5)
@@ -158,4 +172,5 @@ Partial Class Form9
     Friend WithEvents CheckBox6 As System.Windows.Forms.CheckBox
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents CheckBox4 As System.Windows.Forms.CheckBox
 End Class

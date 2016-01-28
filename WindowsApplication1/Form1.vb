@@ -34,14 +34,16 @@ Class Form1
     Dim anulareservice As CancellationTokenSource
     Dim anularetills As CancellationTokenSource
     Dim anulareoperators As CancellationTokenSource
-    Dim cnt As String = ""
+    Public Shared cnt As String = ""
 
     '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN form load/unload
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         If x = False Then
             NotifyIcon1.Visible = True
             Me.Hide()
-            Form7.Show()
+            If Form9.CheckBox4.Checked Then
+                Form7.Show()
+            End If
             e.Cancel = True
         End If
     End Sub
@@ -166,28 +168,28 @@ Class Form1
         ElseIf link = "DEV" Then
             env = "Path"
         End If
-            Try
-                folderlist.Items.Clear()
-                Do While (readfolder.Read())
-                    Select Case readfolder.NodeType
-                        Case XmlNodeType.Element
-                            Select Case readfolder.Name
-                                Case "Name"
-                                    readfolder.Read()
-                                    folderlist.Items.Add(readfolder.Value)
+        Try
+            folderlist.Items.Clear()
+            Do While (readfolder.Read())
+                Select Case readfolder.NodeType
+                    Case XmlNodeType.Element
+                        Select Case readfolder.Name
+                            Case "Name"
+                                readfolder.Read()
+                                folderlist.Items.Add(readfolder.Value)
                             Case env
                                 readfolder.Read()
                                 folderlist.Items(i).SubItems.Add("\\" + label9.Text + readfolder.Value)
                                 i = i + 1
 
                         End Select
-                    End Select
-                Loop
-                readfolder.Dispose()
-            Catch e As Exception
+                End Select
+            Loop
+            readfolder.Dispose()
+        Catch e As Exception
             Form7.balon(e.Message)
             Logger.WriteToErrorLog(e.Message, e.StackTrace, "error")
-            End Try
+        End Try
     End Sub
     Private Sub readservicelist()
         Dim readservice As XmlTextReader = New XmlTextReader(srl)
@@ -222,10 +224,7 @@ Class Form1
     '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN server selection
     Private Sub serverlist_SelectedIndexChanged(sender As Object, e As EventArgs) Handles serverlist.SelectedIndexChanged
         servicelist.Items.Clear()
-        'Button1.Visible = True
-        'Button6.Visible = True
         Button5.Visible = True
-        'Button7.Visible = True
         viewserver()
         statusserver()
         For Each item As ListViewItem In serverlist.SelectedItems
@@ -321,25 +320,6 @@ Class Form1
         Next
     End Sub
     '-----------------------------------------------------------------------------------------------------------------------------------------END server selection
-    '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN folder selection
-    Private Sub folderlist_ItemSelectionChanged(sender As Object, e As ListViewItemSelectionChangedEventArgs) Handles folderlist.ItemSelectionChanged
-        Try
-            For Each item As ListViewItem In folderlist.Items
-                If item.Selected = True AndAlso My.Computer.FileSystem.DirectoryExists(item.SubItems(1).Text) Then
-                    Process.Start("explorer.exe", item.SubItems(1).Text)
-                    folderlist.Refresh()
-                    Exit For
-                ElseIf item.Selected = True AndAlso Not My.Computer.FileSystem.DirectoryExists(item.SubItems(1).Text) Then
-                    MsgBox(item.SubItems(1).Text)
-                    Form7.balon("Location not found ...")
-                End If
-            Next
-        Catch ey As Exception
-            Form7.balon(ey.Message)
-            Logger.WriteToErrorLog(ey.Message, ey.StackTrace, "error")
-        End Try
-    End Sub
-    '-----------------------------------------------------------------------------------------------------------------------------------------END folder selection
     '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN load stuff
     Private Sub loaddatabase()
         operatorlist.Items.Clear()
@@ -881,6 +861,11 @@ Class Form1
     End Sub
     Private Sub ContextMenuStrip1_Opening(sender As Object, e As CancelEventArgs) Handles ContextMenuStrip1.Opening
         Try
+            PDFToolStripMenuItem.Visible = False
+            TXToolStripMenuItem.Visible = False
+            LOGToolStripMenuItem.Visible = False
+            BINToolStripMenuItem.Visible = False
+            CFGToolStripMenuItem.Visible = False
             NoneToolStripMenuItem.Checked = False
             MatrixToolStripMenuItem.Checked = False
             LaserToolStripMenuItem.Checked = False
@@ -890,6 +875,7 @@ Class Form1
             OpenInSCCMToolStripMenuItem1.Visible = False
             MSTSCToolStripMenuItem1.Visible = False
             GetLogsToolStripMenuItem.Visible = False
+            OpenFolderToolStripMenuItem.Visible = False
             For Each item As ListViewItem In tilllist.Items
                 If item.Selected AndAlso Label11.Text = "ONLINE" Then
                     If item.SubItems(5).Text <> "-" AndAlso item.SubItems(6).Text = "ON" Then
@@ -897,11 +883,43 @@ Class Form1
                         OpenInSCCMToolStripMenuItem1.Visible = True
                         MSTSCToolStripMenuItem1.Visible = True
                         GetLogsToolStripMenuItem.Visible = True
+                        OpenFolderToolStripMenuItem.Visible = True
+                        If My.Computer.FileSystem.DirectoryExists("\\" & tilllist.SelectedItems.Item(0).SubItems(5).Text & PDFToolStripMenuItem.Tag) Then
+                            PDFToolStripMenuItem.Visible = True
+                        End If
+                        If My.Computer.FileSystem.DirectoryExists("\\" & tilllist.SelectedItems.Item(0).SubItems(5).Text & TXToolStripMenuItem.Tag) Then
+                            TXToolStripMenuItem.Visible = True
+                        End If
+                        If My.Computer.FileSystem.DirectoryExists("\\" & tilllist.SelectedItems.Item(0).SubItems(5).Text & LOGToolStripMenuItem.Tag) Then
+                            LOGToolStripMenuItem.Visible = True
+                        End If
+                        If My.Computer.FileSystem.DirectoryExists("\\" & tilllist.SelectedItems.Item(0).SubItems(5).Text & BINToolStripMenuItem.Tag) Then
+                            BINToolStripMenuItem.Visible = True
+                        End If
+                        If My.Computer.FileSystem.DirectoryExists("\\" & tilllist.SelectedItems.Item(0).SubItems(5).Text & CFGToolStripMenuItem.Tag) Then
+                            CFGToolStripMenuItem.Visible = True
+                        End If
                     ElseIf item.SubItems(5).Text <> "-" Then
                         RestartTillToolStripMenuItem.Visible = True
                         OpenInSCCMToolStripMenuItem1.Visible = True
                         MSTSCToolStripMenuItem1.Visible = True
                         GetLogsToolStripMenuItem.Visible = True
+                        OpenFolderToolStripMenuItem.Visible = True
+                        If My.Computer.FileSystem.DirectoryExists("\\" & tilllist.SelectedItems.Item(0).SubItems(5).Text & PDFToolStripMenuItem.Tag) Then
+                            PDFToolStripMenuItem.Visible = True
+                        End If
+                        If My.Computer.FileSystem.DirectoryExists("\\" & tilllist.SelectedItems.Item(0).SubItems(5).Text & TXToolStripMenuItem.Tag) Then
+                            TXToolStripMenuItem.Visible = True
+                        End If
+                        If My.Computer.FileSystem.DirectoryExists("\\" & tilllist.SelectedItems.Item(0).SubItems(5).Text & LOGToolStripMenuItem.Tag) Then
+                            LOGToolStripMenuItem.Visible = True
+                        End If
+                        If My.Computer.FileSystem.DirectoryExists("\\" & tilllist.SelectedItems.Item(0).SubItems(5).Text & BINToolStripMenuItem.Tag) Then
+                            BINToolStripMenuItem.Visible = True
+                        End If
+                        If My.Computer.FileSystem.DirectoryExists("\\" & tilllist.SelectedItems.Item(0).SubItems(5).Text & CFGToolStripMenuItem.Tag) Then
+                            CFGToolStripMenuItem.Visible = True
+                        End If
                     End If
                     If item.SubItems(4).Text <> "-" Then
                         ForceSignOutToolStripMenuItem.Visible = True
@@ -1037,17 +1055,6 @@ Class Form1
         End If
     End Sub
     '-----------------------------------------------------------------------------------------------------------------------------------------END minimize
-    '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN hover
-    Private Sub Button1_MouseHover(sender As Object, e As EventArgs) Handles Button1.MouseHover
-        ToolTip1.Show(cnt, Button1)
-    End Sub
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        If Label11.Text = "ONLINE" Then
-            Form8.ShowDialog()
-        Else
-            Form7.balon("Server is Offline ...")
-        End If
-    End Sub
     Private Sub ContextMenuStrip6_Opening(sender As Object, e As CancelEventArgs) Handles ContextMenuStrip6.Opening
         Dim ff As String
         ff = "\\" & label9.Text & "\e$\TpDotnet\cfg\Metro.Mpos.Router.xml"
@@ -1061,7 +1068,7 @@ Class Form1
         x = True
         Me.Close()
     End Sub
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs)
         Form9.ShowDialog()
     End Sub
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
@@ -1128,46 +1135,6 @@ Class Form1
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         DeleteOldVersion()
         Timer1.Stop()
-    End Sub
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Dim WbReq As New Net.WebClient
-        WbReq.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials
-        WbReq.Dispose()
-
-        Dim result As Integer = MessageBox.Show("Updating will close current session. Are you sure you want to continue ?", "MPOS Tool Updater", MessageBoxButtons.YesNo)
-        If result = DialogResult.No Then
-        ElseIf result = DialogResult.Yes Then
-            Dim request As System.Net.HttpWebRequest = System.Net.HttpWebRequest.Create("http://my-collaboration.metrogroup-networking.com/personal/r4_razvan_belcea/Shared%20Documents/Update.txt")
-            request.Credentials = System.Net.CredentialCache.DefaultCredentials
-            Dim response As System.Net.HttpWebResponse = request.GetResponse()
-            Dim sr As System.IO.StreamReader = New System.IO.StreamReader(response.GetResponseStream())
-            Dim newestversion As String = sr.ReadToEnd()
-            Dim currentversion As String = Application.ProductVersion
-            Try
-                Dim source As New Uri("http://my-collaboration.metrogroup-networking.com/personal/r4_razvan_belcea/Shared%20Documents/MPOS%20Server%20Tool%20v1")
-                Dim credentials As System.Net.NetworkCredential = System.Net.CredentialCache.DefaultNetworkCredentials
-                My.Computer.Network.DownloadFile(source, Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe", credentials, True, 60000I, False)
-                If My.Computer.FileSystem.FileExists(Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe") Then
-                    Dim path As String = "oldversion.txt"
-
-                    If Not File.Exists(path) Then
-                        Using sw As StreamWriter = File.CreateText(path)
-                            sw.WriteLine(currentversion)
-                        End Using
-                    End If
-
-                    Form1.x = True
-                    Me.Close()
-                    System.Threading.Thread.Sleep(3000)
-                    Process.Start(Application.StartupPath + "/MPOS Server Tool V" & newestversion + ".exe")
-                End If
-            Catch ex As Exception
-                Form7.balon(ex.Message + " Error Downloading update.")
-                Logger.WriteToErrorLog(ex.Message, ex.StackTrace, "error")
-            End Try
-            sr.Close()
-        End If
     End Sub
     Public Sub XmlVersion(files)
 
@@ -1247,10 +1214,6 @@ Class Form1
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         taskservice()
         Button5.Hide()
-    End Sub
-
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        Form11.ShowDialog()
     End Sub
 
     Public Sub cleanshortc(path)
@@ -1347,14 +1310,6 @@ Class Form1
             Return returnVal
         End Function
     End Class
-
-    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        Try
-            DiscountExtract.getem()
-        Catch ex As Exception
-            Logger.WriteToErrorLog(ex.Message, ex.StackTrace, "error")
-        End Try
-    End Sub
     Private Sub MSTSCToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles MSTSCToolStripMenuItem1.Click
         System.Diagnostics.Process.Start("mstsc.exe", "/v " & tilllist.SelectedItems.Item(0).SubItems(5).Text)
     End Sub
@@ -1424,6 +1379,75 @@ Class Form1
             sr.Close()
         End If
     End Sub
+    Private Sub ToolsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolsToolStripMenuItem.Click
+        BarcodeGeneratorToolStripMenuItem1.Visible = False
+        DiscountExtracterToolStripMenuItem.Visible = False
+        DBQueriesToolStripMenuItem1.Visible = False
+        If Label11.Text = "ONLINE" Then
+            BarcodeGeneratorToolStripMenuItem1.Visible = True
+            DiscountExtracterToolStripMenuItem.Visible = True
+            DBQueriesToolStripMenuItem1.Visible = True
+        Else
+            Form7.balon("Server is Offline. Select online server for more options ...")
+        End If
+    End Sub
+
+    Private Sub ToolsToolStripMenuItem_MouseHover(sender As Object, e As EventArgs) Handles ToolsToolStripMenuItem.MouseHover
+        If Label11.Text = "ONLINE" Then
+            Form7.balon(cnt)
+        Else
+            Form7.balon("Server is Offline/Not selected. Select online server for DB details ...")
+        End If
+    End Sub
+    '-----------------------------------------------------------------------------------------------------------------------------------------BEGIN folder selection
+    Private Sub folderlist_MouseClick(sender As Object, e As MouseEventArgs) Handles folderlist.MouseClick
+        Try
+            If e.Button = Windows.Forms.MouseButtons.Left Then
+                If My.Computer.FileSystem.DirectoryExists(folderlist.SelectedItems.Item(0).SubItems(1).Text) Then
+                    Process.Start("explorer.exe", folderlist.SelectedItems.Item(0).SubItems(1).Text)
+                ElseIf Not My.Computer.FileSystem.DirectoryExists(folderlist.SelectedItems.Item(0).SubItems(1).Text) Then
+                    Form7.balon("Location not found ...")
+                End If
+            End If
+            folderlist.SelectedItems.Clear()
+        Catch ey As Exception
+            Form7.balon(ey.Message)
+            Logger.WriteToErrorLog(ey.Message, ey.StackTrace, "error")
+        End Try
+    End Sub
+    '-----------------------------------------------------------------------------------------------------------------------------------------END folder selection
+    Private Sub PDFToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PDFToolStripMenuItem.Click
+        folderlisttill(PDFToolStripMenuItem)
+    End Sub
+
+    Private Sub TXToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TXToolStripMenuItem.Click
+        folderlisttill(TXToolStripMenuItem)
+    End Sub
+
+    Private Sub LOGToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LOGToolStripMenuItem.Click
+        folderlisttill(LOGToolStripMenuItem)
+    End Sub
+
+    Private Sub BINToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BINToolStripMenuItem.Click
+        folderlisttill(BINToolStripMenuItem)
+    End Sub
+
+    Private Sub CFGToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CFGToolStripMenuItem.Click
+        folderlisttill(CFGToolStripMenuItem)
+    End Sub
+    Sub folderlisttill(loc)
+        Try
+            If tilllist.SelectedItems.Item(0).SubItems(5).Text <> "-" AndAlso tilllist.SelectedItems.Item(0).SubItems(6).Text = "ON" Then
+                If My.Computer.FileSystem.DirectoryExists("\\" & tilllist.SelectedItems.Item(0).SubItems(5).Text & loc.Tag) Then
+                    Process.Start("explorer.exe", "\\" & tilllist.SelectedItems.Item(0).SubItems(5).Text & loc.Tag)
+                End If
+            End If
+        Catch ey As Exception
+            Form7.balon(ey.Message)
+            Logger.WriteToErrorLog(ey.Message, ey.StackTrace, "error")
+        End Try
+    End Sub
+
 End Class
 
 

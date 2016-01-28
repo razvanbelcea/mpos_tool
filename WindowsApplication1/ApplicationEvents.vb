@@ -30,7 +30,7 @@ Namespace My
                     Form1.DownloadNewVersionToolStripMenuItem1.ForeColor = Color.Red
                 Else
                     Form1.ActualVersion()
-                    Form1.Button2.Hide()
+                    Form1.DownloadNewVersionToolStripMenuItem1.Enabled = False
                 End If
                 sr.Close()
                 Form1.ActualVersion()

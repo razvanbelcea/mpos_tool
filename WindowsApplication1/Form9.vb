@@ -58,8 +58,8 @@ Public Class Form9
             Form1.servicelist.Hide()
             Form1.Button5.Hide()
             Form1.tills.Height = 392
-            Form1.status.Height = 110
-            Form1.tills.Location = New Point(493, 130)
+        Form1.status.Height = 112
+        Form1.tills.Location = New Point(493, 156)
             Form1.tilllist.Height = 350
             Form1.tilllist.Location = New Point(7, 25)
             Form1.tlb.Location = New Point(356, 340)
@@ -71,7 +71,7 @@ Public Class Form9
         Form1.Button5.Show()
         Form1.tills.Height = 209
         Form1.status.Height = 294
-        Form1.tills.Location = New Point(493, 312)
+        Form1.tills.Location = New Point(493, 339)
         Form1.tilllist.Height = 179
         Form1.tilllist.Location = New Point(7, 21)
         Form1.tlb.Location = New Point(356, 169)
@@ -105,6 +105,11 @@ Public Class Form9
         ElseIf CheckBox6.Checked = False Then
             config.AddSection("Settings").AddKey("printeron").Value = "0"
         End If
+        If CheckBox4.Checked = True Then
+            config.SetKeyValue("Settings", "SideMenu", "1")
+        ElseIf CheckBox4.Checked = False Then
+            config.SetKeyValue("Settings", "SideMenu", "0")
+        End If
         config.Save("config.ini")
         Form7.balon("Settings saved!")
     End Sub
@@ -137,6 +142,11 @@ Public Class Form9
         ElseIf CheckBox6.Checked = False Then
             config.SetKeyValue("Settings", "printeron", "0")
         End If
+        If CheckBox4.Checked = True Then
+            config.SetKeyValue("Settings", "SideMenu", "1")
+        ElseIf CheckBox4.Checked = False Then
+            config.SetKeyValue("Settings", "SideMenu", "0")
+        End If
         config.Save("config.ini")
         Form7.balon("Settings saved!")
     End Sub
@@ -168,10 +178,17 @@ Public Class Form9
                 Else
                     CheckBox5.Checked = False
                 End If
+
                 If config.GetKeyValue("Settings", "printeron") = "1" Then
                     CheckBox6.Checked = True
                 Else
                     CheckBox6.Checked = False
+                End If
+
+                If config.GetKeyValue("Settings", "SideMenu") = "1" Then
+                    CheckBox4.Checked = True
+                Else
+                    CheckBox4.Checked = False
                 End If
             Else
                 CheckBox2.Checked = True
@@ -216,5 +233,9 @@ Public Class Form9
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Reporter.send()
+    End Sub
+
+    Private Sub CheckBox4_CheckedChanged_1(sender As Object, e As EventArgs) Handles CheckBox4.CheckedChanged
+        Button2.Enabled = True
     End Sub
 End Class
